@@ -1,10 +1,11 @@
 package ru.skypro.homework.dto;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import lombok.Data;
 
+import javax.management.relation.Role;
+
 @Data
-public class Register {
+public class RegisterDto {
 
     private String username;
     private String password;

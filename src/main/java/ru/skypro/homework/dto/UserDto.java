@@ -1,4 +1,4 @@
 package ru.skypro.homework.dto;
 
-public class Auth {
+public class UserDto {
 }
