@@ -2,7 +2,6 @@ package ru.skypro.homework.dto;
 
 import lombok.Data;
 
-import javax.management.relation.Role;
 
 @Data
 public class RegisterDto {
@@ -12,7 +11,7 @@ public class RegisterDto {
     private String firstName;
     private String lastName;
     private String phone;
-    private Role role;
+    private RoleDto role;
 
     public String getUsername() {
         return username;
@@ -34,7 +33,7 @@ public class RegisterDto {
         return phone;
     }
 
-    public Role getRole() {
+    public RoleDto getRole() {
         return role;
     }
 }
