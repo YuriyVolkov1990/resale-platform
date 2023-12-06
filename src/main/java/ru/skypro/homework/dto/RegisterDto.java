@@ -11,7 +11,7 @@ public class RegisterDto {
     private String firstName;
     private String lastName;
     private String phone;
-    private RoleDto role;
+    private Role role;
 
     public String getUsername() {
         return username;
@@ -33,7 +33,7 @@ public class RegisterDto {
         return phone;
     }
 
-    public RoleDto getRole() {
+    public Role getRole() {
         return role;
     }
 }
