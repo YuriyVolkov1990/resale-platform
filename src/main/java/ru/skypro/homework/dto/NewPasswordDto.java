@@ -6,6 +6,13 @@ import lombok.Data;
 public class NewPasswordDto {
     private String currentPassword;
     private String newPassword;
+    public NewPasswordDto() {
+    }
+
+    public NewPasswordDto(String currentPassword, String newPassword) {
+        this.currentPassword = currentPassword;
+        this.newPassword = newPassword;
+    }
 
     public String getCurrentPassword() {
         return currentPassword;

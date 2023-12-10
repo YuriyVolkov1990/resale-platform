@@ -13,6 +13,17 @@ public class RegisterDto {
     private String phone;
     private Role role;
 
+    public RegisterDto() {
+    }
+    public RegisterDto(String username, String password, String firstName, String lastName, String phone, Role role) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.role = role;
+    }
+
     public String getUsername() {
         return username;
     }

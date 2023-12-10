@@ -1,29 +1,35 @@
 package ru.skypro.homework.controller;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.skypro.homework.dto.LoginDto;
 import ru.skypro.homework.dto.NewPasswordDto;
+import ru.skypro.homework.mapper.UserMapper;
+import ru.skypro.homework.service.UserService;
 
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class UserController {
     private final UserController userController;
+    private final UserMapper userMapper;
+    private final UserService userService;
 
-    public UserController(UserController userController) {
+    public UserController(UserController userController, UserMapper userMapper, UserService userService) {
         this.userController = userController;
+        this.userMapper = userMapper;
+        this.userService = userService;
     }
 
-    @PostMapping("/users/set_password")
-    public ResponseEntity<NewPasswordDto> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
-
-        return
-    }
+//    @PostMapping("/users/set_password")
+//    public ResponseEntity<NewPasswordDto> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
+//        if (newPasswordDto.getCurrentPassword().equals())
+//        userMapper.mapToNewPasswordDto(newPasswordDto);
+//
+//        return
+//    }
 }
