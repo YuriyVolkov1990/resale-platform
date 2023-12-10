@@ -7,8 +7,9 @@ import java.util.List;
 
 @Data
 public class AdsDto {
-    private Integer count;
+
     private List<Ad> results;
+    private Integer count;
 
     public AdsDto() {
     }
@@ -22,10 +23,6 @@ public class AdsDto {
         return count;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
     public List<Ad> getResults() {
         return results;
     }
@@ -33,4 +30,9 @@ public class AdsDto {
     public void setResults(List<Ad> results) {
         this.results = results;
     }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 }
+

@@ -12,10 +12,10 @@ create table Users (
 );
 create table Ad (
     id bigserial primary key,
-    author serial not null,
     image text,
     price serial not null,
     title text not null
+    description text
 );
 create table Comment (
     idComment bigserial primary key,

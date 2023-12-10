@@ -7,16 +7,39 @@ public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer author;
     private String image;
     private Integer price;
     private String title;
-    public Ad(Long id, Integer author, String image, Integer price, String title) {
+    private String description;
+    @ManyToOne
+    @JoinColumn(name = "authorId")
+    private User user;
+
+    public Ad() {
+    }
+
+    public Ad(Long id, String image, Integer price, String title, String description) {
         this.id = id;
-        this.author = author;
         this.image = image;
         this.price = price;
         this.title = title;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
@@ -25,14 +48,6 @@ public class Ad {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Integer author) {
-        this.author = author;
     }
 
     public String getImage() {
@@ -63,24 +78,23 @@ public class Ad {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Ad ads = (Ad) o;
-        return Objects.equals(id, ads.id) && Objects.equals(author, ads.author) && Objects.equals(image, ads.image) && Objects.equals(price, ads.price) && Objects.equals(title, ads.title);
+        Ad ad = (Ad) o;
+        return Objects.equals(id, ad.id) && Objects.equals(image, ad.image) && Objects.equals(price, ad.price) && Objects.equals(title, ad.title) && Objects.equals(user, ad.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, image, price, title);
+        return Objects.hash(id, image, price, title, user);
     }
 
     @Override
     public String toString() {
-        return "Ads{" +
+        return "Ad{" +
                 "id=" + id +
-                ", author=" + author +
                 ", image='" + image + '\'' +
                 ", price=" + price +
                 ", title='" + title + '\'' +
+                ", user=" + user +
                 '}';
     }
-
 }

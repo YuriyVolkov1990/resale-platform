@@ -4,6 +4,7 @@ import lombok.Data;
 import ru.skypro.homework.dto.Role;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 //@Data
@@ -20,6 +21,8 @@ public class User {
     private Role role;
     private String image;
     private String password;
+    @OneToMany(mappedBy = "users")
+    private List<Ad> ads;
     public User() {
 
     }
@@ -97,6 +100,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Ad> getAds() {
+        return ads;
+    }
+
+    public void setAds(List<Ad> ads) {
+        this.ads = ads;
     }
 
     @Override
