@@ -10,11 +10,11 @@ create table Users (
     role text not null,
     image text
 );
-create table Ads (
-    idAd bigserial primary key,
-    idUser serial not null,
+create table Ad (
+    id bigserial primary key,
+    author serial not null,
     image text,
-    prise serial not null,
+    price serial not null,
     title text not null
 );
 create table Comment (

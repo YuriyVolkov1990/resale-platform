@@ -6,5 +6,5 @@ import ru.skypro.homework.entity.User;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Long> {
-    User findByPassword(String password);
+    List<User> findByPassword(String password);
 }

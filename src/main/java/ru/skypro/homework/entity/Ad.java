@@ -1,9 +1,6 @@
 package ru.skypro.homework.entity;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.util.Objects;
 @Entity
 public class Ad {

@@ -4,9 +4,18 @@ import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.User;
+import ru.skypro.homework.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class UserMapper {
+    private final UserRepository userRepository;
+
+    public UserMapper(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public UserDto mapToUserDto(User user) {
         UserDto dto = new UserDto();
         dto.setEmail(user.getEmail());
@@ -28,8 +37,9 @@ public class UserMapper {
     }
 
     public User mapToNewPasswordDto(NewPasswordDto newPasswordDto) {
-        User user = new User();
-        user.setPassword(newPasswordDto.getNewPassword());
-        return user;
+       List<User> users = userRepository.findByPassword(newPasswordDto.getCurrentPassword());
+       User user = users.get(0);
+       user.setPassword(newPasswordDto.getNewPassword());
+       return user;
     }
 }
