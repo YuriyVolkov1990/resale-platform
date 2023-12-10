@@ -2,8 +2,7 @@ package ru.skypro.homework.entity;
 
 import lombok.Data;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,12 +11,12 @@ import java.util.Objects;
 public class Ads {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private Integer author;
     private String image;
     private Integer price;
     private String title;
-    public Ads(Integer id, Integer author, String image, Integer price, String title) {
+    public Ads(Long id, Integer author, String image, Integer price, String title) {
         this.id = id;
         this.author = author;
         this.image = image;
@@ -25,11 +24,11 @@ public class Ads {
         this.title = title;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

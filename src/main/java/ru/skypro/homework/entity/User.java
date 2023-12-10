@@ -19,8 +19,12 @@ public class User {
     private String phone;
     private Role role;
     private String image;
+    private String password;
+    public User() {
 
-    public User(Long id, String email, String firstName, String lastName, String phone, Role role, String image) {
+    }
+
+    public User(Long id, String email, String firstName, String lastName, String phone, Role role, String image, String password) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -28,6 +32,7 @@ public class User {
         this.phone = phone;
         this.role = role;
         this.image = image;
+        this.password = password;
     }
 
     public Long getId() {
@@ -84,6 +89,14 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

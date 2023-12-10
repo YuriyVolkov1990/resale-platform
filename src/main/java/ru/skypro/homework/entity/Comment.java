@@ -1,7 +1,6 @@
 package ru.skypro.homework.entity;
 
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import java.util.Objects;
@@ -10,14 +9,14 @@ import java.util.Objects;
 public class Comment {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private Integer author;
     private String authorImage;
     private String authorFirstName;
     private Integer createdAt;
     private String text;
 
-    public Comment(Integer id, Integer author, String authorImage, String authorFirstName, Integer createdAt, String text) {
+    public Comment(Long id, Integer author, String authorImage, String authorFirstName, Integer createdAt, String text) {
         this.id = id;
         this.author = author;
         this.authorImage = authorImage;
@@ -26,11 +25,11 @@ public class Comment {
         this.text = text;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
