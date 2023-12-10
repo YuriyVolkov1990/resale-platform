@@ -1,35 +1,36 @@
 package ru.skypro.homework.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.Objects;
-
 @Entity
 public class Ads {
     @Id
-    @GeneratedValue
-    private Integer pk;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private Integer author;
     private String image;
     private Integer price;
     private String title;
-    public Ads(Integer pk, Integer author, String image, Integer price, String title) {
-        this.pk = pk;
+    public Ads(Integer id, Integer author, String image, Integer price, String title) {
+        this.id = id;
         this.author = author;
         this.image = image;
         this.price = price;
         this.title = title;
     }
 
-    public Integer getPk() {
-        return pk;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPk(Integer pk) {
-        this.pk = pk;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getAuthor() {
@@ -69,18 +70,18 @@ public class Ads {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ads ads = (Ads) o;
-        return Objects.equals(pk, ads.pk) && Objects.equals(author, ads.author) && Objects.equals(image, ads.image) && Objects.equals(price, ads.price) && Objects.equals(title, ads.title);
+        return Objects.equals(id, ads.id) && Objects.equals(author, ads.author) && Objects.equals(image, ads.image) && Objects.equals(price, ads.price) && Objects.equals(title, ads.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pk, author, image, price, title);
+        return Objects.hash(id, author, image, price, title);
     }
 
     @Override
     public String toString() {
         return "Ads{" +
-                "pk=" + pk +
+                "id=" + id +
                 ", author=" + author +
                 ", image='" + image + '\'' +
                 ", price=" + price +
