@@ -14,7 +14,7 @@ public class Ad {
     private String image;
     private Integer price;
     private String title;
-    public Ads(Long id, Integer author, String image, Integer price, String title) {
+    public Ad(Long id, Integer author, String image, Integer price, String title) {
         this.id = id;
         this.author = author;
         this.image = image;
