@@ -1,14 +1,12 @@
 package ru.skypro.homework.entity;
 
-import lombok.Data;
-import lombok.Getter;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.Objects;
 @Entity
-public class Ads {
+public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -68,7 +66,7 @@ public class Ads {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Ads ads = (Ads) o;
+        Ad ads = (Ad) o;
         return Objects.equals(id, ads.id) && Objects.equals(author, ads.author) && Objects.equals(image, ads.image) && Objects.equals(price, ads.price) && Objects.equals(title, ads.title);
     }
 
