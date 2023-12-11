@@ -13,10 +13,13 @@ public class Comment {
     private Integer author;
     private String authorImage;
     private String authorFirstName;
-    private Integer createdAt;
+    private Long createdAt;
     private String text;
 
-    public Comment(Long id, Integer author, String authorImage, String authorFirstName, Integer createdAt, String text) {
+    public Comment() {
+    }
+
+    public Comment(Long id, Integer author, String authorImage, String authorFirstName, Long createdAt, String text) {
         this.id = id;
         this.author = author;
         this.authorImage = authorImage;
@@ -57,11 +60,11 @@ public class Comment {
         this.authorFirstName = authorFirstName;
     }
 
-    public Integer getCreatedAt() {
+    public Long getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Integer createdAt) {
+    public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
 

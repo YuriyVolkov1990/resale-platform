@@ -2,15 +2,18 @@ package ru.skypro.homework.dto;
 
 import lombok.Data;
 import ru.skypro.homework.entity.Comment;
+
+import java.util.List;
+
 @Data
 public class CommentsDto {
     private Integer count;
-    private Comment results;
+    private List<Comment> results;
 
     public CommentsDto() {
     }
 
-    public CommentsDto(Integer count, Comment results) {
+    public CommentsDto(Integer count, List<Comment> results) {
         this.count = count;
         this.results = results;
     }
@@ -23,11 +26,11 @@ public class CommentsDto {
         this.count = count;
     }
 
-    public Comment getResults() {
+    public List<Comment> getResults() {
         return results;
     }
 
-    public void setResults(Comment results) {
+    public void setResults(List<Comment> results) {
         this.results = results;
     }
 }

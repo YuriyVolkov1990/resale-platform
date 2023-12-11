@@ -1,7 +1,7 @@
 package ru.skypro.homework.dto;
 
 public class CommentDto {
-    private Long authorId;
+    private Integer authorId;
     private String authorImage;
     private String authorFirstName;
     private Long createdAt;
@@ -11,7 +11,7 @@ public class CommentDto {
     public CommentDto() {
     }
 
-    public CommentDto(Long authorId, String authorImage, String authorFirstName, Long createdAt, Long commentId, String text) {
+    public CommentDto(Integer authorId, String authorImage, String authorFirstName, Long createdAt, Long commentId, String text) {
         this.authorId = authorId;
         this.authorImage = authorImage;
         this.authorFirstName = authorFirstName;
@@ -20,11 +20,11 @@ public class CommentDto {
         this.text = text;
     }
 
-    public Long getAuthorId() {
+    public Integer getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Long authorId) {
+    public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
     }
 
