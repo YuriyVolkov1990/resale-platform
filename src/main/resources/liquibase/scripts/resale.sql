@@ -14,7 +14,7 @@ create table Ad (
     id bigserial primary key,
     image text,
     price serial not null,
-    title text not null
+    title text not null,
     description text
 );
 create table Comment (

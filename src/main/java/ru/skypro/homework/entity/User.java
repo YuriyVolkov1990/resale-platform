@@ -21,7 +21,7 @@ public class User {
     private Role role;
     private String image;
     private String password;
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private List<Ad> ads;
     public User() {
 

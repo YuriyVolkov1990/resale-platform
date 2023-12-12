@@ -19,9 +19,11 @@ public class AdMapper {
 
     public AdDto mapToAdDto(Ad ad) {
         AdDto dto = new AdDto();
+        dto.setId(ad.getId());
         dto.setImage(ad.getImage());
         dto.setPrice(ad.getPrice());
         dto.setTitle(ad.getTitle());
+        dto.setAuthor(dto.getAuthor());
         return dto;
     }
     public Ad mapToAd(AdDto dto) {
