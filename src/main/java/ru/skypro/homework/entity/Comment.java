@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Comment {
     @Id
     @GeneratedValue
-    @Column(name = "idComment")
+    @Column(name = "idcomment")
     private Long id;
     @Column(name = "iduser")
     private Integer author;
