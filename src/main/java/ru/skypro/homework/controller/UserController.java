@@ -3,11 +3,10 @@ package ru.skypro.homework.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.NewPasswordDto;
+import ru.skypro.homework.dto.UpdateUserDto;
+import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.service.UserService;
@@ -15,6 +14,7 @@ import ru.skypro.homework.service.UserService;
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
+@RequestMapping("/users")
 //@RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -23,8 +23,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/users/set_password")
+    @PostMapping("/set_password")
     public ResponseEntity<NewPasswordDto> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
-        return ResponseEntity.ok(userService.setPassword(newPasswordDto));
+        return ResponseEntity.ok(userService.postPassword(newPasswordDto));
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserDto> getMyInfo() {
+        return ResponseEntity.ok(userService.getInfo());
+    }
+
+    @PatchMapping("/me")
+    public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody UpdateUserDto updateUser) {
+        return ResponseEntity.ok(userService.updateUser());
+    }
+
+//    @PatchMapping("/me/image")
+//    public ResponseEntity<UserDto> updateImage() {
+//
+//    }
 }
