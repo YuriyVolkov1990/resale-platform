@@ -14,12 +14,19 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "email")
     private String email;
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "role")
     private Role role;
+    @Column(name = "image")
     private String image;
+    @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "user")
     private List<Ad> ads;

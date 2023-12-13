@@ -7,9 +7,13 @@ public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "image")
     private String image;
+    @Column(name = "price")
     private Integer price;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
     @ManyToOne
     @JoinColumn(name = "authorId")

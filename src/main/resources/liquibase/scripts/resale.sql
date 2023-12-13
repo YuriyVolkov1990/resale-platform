@@ -8,7 +8,8 @@ create table Users (
     lastName text not null,
     phone text not null,
     role text not null,
-    image text
+    image text,
+    password text not null
 );
 create table Ad (
     id bigserial primary key,
@@ -19,8 +20,9 @@ create table Ad (
 );
 create table Comment (
     idComment bigserial primary key,
-    idUser bigserial not null,
+    idUser serial not null,
     authorImage text,
     authorFirstName text not null,
-    createdAt bigserial not null
+    createdAt bigserial not null,
+    message text not null
 );
