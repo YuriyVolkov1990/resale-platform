@@ -29,7 +29,7 @@ public class AdMapper {
     }
     public Ad mapToAd(AdDto dto) {
         Ad ad = new Ad();
-        ad.setId(dto.getPk());
+        ad.setPk(dto.getPk());
         ad.setImage(dto.getImage());
         ad.setPrice(dto.getPrice());
         ad.setTitle(dto.getTitle());
@@ -53,13 +53,14 @@ public class AdMapper {
 
     public Ad mapToAd(ExtendedAdDto dto) {
         Ad ad = new Ad();
-        ad.setId(dto.getPk());
+        ad.setPk(dto.getPk());
         ad.setImage(dto.getImage());
         ad.setPrice(dto.getPrice());
         ad.setTitle(dto.getTitle());
         ad.setDescription(dto.getDescription());
         User user = new User(dto.getPk(), dto.getEmail(), dto.getAuthorFirstName(), dto.getAuthorLastName(), dto.getPhone(), null, null, null);
         userMapper.mapToUserDto(user);
+        ad.setUser(user);
         return ad;
     }
     public AdsDto mapToAdsDto(List<Ad> ads) {

@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public UserDto findById(Integer userId) {
+        return null;
+    }
+
 }

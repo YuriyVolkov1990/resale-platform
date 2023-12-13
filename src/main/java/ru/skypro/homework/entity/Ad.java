@@ -50,7 +50,7 @@ public class Ad {
         return pk;
     }
 
-    public void setId(Integer pk) {
+    public void setPk(Integer pk) {
         this.pk = pk;
     }
 
