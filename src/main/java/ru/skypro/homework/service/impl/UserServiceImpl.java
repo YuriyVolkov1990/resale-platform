@@ -20,10 +20,9 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
     @Override
-    public boolean setPassword(NewPasswordDto newPasswordDto) {
-        List<User> user = userRepository.findByPassword(newPasswordDto.getCurrentPassword());
-//                userMapper.mapToNewPasswordDto(newPasswordDto);
-        return true;
+    public String setPassword(NewPasswordDto newPasswordDto) {
+        User user = userRepository.findByPassword(newPasswordDto.getCurrentPassword());
+        return user.getPassword();
     }
 
 }

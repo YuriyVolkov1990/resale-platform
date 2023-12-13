@@ -38,8 +38,7 @@ public class UserMapper {
     }
 
     public User mapToNewPasswordDto(NewPasswordDto newPasswordDto) {
-       List<User> users = userRepository.findByPassword(newPasswordDto.getCurrentPassword());
-       User user = users.get(0);
+       User user = userRepository.findByPassword(newPasswordDto.getCurrentPassword());
        user.setPassword(newPasswordDto.getNewPassword());
        return user;
     }

@@ -23,8 +23,8 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @PostMapping("/users/set_password")
-//    public ResponseEntity<NewPasswordDto> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
-//        return ResponseEntity.ok().build();
-//    }
+    @PostMapping("/users/set_password")
+    public ResponseEntity<NewPasswordDto> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
+        return ResponseEntity.ok().build();
+    }
 }
