@@ -36,7 +36,11 @@ public class UserMapper {
         user.setRole(dto.getRole());
         return user;
     }
-
+    public NewPasswordDto mapToNewPassword(User user) {
+        NewPasswordDto dto = new NewPasswordDto();
+        dto.setNewPassword(user.getPassword());
+        return dto;
+    }
     public User mapToNewPasswordDto(NewPasswordDto newPasswordDto) {
        User user = userRepository.findByPassword(newPasswordDto.getCurrentPassword());
        user.setPassword(newPasswordDto.getNewPassword());

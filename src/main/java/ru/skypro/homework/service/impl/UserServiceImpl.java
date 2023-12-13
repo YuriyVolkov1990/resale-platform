@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public String setPassword(NewPasswordDto newPasswordDto) {
-        User user = userRepository.findByPassword(newPasswordDto.getCurrentPassword());
+        User user = userMapper.mapToNewPasswordDto(newPasswordDto);
         return user.getPassword();
     }
 
