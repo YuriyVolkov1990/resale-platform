@@ -7,7 +7,7 @@ import lombok.Data;
 public class AdDto {
     private Integer author;
     private String image;
-    private Long id;
+    private Integer pk;
     private Integer price;
     private String title;
 
@@ -17,7 +17,7 @@ public class AdDto {
     public AdDto(Integer author, String image, Long id, Integer price, String title) {
         this.author = author;
         this.image = image;
-        this.id = id;
+        this.pk = pk;
         this.price = price;
         this.title = title;
     }
@@ -38,12 +38,12 @@ public class AdDto {
         this.image = image;
     }
 
-    public Long getId() {
-        return id;
+    public Integer getId() {
+        return pk;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Integer pk) {
+        this.pk = pk;
     }
 
     public Integer getPrice() {

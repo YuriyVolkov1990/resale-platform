@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 @Data
 public class UserDto {
-    private Long id;
+    private Integer pk;
     private String email;
     private String firstName;
     private String lastName;
@@ -17,12 +17,12 @@ public class UserDto {
     private Role role;
     private String image;
 
-    public Long getId() {
-        return id;
+    public Integer getPk() {
+        return  pk;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPk(Integer pk) {
+        this.pk =  pk;
     }
 
     public String getEmail() {

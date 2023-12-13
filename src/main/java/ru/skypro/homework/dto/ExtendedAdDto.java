@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ExtendedAdDto {
-    private Long id;
+    private Integer pk;
     private String authorFirstName;
     private String authorLastName;
     private String description;
@@ -17,8 +17,8 @@ public class ExtendedAdDto {
     public ExtendedAdDto() {
     }
 
-    public ExtendedAdDto(Long id, String authorFirstName, String authorLastName, String description, String email, String image, String phone, Integer price, String title) {
-        this.id = id;
+    public ExtendedAdDto(Integer pk, String authorFirstName, String authorLastName, String description, String email, String image, String phone, Integer price, String title) {
+        this.pk = pk;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
         this.description = description;
@@ -29,12 +29,12 @@ public class ExtendedAdDto {
         this.title = title;
     }
 
-    public Long getId() {
-        return id;
+    public Integer getPk() {
+        return pk;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPk(Integer pk) {
+        this.pk = pk;
     }
 
     public String getAuthorFirstName() {

@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name = "image")
     private String image;
     @Column(name = "price")
@@ -22,7 +22,7 @@ public class Ad {
     public Ad() {
     }
 
-    public Ad(Long id, String image, Integer price, String title, String description) {
+    public Ad(Integer id, String image, Integer price, String title, String description) {
         this.id = id;
         this.image = image;
         this.price = price;
@@ -46,11 +46,11 @@ public class Ad {
         this.user = user;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

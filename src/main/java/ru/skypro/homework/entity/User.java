@@ -13,7 +13,7 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer pk;
     @Column(name = "email")
     private String email;
     @Column(name = "firstname")
@@ -34,8 +34,8 @@ public class User {
 
     }
 
-    public User(Long id, String email, String firstName, String lastName, String phone, Role role, String image, String password) {
-        this.id = id;
+    public User(Integer pk, String email, String firstName, String lastName, String phone, Role role, String image, String password) {
+        this.pk = pk;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,12 +45,12 @@ public class User {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public Integer getPk() {
+        return pk;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Integer pk) {
+        this.pk = pk;
     }
 
     public String getEmail() {
@@ -122,18 +122,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(phone, user.phone) && role == user.role && Objects.equals(image, user.image);
+        return Objects.equals(pk, user.pk) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(phone, user.phone) && role == user.role && Objects.equals(image, user.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, firstName, lastName, phone, role, image);
+        return Objects.hash(pk, email, firstName, lastName, phone, role, image);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + pk +
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
