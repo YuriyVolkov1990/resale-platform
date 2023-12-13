@@ -4,21 +4,23 @@ import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.*;
 import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.User;
-import ru.skypro.homework.repository.AdsRepository;
+import ru.skypro.homework.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
 public class AdMapper {
     private final UserMapper userMapper;
+    private final UserService userService;
 
-    public AdMapper(UserMapper userMapper) {
+    public AdMapper(UserMapper userMapper, UserService userService) {
         this.userMapper = userMapper;
+        this.userService = userService;
     }
 
     public AdDto mapToAdDto(Ad ad) {
         AdDto dto = new AdDto();
-        dto.setId(ad.getId());
+        dto.setId(ad.getPk());
         dto.setImage(ad.getImage());
         dto.setPrice(ad.getPrice());
         dto.setTitle(ad.getTitle());
@@ -31,7 +33,8 @@ public class AdMapper {
         ad.setImage(dto.getImage());
         ad.setPrice(dto.getPrice());
         ad.setTitle(dto.getTitle());
-        User user = new User(dto.getPk(),null,null,null,null,null,null,null);
+        UserDto userDto = userService.findById(ad.getPk());
+        User user = userMapper.mapToUser(userDto);
         ad.setUser(user);
         return ad;
     }

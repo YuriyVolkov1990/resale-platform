@@ -10,4 +10,6 @@ public interface UserService {
     public UserDto getInfo();
 
     public UpdateUserDto updateUser();
+
+    public UserDto findById(Integer userId);
 }

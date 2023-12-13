@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer pk;
     @Column(name = "image")
     private String image;
     @Column(name = "price")
@@ -22,8 +22,8 @@ public class Ad {
     public Ad() {
     }
 
-    public Ad(Integer id, String image, Integer price, String title, String description) {
-        this.id = id;
+    public Ad(Integer pk, String image, Integer price, String title, String description) {
+        this.pk = pk;
         this.image = image;
         this.price = price;
         this.title = title;
@@ -46,12 +46,12 @@ public class Ad {
         this.user = user;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getPk() {
+        return pk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer pk) {
+        this.pk = pk;
     }
 
     public String getImage() {
@@ -83,18 +83,18 @@ public class Ad {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ad ad = (Ad) o;
-        return Objects.equals(id, ad.id) && Objects.equals(image, ad.image) && Objects.equals(price, ad.price) && Objects.equals(title, ad.title) && Objects.equals(user, ad.user);
+        return Objects.equals(pk, ad.pk) && Objects.equals(image, ad.image) && Objects.equals(price, ad.price) && Objects.equals(title, ad.title) && Objects.equals(user, ad.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, image, price, title, user);
+        return Objects.hash(pk, image, price, title, user);
     }
 
     @Override
     public String toString() {
         return "Ad{" +
-                "id=" + id +
+                "id=" + pk +
                 ", image='" + image + '\'' +
                 ", price=" + price +
                 ", title='" + title + '\'' +
