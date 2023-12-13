@@ -11,11 +11,9 @@ import java.util.List;
 @Service
 public class AdMapper {
     private final UserMapper userMapper;
-//    private final AdsRepository adsRepository;
 
-    public AdMapper(UserMapper userMapper, AdsRepository adsRepository) {
+    public AdMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
-//        this.adsRepository = adsRepository;
     }
 
     public AdDto mapToAdDto(Ad ad) {

@@ -10,14 +10,15 @@ import java.util.Objects;
 public class Comment {
     @Id
     @GeneratedValue
+    @Column(name = "idComment")
     private Long id;
-    @Column(name = "idUser")
+    @Column(name = "iduser")
     private Integer author;
-    @Column(name = "authorImage")
+    @Column(name = "authorimage")
     private String authorImage;
-    @Column(name = "authorFirstName")
+    @Column(name = "authorfirstname")
     private String authorFirstName;
-    @Column(name = "createdAt")
+    @Column(name = "createdat")
     private Long createdAt;
     @Column(name = "message")
     private String text;
