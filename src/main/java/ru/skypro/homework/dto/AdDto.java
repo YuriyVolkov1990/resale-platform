@@ -14,7 +14,7 @@ public class AdDto {
     public AdDto() {
     }
 
-    public AdDto(Integer author, String image, Long id, Integer price, String title) {
+    public AdDto(Integer author, String image, Integer pk, Integer price, String title) {
         this.author = author;
         this.image = image;
         this.pk = pk;
@@ -38,7 +38,7 @@ public class AdDto {
         this.image = image;
     }
 
-    public Integer getId() {
+    public Integer getPk() {
         return pk;
     }
 
