@@ -1,6 +1,7 @@
 package ru.skypro.homework.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,7 +44,7 @@ public class AdsController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<AdDto> patchAd(@PathVariable Integer id, @RequestBody CreateOrUpdateAdDto) {
+    public ResponseEntity<AdDto> patchAd(@PathVariable Integer id, @RequestBody CreateOrUpdateAdDto dto) {
             return ResponseEntity.ok(adsService.patchAd(id));
 //Forbidden????
 //Not found????
@@ -51,21 +52,11 @@ public class AdsController {
 
     @GetMapping("/me")
     public ResponseEntity<AdsDto> getUserAds() {
-        if () {
             return ResponseEntity.ok(adsService.getUserAds());
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
     }
 
-    @PatchMapping("/{id}/image")
-    public ResponseEntity<String> patchImage(@PathVariable Integer id) {
-        if () {
-            return ResponseEntity.ok(adsService.patchImage(id));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
+    @PatchMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> patchImage(@PathVariable Integer id, @RequestBody MultipartFile multipartFile) {
+            return ResponseEntity.ok(adsService.patchImage(id, multipartFile));
     }
 }

@@ -26,6 +26,7 @@ public class AdsServiceImpl implements AdsService {
 
     @Override
     public AdDto deleteAd(Integer id) {
+        return null;
         // он void, можно ничего не возвращать
     }
 

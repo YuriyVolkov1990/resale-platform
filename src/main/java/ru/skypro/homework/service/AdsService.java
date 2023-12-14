@@ -19,5 +19,5 @@ public interface AdsService {
 
     AdsDto getUserAds();
 
-    String patchImage(Integer id);
+    String patchImage(Integer id, MultipartFile multipartFile);
 }
