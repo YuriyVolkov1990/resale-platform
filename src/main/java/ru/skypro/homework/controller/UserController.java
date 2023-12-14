@@ -2,8 +2,10 @@ package ru.skypro.homework.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
@@ -36,24 +38,15 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDto> getInfo() {
-        if (????) {
-            return ResponseEntity.ok(userService.getInfo());
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        return ResponseEntity.ok(userService.getInfo());
         }
-
-    }
-
     @PatchMapping("/me")
     public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody UpdateUserDto updateUser) {
-        if (????) {
-            return ResponseEntity.ok(userService.updateUser());
+        return ResponseEntity.ok(userService.updateUser());
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
 
-//    @PatchMapping("/me/image")
-//    public ResponseEntity<UserDto> updateImage(String image) {
-//
-//    }
+
+    @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void updateImage(@RequestBody MultipartFile image) {
+    }
 }

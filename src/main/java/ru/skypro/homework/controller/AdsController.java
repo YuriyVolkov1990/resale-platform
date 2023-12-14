@@ -26,43 +26,25 @@ public class AdsController {
     }
 
     @PostMapping
-    public ResponseEntity<AdDto> addAd(@RequestParam Object properties, @RequestParam MultipartFile image) {
-        if () {
+    public ResponseEntity<AdDto> addAd(@RequestParam CreateOrUpdateAdDto properties, @RequestParam MultipartFile image) {
             return ResponseEntity.ok(adsService.addAd(properties, image));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
-        if () {
             return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        //404 Not found????????
         }
-//404 Not found????????
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<AdDto> deleteAd(@PathVariable Integer id) {
-        if () {
             return ResponseEntity.ok(adsService.deleteAd(id));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-//Forbidden????
 //Not found????
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<AdDto> patchAd(@PathVariable Integer id, @RequestBody CreateOrUpdateAdDto) {
-        if (adsService.patchAd(id)) {
             return ResponseEntity.ok(adsService.patchAd(id));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 //Forbidden????
 //Not found????
     }

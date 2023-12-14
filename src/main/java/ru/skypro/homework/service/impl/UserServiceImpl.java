@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getInfo() {
-        UserDto// достать юзера из юзердетаилс и вернуть
-        return
+//        UserDto// достать юзера из юзердетаилс и вернуть
+        return null;
 
     }
 
@@ -44,8 +44,8 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-//    public UserDto findByPassword(String password) {
-//        userMapper.mapToUser( )
-//    } как в домашке про хогвартс
+    public UserDto findByPassword(String password) {
+        return null;
+    }// как в домашке про хогвартс
 
 }
