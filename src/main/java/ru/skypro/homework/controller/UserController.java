@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
-import ru.skypro.homework.entity.User;
-import ru.skypro.homework.mapper.UserMapper;
+import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.UserService;
+
+import java.util.Objects;
 
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
@@ -25,21 +26,34 @@ public class UserController {
 
     @PostMapping("/set_password")
     public ResponseEntity<NewPasswordDto> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
-        return ResponseEntity.ok(userService.setPassword(newPasswordDto));
+        //UNAUTHORIZED??? нужно обработать код, как? Или FORBIDDEN?
+        if (!Objects.equals(newPasswordDto.getCurrentPassword(), newPasswordDto.getNewPassword())) {
+            return ResponseEntity.ok(userService.setPassword(newPasswordDto));
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 
     @GetMapping("/me")
     public ResponseEntity<UserDto> getInfo() {
-        return ResponseEntity.ok(userService.getInfo());
+        if (????) {
+            return ResponseEntity.ok(userService.getInfo());
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
     }
 
     @PatchMapping("/me")
     public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody UpdateUserDto updateUser) {
-        return ResponseEntity.ok(userService.updateUser());
+        if (????) {
+            return ResponseEntity.ok(userService.updateUser());
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 //    @PatchMapping("/me/image")
-//    public ResponseEntity<UserDto> updateImage() {
+//    public ResponseEntity<UserDto> updateImage(String image) {
 //
 //    }
 }
