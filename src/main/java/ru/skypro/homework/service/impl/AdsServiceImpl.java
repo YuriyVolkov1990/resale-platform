@@ -1,5 +1,6 @@
 package ru.skypro.homework.service.impl;
 
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.AdDto;
 import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
@@ -13,22 +14,22 @@ public class AdsServiceImpl implements AdsService {
     }
 
     @Override
-    public AdDto addAd() {
+    public AdDto addAd(Object properties, MultipartFile image) {
         return null;
     }
 
     @Override
-    public ExtendedAdDto getInfoExtendedAd() {
+    public ExtendedAdDto getInfoExtendedAd(Integer id) {
         return null;
     }
 
     @Override
-    public AdDto deleteAd() {
+    public AdDto deleteAd(Integer id) {
         return null;
     }
 
     @Override
-    public AdDto patchAd() {
+    public AdDto patchAd(Integer id) {
         return null;
     }
 
@@ -38,7 +39,7 @@ public class AdsServiceImpl implements AdsService {
     }
 
     @Override
-    public String patchImage() {
+    public String patchImage(Integer id) {
         return null;
     }
 }

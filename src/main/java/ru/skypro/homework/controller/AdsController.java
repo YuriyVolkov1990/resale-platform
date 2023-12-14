@@ -25,22 +25,22 @@ public class AdsController {
 
     @PostMapping
     public ResponseEntity<AdDto> addAd(@RequestParam Object properties, @RequestParam MultipartFile image) {
-        return ResponseEntity.ok(adsService.addAd());
+        return ResponseEntity.ok(adsService.addAd(properties, image));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
-        return ResponseEntity.ok(adsService.getInfoExtendedAd());
+        return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<AdDto> deleteAd(@PathVariable Integer id) {
-        return ResponseEntity.ok(adsService.deleteAd());
+        return ResponseEntity.ok(adsService.deleteAd(id));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<AdDto> patchAd(@PathVariable Integer id) {
-        return ResponseEntity.ok(adsService.patchAd());
+        return ResponseEntity.ok(adsService.patchAd(id));
     }
 
     @GetMapping("/me")
@@ -50,6 +50,6 @@ public class AdsController {
 
     @PatchMapping("/{id}/image")
     public ResponseEntity<String> patchImage(@PathVariable Integer id) {
-        return ResponseEntity.ok(adsService.patchImage());
+        return ResponseEntity.ok(adsService.patchImage(id));
     }
 }
