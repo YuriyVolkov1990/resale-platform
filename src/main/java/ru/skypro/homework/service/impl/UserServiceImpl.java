@@ -24,19 +24,20 @@ public class UserServiceImpl implements UserService {
     public NewPasswordDto setPassword(NewPasswordDto newPasswordDto) {
         manager.changePassword(newPasswordDto.getCurrentPassword(), newPasswordDto.getNewPassword());
         User user = userMapper.mapToNewPassword(newPasswordDto);
-        return userMapper.mapToNewPasswordDto(user);
+        return userMapper.mapToNewPasswordDto(user); // метод void, можно отсавить только changePassword, ничего не возвращать
     }
 
     @Override
     public UserDto getInfo() {
+        UserDto// достать юзера из юзердетаилс и вернуть
+        return
 
-        return null;
     }
 
     @Override
     public UpdateUserDto updateUser() {
         return null;
-    }
+    }//достать юзера из сессии и обновить
 
     @Override
     public UserDto findById(Integer userId) {
@@ -45,6 +46,6 @@ public class UserServiceImpl implements UserService {
 
 //    public UserDto findByPassword(String password) {
 //        userMapper.mapToUser( )
-//    }
+//    } как в домашке про хогвартс
 
 }

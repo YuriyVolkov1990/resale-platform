@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.AdDto;
 import ru.skypro.homework.dto.AdsDto;
+import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.service.AdsService;
 
@@ -36,7 +37,7 @@ public class AdsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
-        if (adsService. ) {
+        if () {
             return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -56,8 +57,8 @@ public class AdsController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<AdDto> patchAd(@PathVariable Integer id) {
-        if () {
+    public ResponseEntity<AdDto> patchAd(@PathVariable Integer id, @RequestBody CreateOrUpdateAdDto) {
+        if (adsService.patchAd(id)) {
             return ResponseEntity.ok(adsService.patchAd(id));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

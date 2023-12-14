@@ -26,12 +26,12 @@ public class UserController {
 
     @PostMapping("/set_password")
     public ResponseEntity<NewPasswordDto> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
+        return ResponseEntity.ok(userService.setPassword(newPasswordDto));
         //UNAUTHORIZED??? нужно обработать код, как? Или FORBIDDEN?
-        if (!Objects.equals(newPasswordDto.getCurrentPassword(), newPasswordDto.getNewPassword())) {
-            return ResponseEntity.ok(userService.setPassword(newPasswordDto));
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+//        if (!Objects.equals(newPasswordDto.getCurrentPassword(), newPasswordDto.getNewPassword())) {
+//        } else {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//        }
     }
 
     @GetMapping("/me")
