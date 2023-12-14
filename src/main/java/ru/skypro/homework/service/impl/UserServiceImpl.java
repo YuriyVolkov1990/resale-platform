@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
     }
     @Override
-    public NewPasswordDto postPassword(NewPasswordDto newPasswordDto) {
+    public NewPasswordDto setPassword(NewPasswordDto newPasswordDto) {
         User user = userMapper.mapToNewPasswordDto(newPasswordDto);
         return userMapper.mapToNewPassword(user);
     }

@@ -5,7 +5,7 @@ import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 
 public interface UserService {
-    public NewPasswordDto postPassword(NewPasswordDto newPasswordDto);
+    public NewPasswordDto setPassword(NewPasswordDto newPasswordDto);
 
     public UserDto getInfo();
 
