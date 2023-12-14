@@ -49,5 +49,7 @@ public class AdsController {
     }
 
     @PatchMapping("/{id}/image")
-    public ResponseEntity<>
+    public ResponseEntity<String> patchImage(@PathVariable Integer id) {
+        return ResponseEntity.ok(adsService.patchImage());
+    }
 }

@@ -16,4 +16,6 @@ public interface AdsService {
     AdDto patchAd();
 
     AdsDto getUserAds();
+
+    String patchImage();
 }
