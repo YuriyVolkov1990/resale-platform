@@ -1,6 +1,7 @@
 package ru.skypro.homework.controller;
 
 import liquibase.pro.packaged.R;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.CommentDto;
@@ -19,21 +20,44 @@ public class CommentController {
 
     @GetMapping("/{id}/comments")
     public ResponseEntity<CommentsDto> getComments(@PathVariable Integer id) {
-        return ResponseEntity.ok(commentService.getCommentsByAd(id));
+        if () {
+            return ResponseEntity.ok(commentService.getCommentsByAd(id));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+//Forbidden????
+//Not found????
     }
 
     @PostMapping("/{id}/comments")
     public ResponseEntity<CommentDto> getComment(@PathVariable Integer id) {
-        return ResponseEntity.ok(commentService.postCommentToAd(id));
+        if () {
+            return ResponseEntity.ok(commentService.postCommentToAd(id));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+//Not found????
     }
 
     @DeleteMapping("/{adId}/comments/{commentId}")
     public ResponseEntity<CommentDto> deleteComment(@PathVariable Integer adId, @PathVariable Integer id) {
-        return ResponseEntity.ok(commentService.deleteCommentAtAd(adId, id));
+        if () {
+            return ResponseEntity.ok(commentService.deleteCommentAtAd(adId, id));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+//Forbidden????
+//Not found????
     }
 
     @PatchMapping("/{adId}/comments/{commentId}")
     public ResponseEntity<CommentDto> patchComment(@PathVariable Integer adId, @PathVariable Integer id) {
-        return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id));
+        if () {
+            return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+//Forbidden????
+//Not found????
     }
 }
