@@ -5,11 +5,11 @@ import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 
 public interface UserService {
-    public NewPasswordDto setPassword(NewPasswordDto newPasswordDto);
+    NewPasswordDto setPassword(NewPasswordDto newPasswordDto);
 
-    public UserDto getInfo();
+    UserDto getInfo();
 
-    public UpdateUserDto updateUser();
+    UpdateUserDto updateUser();
 
-    public UserDto findById(Integer userId);
+    UserDto findById(Integer userId);
 }

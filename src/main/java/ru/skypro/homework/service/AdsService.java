@@ -6,7 +6,7 @@ import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 
 public interface AdsService {
-    public AdsDto getAllAds();
+    AdsDto getAllAds();
 
     AdDto addAd(Object properties, MultipartFile image);
 
