@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getInfo() {
+        userRepository.flush();
         return null;
     }
 

@@ -36,7 +36,7 @@ public class AdsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
-        if () {
+        if (adsService. ) {
             return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
