@@ -34,20 +34,15 @@ public class AdsController {
     @GetMapping("/{id}")
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
             return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
-        //404 Not found????????
         }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AdDto> deleteAd(@PathVariable Integer id) {
-            return ResponseEntity.ok(adsService.deleteAd(id));
-//Not found????
+    public void deleteAd(@PathVariable Integer id) {
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<AdDto> patchAd(@PathVariable Integer id, @RequestBody CreateOrUpdateAdDto dto) {
             return ResponseEntity.ok(adsService.patchAd(id));
-//Forbidden????
-//Not found????
     }
 
     @GetMapping("/me")

@@ -45,7 +45,6 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser());
         }
 
-
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void updateImage(@RequestBody MultipartFile image) {
     }
