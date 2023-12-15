@@ -7,11 +7,15 @@ import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.service.AdsService;
+
+import java.util.List;
+
 @Service
 public class AdsServiceImpl implements AdsService {
 
     @Override
     public AdsDto getAllAds() {
+
         return null;// достать все обьявы из репозитория
     }
 

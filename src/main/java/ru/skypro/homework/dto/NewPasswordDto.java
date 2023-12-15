@@ -2,9 +2,16 @@ package ru.skypro.homework.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 @Data
 public class NewPasswordDto {
+    @Min(value = 8, message = "minLength: 8")
+    @Max(value = 16, message = "maxLength: 16")
     private String currentPassword;
+    @Min(value = 8, message = "minLength: 8")
+    @Max(value = 16, message = "maxLength: 16")
     private String newPassword;
     public NewPasswordDto() {
     }

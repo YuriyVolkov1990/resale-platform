@@ -4,6 +4,8 @@ import lombok.Data;
 import ru.skypro.homework.dto.Role;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +28,8 @@ public class User {
     private Role role;
     @Column(name = "image")
     private String image;
+    @Min(value = 8, message = "minLength: 8")
+    @Max(value = 16, message = "maxLength: 16")
     @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "user")
