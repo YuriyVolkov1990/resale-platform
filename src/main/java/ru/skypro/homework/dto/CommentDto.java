@@ -5,18 +5,18 @@ public class CommentDto {
     private String authorImage;
     private String authorFirstName;
     private Long createdAt;
-    private Long commentId;
+    private Integer pk;
     private String text;
 
     public CommentDto() {
     }
 
-    public CommentDto(Integer authorId, String authorImage, String authorFirstName, Long createdAt, Long commentId, String text) {
+    public CommentDto(Integer authorId, String authorImage, String authorFirstName, Long createdAt, Integer pk, String text) {
         this.authorId = authorId;
         this.authorImage = authorImage;
         this.authorFirstName = authorFirstName;
         this.createdAt = createdAt;
-        this.commentId = commentId;
+        this.pk = pk;
         this.text = text;
     }
 
@@ -52,12 +52,12 @@ public class CommentDto {
         this.createdAt = createdAt;
     }
 
-    public Long getCommentId() {
-        return commentId;
+    public Integer getPk() {
+        return pk;
     }
 
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
+    public void setPk(Integer pk) {
+        this.pk = pk;
     }
 
     public String getText() {
