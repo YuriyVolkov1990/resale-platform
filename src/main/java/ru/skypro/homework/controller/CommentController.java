@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
+import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
 import ru.skypro.homework.service.CommentService;
 
 @CrossOrigin(value = "http://localhost:3000")
@@ -24,17 +25,16 @@ public class CommentController {
         }
 
     @PostMapping("/{id}/comments")
-    public ResponseEntity<CommentDto> getComment(@PathVariable Integer id) {
-            return ResponseEntity.ok(commentService.postCommentToAd(id));
+    public ResponseEntity<CommentDto> getComment(@PathVariable Integer id, @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+            return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
         }
 
     @DeleteMapping("/{adId}/comments/{commentId}")
-    public ResponseEntity<CommentDto> deleteComment(@PathVariable Integer adId, @PathVariable Integer id) {
-            return ResponseEntity.ok(commentService.deleteCommentAtAd(adId, id));
+    public void deleteComment(@PathVariable Integer adId, @PathVariable Integer id) {
         }
 
     @PatchMapping("/{adId}/comments/{commentId}")
-    public ResponseEntity<CommentDto> patchComment(@PathVariable Integer adId, @PathVariable Integer id) {
-            return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id));
+    public ResponseEntity<CommentDto> patchComment(@PathVariable Integer adId, @PathVariable Integer id, @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+            return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id, createOrUpdateCommentDto));
         }
 }
