@@ -11,6 +11,8 @@ import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.service.AdsService;
 
+import javax.validation.Valid;
+
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequestMapping("/ads")
@@ -26,10 +28,14 @@ public class AdsController {
         return ResponseEntity.ok(adsService.getAllAds());
     }
 
+//    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity<AdDto> addAd(@Valid @RequestBody(required = false) CreateOrUpdateAdDto properties, @RequestBody(required = false) MultipartFile image) {
+//            return new ResponseEntity<AdDto>(adsService.addAd(properties, image),HttpStatus.CREATED);
+//    }
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<AdDto> addAd(@RequestBody(required = false) CreateOrUpdateAdDto properties, @RequestBody(required = false) MultipartFile image) {
-            return ResponseEntity.status(201).build();
-//            adsService.addAd(properties, image)
+    public AdDto addAd(@Valid @RequestBody(required = false) CreateOrUpdateAdDto properties, @RequestBody(required = false) MultipartFile image) {
+        return adsService.addAd(properties, image);
     }
 
     @GetMapping("/{id}")

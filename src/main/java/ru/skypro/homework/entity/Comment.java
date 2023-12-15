@@ -11,7 +11,7 @@ public class Comment {
     @Id
     @GeneratedValue
     @Column(name = "idcomment")
-    private Long id;
+    private Integer id;
     @Column(name = "iduser")
     private Integer author;
     @Column(name = "authorimage")
@@ -26,7 +26,7 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(Long id, Integer author, String authorImage, String authorFirstName, Long createdAt, String text) {
+    public Comment(Integer id, Integer author, String authorImage, String authorFirstName, Long createdAt, String text) {
         this.id = id;
         this.author = author;
         this.authorImage = authorImage;
@@ -35,11 +35,11 @@ public class Comment {
         this.text = text;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
