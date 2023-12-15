@@ -48,7 +48,6 @@ public class AdsController {
         if (adsService.findById(id).isPresent()) {
             adsService.deleteAd(id);
         }
-
     }
 
     @PatchMapping("/{id}")
