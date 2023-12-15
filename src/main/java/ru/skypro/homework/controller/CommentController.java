@@ -20,21 +20,21 @@ public class CommentController {
     }
 
     @GetMapping("/{id}/comments")
-    public ResponseEntity<CommentsDto> getComments(@PathVariable Integer id) {
+    public ResponseEntity<CommentsDto> getComments(@PathVariable(required = true) Integer id) {
             return ResponseEntity.ok(commentService.getCommentsByAd(id));
         }
 
     @PostMapping("/{id}/comments")
-    public ResponseEntity<CommentDto> getComment(@PathVariable Integer id, @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+    public ResponseEntity<CommentDto> getComment(@PathVariable(required = true) Integer id, @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
             return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
         }
 
     @DeleteMapping("/{adId}/comments/{commentId}")
-    public void deleteComment(@PathVariable Integer adId, @PathVariable Integer id) {
+    public void deleteComment(@PathVariable(required = true) Integer adId, @PathVariable(required = true) Integer id) {
         }
 
     @PatchMapping("/{adId}/comments/{commentId}")
-    public ResponseEntity<CommentDto> patchComment(@PathVariable Integer adId, @PathVariable Integer id, @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+    public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId, @PathVariable(required = true) Integer id, @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
             return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id, createOrUpdateCommentDto));
         }
 }

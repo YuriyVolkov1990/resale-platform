@@ -26,9 +26,10 @@ public class AdsController {
         return ResponseEntity.ok(adsService.getAllAds());
     }
 
-    @PostMapping
-    public ResponseEntity<AdDto> addAd(@RequestBody CreateOrUpdateAdDto properties, @RequestBody MultipartFile image) {
-            return ResponseEntity.ok(adsService.addAd(properties, image));
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<AdDto> addAd(@RequestBody(required = true) CreateOrUpdateAdDto properties, @RequestBody(required = true) MultipartFile image) {
+            return ResponseEntity.status(201).build();
+//            adsService.addAd(properties, image)
     }
 
     @GetMapping("/{id}")
@@ -37,11 +38,11 @@ public class AdsController {
         }
 
     @DeleteMapping("/{id}")
-    public void deleteAd(@PathVariable Integer id) {
+    public void deleteAd(@PathVariable(required = true) Integer id) {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<AdDto> patchAd(@PathVariable Integer id, @RequestBody CreateOrUpdateAdDto dto) {
+    public ResponseEntity<AdDto> patchAd(@PathVariable(required = true) Integer id, @RequestBody CreateOrUpdateAdDto dto) {
             return ResponseEntity.ok(adsService.patchAd(id));
     }
 
@@ -51,7 +52,7 @@ public class AdsController {
     }
 
     @PatchMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> patchImage(@PathVariable Integer id, @RequestBody MultipartFile multipartFile) {
+    public ResponseEntity<String> patchImage(@PathVariable(required = true) Integer id, @RequestBody(required = true) MultipartFile multipartFile) {
             return ResponseEntity.ok(adsService.patchImage(id, multipartFile));
     }
 }
