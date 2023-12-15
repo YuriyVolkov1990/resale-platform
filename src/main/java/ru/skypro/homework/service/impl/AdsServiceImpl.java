@@ -6,12 +6,15 @@ import ru.skypro.homework.dto.AdDto;
 import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
+import ru.skypro.homework.entity.Ad;
+import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.service.AdsService;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdsServiceImpl implements AdsService {
+    private AdsRepository adsRepository;
 
     @Override
     public AdsDto getAllAds() {
@@ -49,4 +52,10 @@ public class AdsServiceImpl implements AdsService {
     public String patchImage(Integer id, MultipartFile multipartFile) {
         return null;
     }//id это ид объявления, не картинки!!!
+
+    @Override
+    public Optional<Ad> findById(Integer id) {
+        return adsRepository.findById(id);
+
+    }
 }

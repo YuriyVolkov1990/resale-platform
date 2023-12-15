@@ -5,6 +5,9 @@ import ru.skypro.homework.dto.AdDto;
 import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
+import ru.skypro.homework.entity.Ad;
+
+import java.util.Optional;
 
 public interface AdsService {
     AdsDto getAllAds();
@@ -20,4 +23,6 @@ public interface AdsService {
     AdsDto getUserAds();
 
     String patchImage(Integer id, MultipartFile multipartFile);
+
+    Optional<Ad> findById(Integer id);
 }

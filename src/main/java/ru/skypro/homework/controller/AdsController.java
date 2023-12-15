@@ -42,9 +42,13 @@ public class AdsController {
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
             return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
         }
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteAd(@PathVariable(required = true) Integer id) {
+        if (adsService.findById(id).isPresent()) {
+            adsService.deleteAd(id);
+        }
+
     }
 
     @PatchMapping("/{id}")
