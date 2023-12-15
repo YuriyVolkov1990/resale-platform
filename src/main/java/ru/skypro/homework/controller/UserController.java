@@ -25,7 +25,7 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping("/set_password")
-    public void setPassword(@RequestBody NewPasswordDto newPasswordDto) {
+    public void setPassword(@RequestBody(required = false) NewPasswordDto newPasswordDto) {
         userService.setPassword(newPasswordDto);
         }
     @GetMapping("/me")
@@ -33,10 +33,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getInfo());
         }
     @PatchMapping("/me")
-    public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody UpdateUserDto updateUser) {
+    public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody(required = false) UpdateUserDto updateUser) {
         return ResponseEntity.ok(userService.updateUser());
         }
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void updateImage(@RequestBody(required = true) MultipartFile image) {
+    public void updateImage(@RequestBody(required = false) MultipartFile image) {
         }
 }

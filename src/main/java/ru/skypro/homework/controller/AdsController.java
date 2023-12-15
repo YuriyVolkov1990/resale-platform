@@ -27,7 +27,7 @@ public class AdsController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<AdDto> addAd(@RequestBody(required = true) CreateOrUpdateAdDto properties, @RequestBody(required = true) MultipartFile image) {
+    public ResponseEntity<AdDto> addAd(@RequestBody(required = false) CreateOrUpdateAdDto properties, @RequestBody(required = false) MultipartFile image) {
             return ResponseEntity.status(201).build();
 //            adsService.addAd(properties, image)
     }
@@ -42,7 +42,7 @@ public class AdsController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<AdDto> patchAd(@PathVariable(required = true) Integer id, @RequestBody CreateOrUpdateAdDto dto) {
+    public ResponseEntity<AdDto> patchAd(@PathVariable(required = true) Integer id, @RequestBody(required = false) CreateOrUpdateAdDto dto) {
             return ResponseEntity.ok(adsService.patchAd(id));
     }
 
@@ -52,7 +52,7 @@ public class AdsController {
     }
 
     @PatchMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> patchImage(@PathVariable(required = true) Integer id, @RequestBody(required = true) MultipartFile multipartFile) {
-            return ResponseEntity.ok(adsService.patchImage(id, multipartFile));
+    public ResponseEntity<String> patchImage(@PathVariable(required = true) Integer id, @RequestBody(required = false) MultipartFile image) {
+            return ResponseEntity.ok(adsService.patchImage(id, image));
     }
 }

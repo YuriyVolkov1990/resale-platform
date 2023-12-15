@@ -25,7 +25,7 @@ public class CommentController {
         }
 
     @PostMapping("/{id}/comments")
-    public ResponseEntity<CommentDto> getComment(@PathVariable(required = true) Integer id, @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+    public ResponseEntity<CommentDto> getComment(@PathVariable(required = true) Integer id, @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
             return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
         }
 
@@ -34,7 +34,7 @@ public class CommentController {
         }
 
     @PatchMapping("/{adId}/comments/{commentId}")
-    public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId, @PathVariable(required = true) Integer id, @RequestBody CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+    public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId, @PathVariable(required = true) Integer id, @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
             return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id, createOrUpdateCommentDto));
         }
 }
