@@ -4,11 +4,11 @@ import lombok.Data;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Data
 public class CreateOrUpdateCommentDto {
-    @Min(value = 8, message = "minLength: 8")
-    @Max(value = 64, message = "maxLength: 64")
+    @Size(min = 8, max = 64)
     private String text;
     public CreateOrUpdateCommentDto() {
     }

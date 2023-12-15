@@ -4,14 +4,13 @@ import lombok.Data;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Data
 public class LoginDto {
-    @Min(value = 8, message = "minLength: 8")
-    @Max(value = 16, message = "maxLength: 16")
+    @Size(min = 8, max = 16)
     private String username;
-    @Min(value = 4, message = "minLength: 8")
-    @Max(value = 32, message = "maxLength: 16")
+    @Size(min = 4, max = 32)
     private String password;
     public LoginDto() {
     }
