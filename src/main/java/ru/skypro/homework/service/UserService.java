@@ -5,7 +5,7 @@ import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 
 public interface UserService {
-    NewPasswordDto setPassword(NewPasswordDto newPasswordDto);
+    void setPassword(NewPasswordDto newPasswordDto);
 
     UserDto getInfo();
 

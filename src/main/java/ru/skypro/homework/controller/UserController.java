@@ -21,21 +21,13 @@ import java.util.Objects;
 //@RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
     @PostMapping("/set_password")
-    public ResponseEntity<NewPasswordDto> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
-        return ResponseEntity.ok(userService.setPassword(newPasswordDto));
-        //UNAUTHORIZED??? нужно обработать код, как? Или FORBIDDEN?
-//        if (!Objects.equals(newPasswordDto.getCurrentPassword(), newPasswordDto.getNewPassword())) {
-//        } else {
-//            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-//        }
-    }
-
+    public void setPassword(@RequestBody NewPasswordDto newPasswordDto) {
+        userService.setPassword(newPasswordDto);
+        }
     @GetMapping("/me")
     public ResponseEntity<UserDto> getInfo() {
         return ResponseEntity.ok(userService.getInfo());
@@ -44,8 +36,7 @@ public class UserController {
     public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody UpdateUserDto updateUser) {
         return ResponseEntity.ok(userService.updateUser());
         }
-
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void updateImage(@RequestBody MultipartFile image) {
-    }
+        }
 }

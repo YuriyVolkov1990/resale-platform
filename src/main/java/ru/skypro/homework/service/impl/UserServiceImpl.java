@@ -21,10 +21,9 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
     @Override
-    public NewPasswordDto setPassword(NewPasswordDto newPasswordDto) {
+    public void setPassword(NewPasswordDto newPasswordDto) {
         manager.changePassword(newPasswordDto.getCurrentPassword(), newPasswordDto.getNewPassword());
-        User user = userMapper.mapToNewPassword(newPasswordDto);
-        return userMapper.mapToNewPasswordDto(user); // метод void, можно отсавить только changePassword, ничего не возвращать
+// метод void, можно отсавить только changePassword, ничего не возвращать
     }
 
     @Override

@@ -27,7 +27,7 @@ public class AdsController {
     }
 
     @PostMapping
-    public ResponseEntity<AdDto> addAd(@RequestParam CreateOrUpdateAdDto properties, @RequestParam MultipartFile image) {
+    public ResponseEntity<AdDto> addAd(@RequestBody CreateOrUpdateAdDto properties, @RequestBody MultipartFile image) {
             return ResponseEntity.ok(adsService.addAd(properties, image));
     }
 
