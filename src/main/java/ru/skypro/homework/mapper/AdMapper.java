@@ -63,15 +63,15 @@ public class AdMapper {
         ad.setUser(user);
         return ad;
     }
-    public AdsDto mapToAdsDto(List<Ad> ads) {
+    public AdsDto mapToAdsDto(List<AdDto> ads) {
         AdsDto adsDto = new AdsDto();
         adsDto.setResults(ads);
         Integer count = ads.size();
         adsDto.setCount(count);
         return adsDto;
     }
-    public List<Ad> mapToAds(AdsDto adsDto) {
-        List<Ad> ads = new ArrayList<>();
+    public List<AdDto> mapToAds(AdsDto adsDto) {
+        List<AdDto> ads = new ArrayList<>();
         for (int i = 0; i <= adsDto.getCount(); i++) {
             ads.add(i,adsDto.getResults().get(i));
         }

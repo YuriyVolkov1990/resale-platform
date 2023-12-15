@@ -8,13 +8,13 @@ import java.util.List;
 @Data
 public class AdsDto {
 
-    private List<Ad> results;
+    private List<AdDto> results;
     private Integer count;
 
     public AdsDto() {
     }
 
-    public AdsDto(Integer count, List<Ad> results) {
+    public AdsDto(Integer count, List<AdDto> results) {
         this.count = count;
         this.results = results;
     }
@@ -23,11 +23,11 @@ public class AdsDto {
         return count;
     }
 
-    public List<Ad> getResults() {
+    public List<AdDto> getResults() {
         return results;
     }
 
-    public void setResults(List<Ad> results) {
+    public void setResults(List<AdDto> results) {
         this.results = results;
     }
 
