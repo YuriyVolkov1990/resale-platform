@@ -30,7 +30,7 @@ public class AdsServiceImpl implements AdsService {
     @Override
     public ExtendedAdDto getInfoExtendedAd(Integer id) {
         return null;
-    }//достать обявление по d и положить в dto
+    }//достать обявление по id и положить в dto
 
     @Override
     public AdDto deleteAd(Integer id) {
