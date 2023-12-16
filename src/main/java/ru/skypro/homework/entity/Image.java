@@ -4,10 +4,20 @@ import javax.persistence.Entity;
 
 @Entity
 public class Image {
+    private Integer id;
     private String path;
 
-    public Image(String path) {
+    public Image(Integer id, String path) {
+        this.id = id;
         this.path = path;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getPath() {
