@@ -1,4 +1,4 @@
-package ru.skypro.homework.service;
+package ru.skypro.homework.manager;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
