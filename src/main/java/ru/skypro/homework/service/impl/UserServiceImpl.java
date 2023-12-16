@@ -1,12 +1,11 @@
 package ru.skypro.homework.service.impl;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
-import ru.skypro.homework.entity.User;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.UserService;
@@ -15,10 +14,12 @@ import ru.skypro.homework.service.UserService;
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final UserDetailsManager manager;
+    private final PasswordEncoder encoder;
     private UserRepository userRepository;
-    public UserServiceImpl(UserMapper userMapper, UserDetailsManager manager, UserRepository userRepository) {
+    public UserServiceImpl(UserMapper userMapper, UserDetailsManager manager, PasswordEncoder encoder, UserRepository userRepository) {
         this.userMapper = userMapper;
         this.manager = manager;
+        this.encoder = encoder;
         this.userRepository = userRepository;
     }
     @Override
