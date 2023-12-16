@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer pk;
     @Column(name = "image")
     private String image;
