@@ -13,6 +13,8 @@ import ru.skypro.homework.service.AdsService;
 
 import javax.validation.Valid;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequestMapping("/ads")
@@ -23,7 +25,7 @@ public class AdsController {
         this.adsService = adsService;
     }
 
-    @GetMapping
+    @GetMapping(produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AdsDto> getAllAds() {
         return ResponseEntity.ok(adsService.getAllAds());
     }
@@ -38,7 +40,7 @@ public class AdsController {
         return adsService.addAd(properties, image);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
             return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
         }
@@ -50,18 +52,18 @@ public class AdsController {
         }
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AdDto> patchAd(@PathVariable(required = true) Integer id, @RequestBody(required = false) CreateOrUpdateAdDto dto) {
             return ResponseEntity.ok(adsService.patchAd(id));
     }
 
-    @GetMapping("/me")
+    @GetMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AdsDto> getUserAds() {
             return ResponseEntity.ok(adsService.getUserAds());
     }
 
-    @PatchMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> patchImage(@PathVariable(required = true) Integer id, @RequestBody(required = false) MultipartFile image) {
+    @PatchMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<String> patchImage(@PathVariable(required = true) Integer id, @RequestBody MultipartFile image) {
             return ResponseEntity.ok(adsService.patchImage(id, image));
     }
 }

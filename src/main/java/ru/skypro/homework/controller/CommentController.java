@@ -9,6 +9,8 @@ import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
 import ru.skypro.homework.service.CommentService;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequestMapping("/ads")
@@ -19,12 +21,12 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/{id}/comments")
+    @GetMapping(value = "/{id}/comments", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentsDto> getComments(@PathVariable(required = true) Integer id) {
             return ResponseEntity.ok(commentService.getCommentsByAd(id));
         }
 
-    @PostMapping("/{id}/comments")
+    @PostMapping(value = "/{id}/comments", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentDto> getComment(@PathVariable(required = true) Integer id, @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
             return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
         }
@@ -33,7 +35,7 @@ public class CommentController {
     public void deleteComment(@PathVariable(required = true) Integer adId, @PathVariable(required = true) Integer id) {
         }
 
-    @PatchMapping("/{adId}/comments/{commentId}")
+    @PatchMapping(value = "/{adId}/comments/{commentId}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId, @PathVariable(required = true) Integer id, @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
             return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id, createOrUpdateCommentDto));
         }
