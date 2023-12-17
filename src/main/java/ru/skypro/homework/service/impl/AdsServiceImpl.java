@@ -19,9 +19,13 @@ import java.util.*;
 
 @Service
 public class AdsServiceImpl implements AdsService {
-    private AdsRepository adsRepository;
-    private AdMapper adMapper;
-    private UserDetailsManager userDetailsManager;
+    private final AdsRepository adsRepository;
+    private final AdMapper adMapper;
+
+    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper) {
+        this.adsRepository = adsRepository;
+        this.adMapper = adMapper;
+    }
 
     @Override
     public AdsDto getAllAds() {

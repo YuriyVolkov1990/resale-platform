@@ -17,13 +17,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/ads")
 public class CommentController {
     private final CommentService commentService;
-    private final AuthService authService;
-    private final UserRepository userRepository;
+//    private final AuthService authService;
+//    private final UserRepository userRepository;
 
-    public CommentController(CommentService commentService, AuthService authService, UserRepository userRepository) {
+    public CommentController(CommentService commentService) {
         this.commentService = commentService;
-        this.authService = authService;
-        this.userRepository = userRepository;
+//        this.authService = authService;
+//        this.userRepository = userRepository;
     }
 
     @GetMapping(value = "/{id}/comments", produces = APPLICATION_JSON_VALUE)

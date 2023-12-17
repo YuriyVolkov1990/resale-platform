@@ -21,16 +21,16 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserMapper userMapper;
-    private final UserDetailsManager manager;
-    private final PasswordEncoder encoder;
-    private UserRepository userRepository;
-    public UserServiceImpl(UserMapper userMapper, UserDetailsManager manager, PasswordEncoder encoder, UserRepository userRepository) {
-        this.userMapper = userMapper;
-        this.manager = manager;
-        this.encoder = encoder;
-        this.userRepository = userRepository;
-    }
+//    private final UserMapper userMapper;
+//    private final UserDetailsManager manager;
+//    private final PasswordEncoder encoder;
+//    private UserRepository userRepository;
+//    public UserServiceImpl(UserMapper userMapper, UserDetailsManager manager, PasswordEncoder encoder, UserRepository userRepository) {
+//        this.userMapper = userMapper;
+//        this.manager = manager;
+//        this.encoder = encoder;
+//        this.userRepository = userRepository;
+//    }
 
     @Override
     public void setPassword(NewPasswordDto newPasswordDto) {
