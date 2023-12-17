@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getInfo() {
-//        UserDto// достать юзера из юзердетаилс и вернуть
+// достать юзера из юзердетаилс и вернуть
         return null;
 
     }

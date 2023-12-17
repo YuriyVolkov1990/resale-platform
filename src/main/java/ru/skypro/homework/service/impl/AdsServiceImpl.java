@@ -1,5 +1,6 @@
 package ru.skypro.homework.service.impl;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.AdDto;
@@ -23,7 +24,7 @@ public class AdsServiceImpl implements AdsService {
     }
 
     @Override
-    public AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image) {
+    public AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication) {
         return null;
     }//createorupdatedto and MultipartFile
 
@@ -39,7 +40,7 @@ public class AdsServiceImpl implements AdsService {
     }
 
     @Override
-    public AdDto patchAd(Integer id) {
+    public AdDto patchAd(Integer id, CreateOrUpdateAdDto dto) {
         return null;
     }//аналогично update student, faculty достать по id, обновить данными, которые пришли из дто
 
