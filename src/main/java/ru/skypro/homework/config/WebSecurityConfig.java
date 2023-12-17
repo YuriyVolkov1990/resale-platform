@@ -15,7 +15,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class WebSecurityConfig {
-
     private static final String[] AUTH_WHITELIST = {
             "/swagger-resources/**",
             "/swagger-ui.html",
@@ -24,6 +23,9 @@ public class WebSecurityConfig {
             "/login",
             "/register"
     };
+
+    public WebSecurityConfig() {
+    }
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
