@@ -12,8 +12,8 @@ import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.service.AdsService;
-
-import javax.validation.Valid;
+import ru.skypro.homework.service.CommentService;
+import ru.skypro.homework.service.ImageService;
 
 import java.io.IOException;
 
@@ -24,9 +24,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/ads")
 public class AdsController {
     private final AdsService adsService;
+    private final ImageService imageService;
+    private final CommentService commentService;
 
-    public AdsController(AdsService adsService) {
+
+    public AdsController(AdsService adsService, ImageService imageService, CommentService commentService) {
         this.adsService = adsService;
+        this.imageService = imageService;
+        this.commentService = commentService;
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
@@ -42,7 +47,7 @@ public class AdsController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public AdDto addAd(@RequestPart CreateOrUpdateAdDto properties,
                        @RequestPart MultipartFile image,
-                       Authentication authentication) throws IOException {
+                       Authentication authentication) {
         return adsService.addAd(properties, image, authentication);
     }
 

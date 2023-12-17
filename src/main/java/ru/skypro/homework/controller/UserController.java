@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
+import ru.skypro.homework.entity.User;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.UserService;
 
@@ -28,13 +29,12 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping("/set_password")
-    public void setPassword(@RequestBody(required = false) NewPasswordDto newPasswordDto, Authentication authentication) {
-        authentication.getName();
+    public void setPassword(@RequestBody(required = false) NewPasswordDto newPasswordDto) {
         userService.setPassword(newPasswordDto);
         }
     @GetMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDto> getInfo() {
-        return ResponseEntity.ok(userService.getInfo());
+    public ResponseEntity<UserDto> getInfo(Authentication authentication) {
+        return ResponseEntity.ok(userService.getInfo(authentication.getName()));
         }
     @PatchMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody(required = false) UpdateUserDto updateUser) {

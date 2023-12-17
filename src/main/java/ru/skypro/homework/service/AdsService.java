@@ -14,11 +14,11 @@ import java.util.Optional;
 public interface AdsService {
     AdsDto getAllAds();
 
-    AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication) throws IOException;
+    AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication);
 
     ExtendedAdDto getInfoExtendedAd(Integer id);
 
-    AdDto deleteAd(Integer id);
+    void deleteAd(Integer id);
 
     AdDto patchAd(Integer id, CreateOrUpdateAdDto dto);
 

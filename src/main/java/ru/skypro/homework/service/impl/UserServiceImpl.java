@@ -1,14 +1,23 @@
 package ru.skypro.homework.service.impl;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
+import ru.skypro.homework.entity.User;
+import ru.skypro.homework.exception.PassNotMatchException;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.UserService;
+
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,17 +31,16 @@ public class UserServiceImpl implements UserService {
         this.encoder = encoder;
         this.userRepository = userRepository;
     }
+
     @Override
     public void setPassword(NewPasswordDto newPasswordDto) {
-        manager.changePassword(newPasswordDto.getCurrentPassword(), newPasswordDto.getNewPassword());
-// метод void, можно отсавить только changePassword, ничего не возвращать
+
     }
 
     @Override
-    public UserDto getInfo() {
-// достать юзера из юзердетаилс и вернуть
-        return null;
+    public UserDto getInfo(String s) {
 
+        return null;
     }
 
     @Override
