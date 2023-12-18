@@ -37,10 +37,10 @@ public class CommentController {
             return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
         }
 
-    @DeleteMapping("/{adId}/comments/{commentId}")
-    public void deleteComment(@PathVariable(required = true) Integer adId,
-                              @PathVariable(required = true) Integer id,
-                              Authentication authentication) {
+    @DeleteMapping(value = "/comments/{commentId}")///{adId}
+    public void deleteComment(/*@PathVariable(required = false) Integer adId,*/
+                              @PathVariable(required = true) Integer commentId) {
+        commentService.deleteCommentAtAd(/*adId,*/ commentId);
         }
 
     @PatchMapping(value = "/{adId}/comments/{commentId}", produces = APPLICATION_JSON_VALUE)

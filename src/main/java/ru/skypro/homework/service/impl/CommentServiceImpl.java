@@ -1,7 +1,6 @@
 package ru.skypro.homework.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.skypro.homework.dto.AdDto;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
@@ -43,7 +42,6 @@ public class CommentServiceImpl implements CommentService {
         String text = createOrUpdateCommentDto.getText();
         comment.setText(text);
         Ad ad = adsRepository.getAdByPk(adId);
-        AdDto adDto = adMapper.mapToAdDto(ad);
         comment.setAuthor(ad.getUser().getPk());
         comment.setAuthorFirstName(ad.getUser().getFirstName());
         comment.setCreatedAt(121212L);
@@ -56,8 +54,8 @@ public class CommentServiceImpl implements CommentService {
     }// по ид объявления добавить коментарий
 
     @Override
-    public CommentDto deleteCommentAtAd(Integer adId, Integer id) {
-        return null;
+    public void deleteCommentAtAd(/*Integer adId,*/ Integer id) {
+        commentRepository.deleteById(id);
     }//
 
     @Override
