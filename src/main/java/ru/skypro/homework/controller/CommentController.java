@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/ads")
 public class CommentController {
+    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
     private final CommentService commentService;
 //    private final AuthService authService;
 //    private final UserRepository userRepository;
@@ -56,7 +59,8 @@ public class CommentController {
     )
     @GetMapping(value = "/{id}/comments", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentsDto> getComments(@PathVariable(required = true) Integer id) {
-            return ResponseEntity.ok(commentService.getCommentsByAd(id));
+        logger.info("Запущен метод CommentController getComments: Получение комментариев объявления");
+        return ResponseEntity.ok(commentService.getCommentsByAd(id));
         }
     @Operation(
             tags = "Комментарии",
@@ -83,9 +87,10 @@ public class CommentController {
             }
     )
     @PostMapping(value = "/{id}/comments", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<CommentDto> getComment(@PathVariable(required = true) Integer id,
+    public ResponseEntity<CommentDto> postComment(@PathVariable(required = true) Integer id,
                                                  @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
-            return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
+        logger.info("Запущен метод CommentController postComment: Добавление комментария к объявлению");
+        return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
         }
     @Operation(
             tags = "Комментарии",
@@ -116,6 +121,7 @@ public class CommentController {
     @DeleteMapping(value = "/comments/{commentId}")///{adId}
     public void deleteComment(/*@PathVariable(required = false) Integer adId,*/
                               @PathVariable(required = true) Integer commentId) {
+        logger.info("Запущен метод CommentController deleteComment: Удаление комментария");
         commentService.deleteCommentAtAd(/*adId,*/ commentId);
         }
     @Operation(
@@ -151,6 +157,7 @@ public class CommentController {
     public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId,
                                                    @PathVariable(required = true) Integer id,
                                                    @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
-            return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id, createOrUpdateCommentDto));
+        logger.info("Запущен метод CommentController patchComment: Обновление комментария");
+        return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id, createOrUpdateCommentDto));
         }
 }

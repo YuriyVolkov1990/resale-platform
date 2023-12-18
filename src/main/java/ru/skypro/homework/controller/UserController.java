@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(path = "/users")
 //@RequiredArgsConstructor
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     public UserController(UserService userService) {
         this.userService = userService;
@@ -60,6 +63,7 @@ public class UserController {
     )
     @PostMapping("/set_password")
     public void setPassword(@RequestBody(required = false) NewPasswordDto newPasswordDto) {
+        logger.info("Запущен метод UserController setPassword: Обновление пароля");
         userService.setPassword(newPasswordDto);
         }
     @Operation(
@@ -83,6 +87,7 @@ public class UserController {
     )
     @GetMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> getInfo(Authentication authentication) {
+        logger.info("Запущен метод UserController getInfo: Получение информации об авторизованном пользователе");
         return ResponseEntity.ok(userService.getInfo(authentication.getName()));
         }
     @Operation(
@@ -100,6 +105,7 @@ public class UserController {
     )
     @PatchMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody(required = false) UpdateUserDto updateUser) {
+        logger.info("Запущен метод UserController updateInfo: Изменение данных пользователя");
         return ResponseEntity.ok(userService.updateUser());
         }
     @Operation(
@@ -120,5 +126,6 @@ public class UserController {
     )
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void updateImage(@RequestPart MultipartFile image) {
+        logger.info("Запущен метод UserController updateImage: Обновление аватара авторизованного пользователя");
         }
 }

@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/ads")
 public class AdsController {
+    private static final Logger logger = LoggerFactory.getLogger(AdsController.class);
     private final AdsService adsService;
 
     public AdsController(AdsService adsService) {
@@ -47,6 +50,7 @@ public class AdsController {
     )
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AdsDto> getAllAds() {
+        logger.info("Запущен метод AdsController getAllAds: Получение всех объявлений");
         return ResponseEntity.ok(adsService.getAllAds());
     }
 
@@ -78,6 +82,7 @@ public class AdsController {
 //    (consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
     public AdDto addAd(@RequestPart CreateOrUpdateAdDto properties,
                        Authentication authentication) {
+        logger.info("Запущен метод AdsController addAd: Добавление объявления");
         return adsService.addAd(properties, authentication);
 //        @RequestPart(required = false) MultipartFile image,
 //        , image
@@ -105,7 +110,8 @@ public class AdsController {
     )
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
-            return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
+        logger.info("Запущен метод AdsController getInfo: Получить информацию об объявлении");
+        return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
         }
     @Operation(
             tags = "Объявления",
@@ -136,6 +142,7 @@ public class AdsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteAd(@PathVariable(required = true) Integer id) {
+        logger.info("Запущен метод AdsController deleteAd: Удаление объявления");
         if (adsService.findById(id).isPresent()) {
             adsService.deleteAd(id);
         }
@@ -172,7 +179,8 @@ public class AdsController {
     @PatchMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AdDto> patchAd(@PathVariable(required = true) Integer id,
                                          @RequestBody(required = false) CreateOrUpdateAdDto dto) {
-            return ResponseEntity.ok(adsService.patchAd(id, dto));
+        logger.info("Запущен метод AdsController patchAd: Обновление информации об объявлении");
+        return ResponseEntity.ok(adsService.patchAd(id, dto));
     }
     @Operation(
             tags = "Объявления",
@@ -195,7 +203,8 @@ public class AdsController {
     )
     @GetMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AdsDto> getUserAds() {
-            return ResponseEntity.ok(adsService.getUserAds());
+        logger.info("Запущен метод AdsController getUserAds: Получение объявлений авторизованного пользователя");
+        return ResponseEntity.ok(adsService.getUserAds());
     }
     @Operation(
             tags = "Объявления",
@@ -230,6 +239,7 @@ public class AdsController {
     public ResponseEntity<String> patchImage(@PathVariable(required = true) Integer id,
                                              @RequestPart MultipartFile image,
                                              Authentication authentication) throws IOException {
-            return ResponseEntity.ok(adsService.patchImage(id, image));
+        logger.info("Запущен метод AdsController patchImage: Обновление картинки объявления");
+        return ResponseEntity.ok(adsService.patchImage(id, image));
     }
 }

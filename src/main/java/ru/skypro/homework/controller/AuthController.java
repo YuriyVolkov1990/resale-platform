@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +21,7 @@ import ru.skypro.homework.service.AuthService;
 @RestController
 //@RequiredArgsConstructor
 public class AuthController {
-
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final AuthService authService;
 
     public AuthController(AuthService authService) {
@@ -43,6 +45,7 @@ public class AuthController {
     )
     @PostMapping("/login")
     public ResponseEntity<LoginDto> login(@RequestBody(required = false) LoginDto login) {
+        logger.info("Запущен метод AuthController login: Авторизация");
         if (authService.login(login.getUsername(), login.getPassword())) {
             return ResponseEntity.ok().build();
         } else {
@@ -67,6 +70,7 @@ public class AuthController {
     )
     @PostMapping("/register")
     public ResponseEntity<RegisterDto> register(@RequestBody(required = false) RegisterDto register) {
+        logger.info("Запущен метод AuthController register: Регистрация");
         if (authService.register(register)) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {

@@ -31,6 +31,11 @@ public class AdsServiceImpl implements AdsService {
         this.adMapper = adMapper;
     }
 
+    /**
+     * Метод возвращает список всех объявлений в виде DTO {@link Ad}.
+     *
+     * @return возвращает все объявления из БД
+     */
     @Override
     public AdsDto getAllAds() {
         List<Ad> adsList = adsRepository.findAll();
@@ -42,6 +47,13 @@ public class AdsServiceImpl implements AdsService {
         return new AdsDto(adDtoList.size(),adDtoList);// достать все обьявы из репозитория
     }
 
+    /**
+     * Метод добавляет новое объявление в БД
+     *
+     * @param properties - DTO модель класса {@link CreateOrUpdateAdDto};
+     * @param image      - фотография объявления
+     * @return возвращает объявление в виде AdDto
+     */
     @Override
     public AdDto addAd(CreateOrUpdateAdDto properties, Authentication authentication) {
         Ad ad = new Ad();
@@ -54,6 +66,12 @@ public class AdsServiceImpl implements AdsService {
         return adMapper.mapToAdDto(ad);
     }//createorupdatedto and MultipartFile
 
+    /**
+     * Метод получает информацию об объявлении по id
+     *
+     * @param id - id объявления
+     * @return возвращает ExtendedAdDto
+     */
     @Override
     public ExtendedAdDto getInfoExtendedAd(Integer id) {
         Optional<Ad> adOp = adsRepository.findById(id);
@@ -64,6 +82,12 @@ public class AdsServiceImpl implements AdsService {
         return adMapper.mapToExtendedAdDto(Objects.requireNonNull(ad), ad.getUser());
         //достать обявление по id и положить в dto
     }
+
+    /**
+     * Метод удаляет объявление по id
+     *
+     * @param id - id объявления
+     */
     @Override
     public void deleteAd (Integer id){
         Optional<Ad> adOp = adsRepository.findById(id);
@@ -75,6 +99,13 @@ public class AdsServiceImpl implements AdsService {
         // он void, можно ничего не возвращать
     }
 
+    /**
+     * Метод вносит изменения в объявление
+     *
+     * @param id  - id объявления
+     * @param dto - DTO модель класса {@link CreateOrUpdateAdDto};
+     * @return возвращает DTO модель объявления
+     */
     @Override
     public AdDto patchAd (Integer id, CreateOrUpdateAdDto dto){
         Ad existingAd = adsRepository.findById(id).orElseThrow(AdNotFoundException::new);
@@ -85,17 +116,36 @@ public class AdsServiceImpl implements AdsService {
         return adMapper.mapToAdDto(existingAd);
     }//аналогично update student, faculty достать по id, обновить данными, которые пришли из дто
 
+    /**
+     * Метод получает все объявления данного пользователя
+     *
+     * @param username - логин пользователя
+     * @return возвращает AdsDto
+     */
     @Override
     public AdsDto getUserAds () {
 
         return null;
     }//id пользователя берем из userDetails, запрашиваем у репорзитория все обявления с ид нужного пользователя
 
+    /**
+     * Метод меняет аватар пользователя
+     *
+     * @param id - идентификатор аватара в базе
+     * @param multipartFile - файл нового аватара
+     * @return возвращает путь к файлу
+     */
     @Override
     public String patchImage (Integer id, MultipartFile multipartFile){
         return null;
     }//id это ид объявления, не картинки!!!
 
+    /**
+     * Метод ищет объявление по id
+     *
+     * @param id - идентификатор объявления в базе
+     * @return возвращает Optional<Ad>
+     */
     @Override
     public Optional<Ad> findById (Integer id){
         return adsRepository.findById(id);
