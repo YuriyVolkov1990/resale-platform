@@ -4,9 +4,10 @@ package ru.skypro.homework.manager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.stereotype.Service;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.repository.UserRepository;
-
+@Service
 public class MyUserDetailsManager implements UserDetailsManager {
     private final UserRepository userRepository;
 

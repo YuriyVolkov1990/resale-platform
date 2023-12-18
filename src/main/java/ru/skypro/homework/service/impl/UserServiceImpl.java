@@ -13,6 +13,7 @@ import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.exception.PassNotMatchException;
+import ru.skypro.homework.manager.MyUserDetailsManager;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.UserService;
@@ -21,20 +22,20 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-//    private final UserMapper userMapper;
-//    private final UserDetailsManager manager;
-//    private final PasswordEncoder encoder;
-//    private UserRepository userRepository;
-//    public UserServiceImpl(UserMapper userMapper, UserDetailsManager manager, PasswordEncoder encoder, UserRepository userRepository) {
-//        this.userMapper = userMapper;
-//        this.manager = manager;
-//        this.encoder = encoder;
-//        this.userRepository = userRepository;
-//    }
+    private final UserMapper userMapper;
+    private final MyUserDetailsManager manager;
+    private final PasswordEncoder encoder;
+    private UserRepository userRepository;
+    public UserServiceImpl(UserMapper userMapper, MyUserDetailsManager manager, PasswordEncoder encoder, UserRepository userRepository) {
+        this.userMapper = userMapper;
+        this.manager = manager;
+        this.encoder = encoder;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void setPassword(NewPasswordDto newPasswordDto) {
-
+        manager.changePassword(newPasswordDto.getCurrentPassword(), newPasswordDto.getNewPassword());
     }
 
     @Override
