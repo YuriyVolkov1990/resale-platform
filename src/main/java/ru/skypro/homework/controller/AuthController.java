@@ -1,5 +1,8 @@
 package ru.skypro.homework.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +25,22 @@ public class AuthController {
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
-
+    @Operation(
+            tags = "Авторизация",
+            summary = "Авторизация",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Успешная авторизация",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Пользователь не авторизован",
+                            content = @Content()
+                    )
+            }
+    )
     @PostMapping("/login")
     public ResponseEntity<LoginDto> login(@RequestBody(required = false) LoginDto login) {
         if (authService.login(login.getUsername(), login.getPassword())) {
@@ -31,7 +49,22 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
+    @Operation(
+            tags = "Регистрация",
+            summary = "Регистрация",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Успешная регистрация",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Некорректные данные",
+                            content = @Content()
+                    )
+            }
+    )
     @PostMapping("/register")
     public ResponseEntity<RegisterDto> register(@RequestBody(required = false) RegisterDto register) {
         if (authService.register(register)) {

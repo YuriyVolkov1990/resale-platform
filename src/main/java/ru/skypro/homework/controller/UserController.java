@@ -1,5 +1,9 @@
 package ru.skypro.homework.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,18 +32,92 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+    @Operation(
+            tags = "Пользователи",
+            summary = "Обновление пароля",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Пароль обновлен",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Пользователь не авторизован",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "Доступ запрещен",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Пользователь не найден",
+                            content = @Content()
+                    )
+            }
+    )
     @PostMapping("/set_password")
     public void setPassword(@RequestBody(required = false) NewPasswordDto newPasswordDto) {
         userService.setPassword(newPasswordDto);
         }
+    @Operation(
+            tags = "Пользователи",
+            summary = "Получение информации об авторизованном пользователе",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Пользователь найден",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = User.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Пользователь не авторизован",
+                            content = @Content()
+                    )
+            }
+    )
     @GetMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> getInfo(Authentication authentication) {
         return ResponseEntity.ok(userService.getInfo(authentication.getName()));
         }
+    @Operation(
+            tags = "Пользователи",
+            summary = "Изменение данных пользователя",
+            responses = {
+                    @ApiResponse(responseCode = "200",
+                            description = "Пользователь обновлен",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = UpdateUserDto.class))),
+                    @ApiResponse(responseCode = "401",
+                            description = "Пользователь не авторизован",
+                            content = @Content())
+            }
+    )
     @PatchMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody(required = false) UpdateUserDto updateUser) {
         return ResponseEntity.ok(userService.updateUser());
         }
+    @Operation(
+            tags = "Пользователи",
+            summary = "Обновление аватара авторизованного пользователя",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Картинка загружена",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Пользователь не авторизован (unauthorized)",
+                            content = @Content()
+                    )
+            }
+    )
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void updateImage(@RequestPart MultipartFile image) {
         }

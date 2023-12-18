@@ -1,5 +1,10 @@
 package ru.skypro.homework.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -25,24 +30,123 @@ public class CommentController {
 //        this.authService = authService;
 //        this.userRepository = userRepository;
     }
-
+    @Operation(
+            tags = "Комментарии",
+            summary = "Получение комментариев объявления",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "OK",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = CommentsDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Not found",
+                            content = @Content()
+                    )
+            }
+    )
     @GetMapping(value = "/{id}/comments", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentsDto> getComments(@PathVariable(required = true) Integer id) {
             return ResponseEntity.ok(commentService.getCommentsByAd(id));
         }
-
+    @Operation(
+            tags = "Комментарии",
+            summary = "Добавление комментария к объявлению",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "OK",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = CommentsDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Not found",
+                            content = @Content()
+                    )
+            }
+    )
     @PostMapping(value = "/{id}/comments", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentDto> getComment(@PathVariable(required = true) Integer id,
                                                  @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
             return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
         }
-
+    @Operation(
+            tags = "Комментарии",
+            summary = "Удаление комментария",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "OK",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "Forbidden",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Not found",
+                            content = @Content()
+                    )
+            }
+    )
     @DeleteMapping(value = "/comments/{commentId}")///{adId}
     public void deleteComment(/*@PathVariable(required = false) Integer adId,*/
                               @PathVariable(required = true) Integer commentId) {
         commentService.deleteCommentAtAd(/*adId,*/ commentId);
         }
-
+    @Operation(
+            tags = "Комментарии",
+            summary = "Обновление комментария",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "OK",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = CommentsDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "Forbidden",
+                            content = @Content()
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Not found",
+                            content = @Content()
+                    )
+            }
+    )
     @PatchMapping(value = "/{adId}/comments/{commentId}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId,
                                                    @PathVariable(required = true) Integer id,
