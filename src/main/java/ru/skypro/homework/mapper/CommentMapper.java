@@ -17,6 +17,7 @@ public class CommentMapper {
         dto.setAuthorFirstName(comment.getAuthorFirstName());
         dto.setCreatedAt(comment.getCreatedAt());
         dto.setText(comment.getText());
+        dto.setPk(comment.getId());
         return dto;
     }
     public Comment mapToComment(CommentDto dto) {
@@ -26,6 +27,7 @@ public class CommentMapper {
         comment.setAuthorFirstName(dto.getAuthorFirstName());
         comment.setCreatedAt(dto.getCreatedAt());
         dto.setText(comment.getText());
+        dto.setPk(comment.getId());
         return comment;
     }
     public CommentsDto mapToCommentsDto(List<Comment> comments) {

@@ -25,6 +25,7 @@ public class Ad {
     @OneToMany(mappedBy = "ad")
     private List<Comment> comments;
 
+
     public Ad() {
     }
 
@@ -82,6 +83,9 @@ public class Ad {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override

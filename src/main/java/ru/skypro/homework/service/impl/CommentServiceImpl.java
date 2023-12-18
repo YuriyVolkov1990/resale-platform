@@ -1,24 +1,34 @@
 package ru.skypro.homework.service.impl;
 
 import org.springframework.stereotype.Service;
+import ru.skypro.homework.dto.AdDto;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
+import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.Comment;
+import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.mapper.CommentMapper;
+import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.CommentRepository;
 import ru.skypro.homework.service.CommentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
     private final CommentRepository commentRepository;
+    private final AdsRepository adsRepository;
+    private final AdMapper adMapper;
 
-    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository) {
+
+    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository, AdsRepository adsRepository, AdMapper adMapper) {
         this.commentMapper = commentMapper;
         this.commentRepository = commentRepository;
+        this.adsRepository = adsRepository;
+        this.adMapper = adMapper;
     }
 
     @Override
@@ -29,7 +39,20 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDto postCommentToAd(Integer adId, CreateOrUpdateCommentDto createOrUpdateCommentDto) {
-        return null;
+        Comment comment = new Comment();
+        String text = createOrUpdateCommentDto.getText();
+        comment.setText(text);
+        Ad ad = adsRepository.getAdByPk(adId);
+        AdDto adDto = adMapper.mapToAdDto(ad);
+        comment.setAuthor(ad.getUser().getPk());
+        comment.setAuthorFirstName(ad.getUser().getFirstName());
+        comment.setCreatedAt(121212L);
+        comment.setAd(ad);
+        List<Comment> newComment = new ArrayList<>();
+        newComment.add(comment);
+        ad.setComments(newComment);
+        commentRepository.save(comment);
+        return commentMapper.mapToCommentDto(comment);
     }// по ид объявления добавить коментарий
 
     @Override

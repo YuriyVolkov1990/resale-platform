@@ -23,11 +23,11 @@ public class Comment {
     @JoinColumn(name = "adid")
     private Ad ad;
 
-    public Ad getAdId() {
+    public Ad getAd() {
         return ad;
     }
 
-    public void setAdId(Ad adId) {
+    public void setAd(Ad adId) {
         this.ad = adId;
     }
 //    @ManyToOne
