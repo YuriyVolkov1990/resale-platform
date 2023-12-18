@@ -40,7 +40,21 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user")
     private List<Ad> ads;
+    @OneToMany(mappedBy = "user", targetEntity = Comment.class)
+    private List<Comment> comments;
     public User() {
+    }
+
+    public void setPk(Integer pk) {
+        this.pk = pk;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public User(Integer pk, String email, String firstName, String lastName, String phone, Role role, String image, String password) {

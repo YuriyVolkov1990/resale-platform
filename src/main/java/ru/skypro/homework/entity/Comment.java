@@ -9,9 +9,8 @@ public class Comment {
     @GeneratedValue
     @Column(name = "idcomment")
     private Integer id;
-    @ManyToOne
+//    @ManyToOne
     @Column(name = "iduser")
-    @JoinColumn(name = "author_id", nullable = false)
     private Integer author;
     @Column(name = "authorimage")
     private String authorImage;
