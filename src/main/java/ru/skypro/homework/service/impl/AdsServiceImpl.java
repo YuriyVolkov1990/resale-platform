@@ -1,5 +1,6 @@
 package ru.skypro.homework.service.impl;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.service.AdsService;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 @Service
@@ -31,7 +35,7 @@ public class AdsServiceImpl implements AdsService {
     public AdsDto getAllAds() {
         List<Ad> adsList = adsRepository.findAll();
         List<AdDto> adDtoList = new ArrayList<>();
-        for (int i = 0; i <= adsList.size(); i++) {
+        for (int i = 0; i <= adsList.size()-1; i++) {
             AdDto adDto = adMapper.mapToAdDto(adsList.get(i));
             adDtoList.add(adDto);
         }
@@ -39,13 +43,14 @@ public class AdsServiceImpl implements AdsService {
     }
 
     @Override
-    public AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication) {
+    public AdDto addAd(CreateOrUpdateAdDto properties, Authentication authentication) {
         Ad ad = new Ad();
         ad.setTitle(properties.getTitle());
         ad.setPrice(properties.getPrice());
         ad.setDescription(properties.getDescription());
-        ad.setImage(image.getName());
         ad.setUser((User) authentication.getPrincipal());
+        adsRepository.save(ad);
+//        , MultipartFile image,
         return adMapper.mapToAdDto(ad);
     }//createorupdatedto and MultipartFile
 

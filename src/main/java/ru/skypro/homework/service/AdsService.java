@@ -14,7 +14,8 @@ import java.util.Optional;
 public interface AdsService {
     AdsDto getAllAds();
 
-    AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication);
+    AdDto addAd(CreateOrUpdateAdDto properties, Authentication authentication);
+//    , MultipartFile image
 
     ExtendedAdDto getInfoExtendedAd(Integer id);
 

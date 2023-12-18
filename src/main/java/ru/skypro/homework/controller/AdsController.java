@@ -40,11 +40,13 @@ public class AdsController {
 //            return new ResponseEntity<AdDto>(adsService.addAd(properties, image),HttpStatus.CREATED);
 //    }
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(produces = APPLICATION_JSON_VALUE)
+//    (consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
     public AdDto addAd(@RequestPart CreateOrUpdateAdDto properties,
-                       @RequestPart(required = false) MultipartFile image,
                        Authentication authentication) {
-        return adsService.addAd(properties, image, authentication);
+        return adsService.addAd(properties, authentication);
+//        @RequestPart(required = false) MultipartFile image,
+//        , image
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)

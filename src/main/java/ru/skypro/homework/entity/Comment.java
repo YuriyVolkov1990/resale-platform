@@ -1,9 +1,6 @@
 package ru.skypro.homework.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +9,9 @@ public class Comment {
     @GeneratedValue
     @Column(name = "idcomment")
     private Integer id;
+    @ManyToOne
     @Column(name = "iduser")
+    @JoinColumn(name = "author_id", nullable = false)
     private Integer author;
     @Column(name = "authorimage")
     private String authorImage;
@@ -22,6 +21,9 @@ public class Comment {
     private Long createdAt;
     @Column(name = "message")
     private String text;
+    @ManyToOne
+    @JoinColumn(name = "ad_id", nullable = false)
+    private Ad ad;
 
     public Comment() {
     }

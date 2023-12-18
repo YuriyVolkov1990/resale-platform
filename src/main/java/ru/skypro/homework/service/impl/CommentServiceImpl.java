@@ -4,13 +4,27 @@ import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
+import ru.skypro.homework.entity.Comment;
+import ru.skypro.homework.mapper.CommentMapper;
+import ru.skypro.homework.repository.CommentRepository;
 import ru.skypro.homework.service.CommentService;
+
+import java.util.List;
+
 @Service
 public class CommentServiceImpl implements CommentService {
+    private final CommentMapper commentMapper;
+    private final CommentRepository commentRepository;
+
+    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository) {
+        this.commentMapper = commentMapper;
+        this.commentRepository = commentRepository;
+    }
 
     @Override
     public CommentsDto getCommentsByAd(Integer adId) {
-        return null;
+        List<Comment> comments = commentRepository.getCommentByAdId(adId);
+        return commentMapper.mapToCommentsDto(comments);
     }// по ид объявления нужно вытащить все коменты
 
     @Override
