@@ -9,7 +9,6 @@ public class Comment {
     @GeneratedValue
     @Column(name = "idcomment")
     private Integer id;
-//    @ManyToOne
     @Column(name = "iduser")
     private Integer author;
     @Column(name = "authorimage")
