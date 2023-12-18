@@ -20,8 +20,19 @@ public class Comment {
     @Column(name = "message")
     private String text;
     @ManyToOne
-    @JoinColumn(name = "ad_id", nullable = false)
+    @JoinColumn(name = "adid")
     private Ad ad;
+
+    public Ad getAdId() {
+        return ad;
+    }
+
+    public void setAdId(Ad adId) {
+        this.ad = adId;
+    }
+//    @ManyToOne
+//    @JoinColumn(name = "ad_id", nullable = false)
+//    private Ad ad;
 
     public Comment() {
     }

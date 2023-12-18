@@ -1,6 +1,9 @@
 package ru.skypro.homework.entity;
 
+import liquibase.license.LicenseService;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 @Entity
 public class Ad {
@@ -19,6 +22,8 @@ public class Ad {
     @ManyToOne
     @JoinColumn(name = "authorId")
     private User user;
+    @OneToMany(mappedBy = "ad")
+    private List<Comment> comments;
 
     public Ad() {
     }

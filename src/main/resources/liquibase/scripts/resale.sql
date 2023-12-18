@@ -24,5 +24,6 @@ create table Comment (
     authorImage text,
     authorFirstName text not null,
     createdAt bigserial not null,
-    message text not null
+    message text not null,
+    adId serial not null
 );

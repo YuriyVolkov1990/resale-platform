@@ -40,8 +40,6 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user")
     private List<Ad> ads;
-//    @OneToMany(mappedBy = "user", targetEntity = Comment.class)
-//    private List<Comment> comments;
     public User() {
     }
 
