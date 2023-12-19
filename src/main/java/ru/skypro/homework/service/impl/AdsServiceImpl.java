@@ -1,8 +1,6 @@
 package ru.skypro.homework.service.impl;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.AdDto;
@@ -14,21 +12,21 @@ import ru.skypro.homework.entity.User;
 import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.repository.AdsRepository;
+import ru.skypro.homework.repository.ImageRepository;
 import ru.skypro.homework.service.AdsService;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 @Service
 public class AdsServiceImpl implements AdsService {
     private final AdsRepository adsRepository;
     private final AdMapper adMapper;
+    private final ImageRepository imageRepository;
 
-    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper) {
+    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper, ImageRepository imageRepository) {
         this.adsRepository = adsRepository;
         this.adMapper = adMapper;
+        this.imageRepository = imageRepository;
     }
 
     /**
