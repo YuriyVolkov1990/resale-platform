@@ -2,7 +2,6 @@ package ru.skypro.homework.service.impl;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.AdDto;
@@ -11,7 +10,6 @@ import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.Image;
-import ru.skypro.homework.entity.User;
 import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.mapper.UserMapper;
@@ -19,7 +17,9 @@ import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.ImageRepository;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.AdsService;
+import ru.skypro.homework.service.ImageService;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -29,13 +29,15 @@ public class AdsServiceImpl implements AdsService {
     private final ImageRepository imageRepository;
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final ImageService imageService;
 
-    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper, ImageRepository imageRepository, UserMapper userMapper, UserRepository userRepository) {
+    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper, ImageRepository imageRepository, UserMapper userMapper, UserRepository userRepository, ImageService imageService) {
         this.adsRepository = adsRepository;
         this.adMapper = adMapper;
         this.imageRepository = imageRepository;
         this.userMapper = userMapper;
         this.userRepository = userRepository;
+        this.imageService = imageService;
     }
 
     /**
@@ -62,14 +64,13 @@ public class AdsServiceImpl implements AdsService {
      * @return возвращает объявление в виде AdDto
      */
     @Override
-    public AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication) {
+    public AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication) throws IOException {
         Ad ad = new Ad();
         ad.setTitle(properties.getTitle());
         ad.setPrice(properties.getPrice());
         ad.setDescription(properties.getDescription());
         ad.setUser(userRepository.findByEmail(authentication.getName()));
-        Image adImage = userMapper.mapMultipartFileToImage(image);
-        imageRepository.save(adImage);
+        Image adImage = imageService.uploadImage(ad.getPk(), image);
         ad.setImage(adImage.getPath());
         System.out.println("===================================");
         System.out.println("adImage.getPath() = " + adImage.getPath());

@@ -81,7 +81,7 @@ public class AdsController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
     public AdDto addAd(@RequestPart CreateOrUpdateAdDto properties,
                        @RequestPart MultipartFile image,
-                       Authentication authentication) {
+                       Authentication authentication) throws IOException {
         logger.info("Запущен метод AdsController addAd: Добавление объявления");
         return adsService.addAd(properties, image, authentication);
     }

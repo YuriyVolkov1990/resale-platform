@@ -1,18 +1,19 @@
 package ru.skypro.homework.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "path")
     private String path;
+    @Column(name = "fileSize")
     private long fileSize;
+    @Column(name = "mediaType")
     private String mediaType;
+    @Column(name = "data")
     private byte[] data;
 
     public Image() {
