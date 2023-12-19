@@ -78,14 +78,12 @@ public class AdsController {
         }
 )
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(produces = APPLICATION_JSON_VALUE)
-//    (consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
     public AdDto addAd(@RequestPart CreateOrUpdateAdDto properties,
+                       @RequestPart MultipartFile image,
                        Authentication authentication) {
         logger.info("Запущен метод AdsController addAd: Добавление объявления");
-        return adsService.addAd(properties, authentication);
-//        @RequestPart(required = false) MultipartFile image,
-//        , image
+        return adsService.addAd(properties, image, authentication);
     }
     @Operation(
             tags = "Объявления",

@@ -20,6 +20,7 @@ import ru.skypro.homework.entity.User;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.UserService;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -125,7 +126,9 @@ public class UserController {
             }
     )
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void updateImage(@RequestPart MultipartFile image) {
+    public void updateImage(@RequestPart MultipartFile image,
+                            Authentication authentication) throws IOException {
         logger.info("Запущен метод UserController updateImage: Обновление аватара авторизованного пользователя");
-        }
+        userService.updateUserImage(image, authentication);
+    }
 }

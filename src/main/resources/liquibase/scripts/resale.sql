@@ -27,3 +27,10 @@ create table Comment (
     message text not null,
     adId serial not null
 );
+create table Image (
+    id bigserial primary key,
+    path text not null,
+    fileSize int8 not null,
+    mediaType text not null,
+    data bytea not null
+)

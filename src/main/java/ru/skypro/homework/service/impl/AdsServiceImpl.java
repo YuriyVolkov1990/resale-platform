@@ -1,6 +1,8 @@
 package ru.skypro.homework.service.impl;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.AdDto;
@@ -8,11 +10,14 @@ import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.entity.Ad;
+import ru.skypro.homework.entity.Image;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.AdMapper;
+import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.ImageRepository;
+import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.AdsService;
 
 import java.util.*;
@@ -22,11 +27,15 @@ public class AdsServiceImpl implements AdsService {
     private final AdsRepository adsRepository;
     private final AdMapper adMapper;
     private final ImageRepository imageRepository;
+    private final UserMapper userMapper;
+    private final UserRepository userRepository;
 
-    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper, ImageRepository imageRepository) {
+    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper, ImageRepository imageRepository, UserMapper userMapper, UserRepository userRepository) {
         this.adsRepository = adsRepository;
         this.adMapper = adMapper;
         this.imageRepository = imageRepository;
+        this.userMapper = userMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -53,16 +62,21 @@ public class AdsServiceImpl implements AdsService {
      * @return возвращает объявление в виде AdDto
      */
     @Override
-    public AdDto addAd(CreateOrUpdateAdDto properties, Authentication authentication) {
+    public AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication) {
         Ad ad = new Ad();
         ad.setTitle(properties.getTitle());
         ad.setPrice(properties.getPrice());
         ad.setDescription(properties.getDescription());
-        ad.setUser((User) authentication.getPrincipal());
+        ad.setUser(userRepository.findByEmail(authentication.getName()));
+        Image adImage = userMapper.mapMultipartFileToImage(image);
+        imageRepository.save(adImage);
+        ad.setImage(adImage.getPath());
+        System.out.println("===================================");
+        System.out.println("adImage.getPath() = " + adImage.getPath());
+        System.out.println("===================================");
         adsRepository.save(ad);
-//        , MultipartFile image,
         return adMapper.mapToAdDto(ad);
-    }//createorupdatedto and MultipartFile
+    }
 
     /**
      * Метод получает информацию об объявлении по id
@@ -116,9 +130,6 @@ public class AdsServiceImpl implements AdsService {
 
     /**
      * Метод получает все объявления данного пользователя
-     *
-     * @param username - логин пользователя
-     * @return возвращает AdsDto
      */
     @Override
     public AdsDto getUserAds () {
@@ -148,5 +159,9 @@ public class AdsServiceImpl implements AdsService {
     public Optional<Ad> findById (Integer id){
         return adsRepository.findById(id);
 
+    }
+    public String getCurrentUsername() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
     }
     }
