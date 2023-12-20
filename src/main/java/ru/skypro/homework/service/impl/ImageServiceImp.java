@@ -25,13 +25,12 @@ public class ImageServiceImp implements ImageService {
     private final ImageRepository imageRepository;
     private final UserMapper userMapper;
     private final AdsRepository adsRepository;
-    @Value("${path.to.avatars.folder}")
+    @Value("${path.to.images.folder}")
     private Path imagePath;
-    public ImageServiceImp(ImageRepository imageRepository, UserMapper userMapper, AdsRepository adsRepository, Path imagePath) {
+    public ImageServiceImp(ImageRepository imageRepository, UserMapper userMapper, AdsRepository adsRepository) {
         this.imageRepository = imageRepository;
         this.userMapper = userMapper;
         this.adsRepository = adsRepository;
-        this.imagePath = imagePath;
     }
 
     @Override
