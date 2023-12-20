@@ -21,6 +21,7 @@ public class MyUserDetailsManager implements UserDetailsManager {
         User newUser = new User();
         newUser.setEmail(user.getUsername());
         newUser.setPassword(user.getPassword());
+
         userRepository.save(newUser);
     }
 

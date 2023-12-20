@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPasswordDto;
+import ru.skypro.homework.dto.RegisterDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.Image;
@@ -76,5 +77,25 @@ public class UserMapper {
         dto.setLastName(user.getLastName());
         dto.setPhone(user.getPhone());
         return dto;
+    }
+
+    public RegisterDto mapFromUserToRegisterDto(User user) {
+        RegisterDto dto = new RegisterDto();
+        dto.setUsername(user.getUsername());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setPassword(user.getPassword());
+        dto.setRole(user.getRole());
+        return dto;
+    }
+
+    public User mapFromRegisterDtoToUser(RegisterDto dto) {
+        User user = new User();
+        user.setEmail(dto.getUsername());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setPassword(dto.getPassword());
+        user.setRole(dto.getRole());
+        return user;
     }
 }
