@@ -56,14 +56,18 @@ public class ImageServiceImp implements ImageService {
 
     @Override
     public Image uploadImage(Integer id, MultipartFile image) throws IOException {
+        getImagePath(id, image);
+        Image newImage = userMapper.mapMultipartFileToImage(image);
+        imageRepository.save(newImage);
+        return newImage;
+    }
+
+    public void getImagePath(Integer id, MultipartFile image) throws IOException {
         Files.createDirectories(imagePath);
         int dotIndex = image.getOriginalFilename().lastIndexOf(".");
         String fileExtension = image.getOriginalFilename().substring(dotIndex + 1);
         Path filePath = imagePath.resolve(id + "." + fileExtension);
         byte[] data = image.getBytes();
         Files.write(filePath, data, StandardOpenOption.CREATE);
-        Image newImage = userMapper.mapMultipartFileToImage(image);
-        imageRepository.save(newImage);
-        return newImage;
     }
 }

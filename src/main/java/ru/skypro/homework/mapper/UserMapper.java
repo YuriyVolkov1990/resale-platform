@@ -1,5 +1,6 @@
 package ru.skypro.homework.mapper;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPasswordDto;
@@ -7,16 +8,19 @@ import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.Image;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.repository.UserRepository;
+import ru.skypro.homework.service.ImageService;
+import ru.skypro.homework.service.impl.ImageServiceImp;
 
 import java.io.IOException;
-import java.util.List;
 
-@Service
+@Component
 public class UserMapper {
     private final UserRepository userRepository;
+    private final ImageServiceImp imageService;
 
-    public UserMapper(UserRepository userRepository) {
+    public UserMapper(UserRepository userRepository, ImageServiceImp imageService) {
         this.userRepository = userRepository;
+        this.imageService = imageService;
     }
 
     public UserDto mapToUserDto(User user) {

@@ -23,6 +23,7 @@ import ru.skypro.homework.service.AdsService;
 import java.io.IOException;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -34,6 +35,7 @@ public class AdsController {
     public AdsController(AdsService adsService) {
         this.adsService = adsService;
     }
+
     @Operation(
             tags = "Объявления",
             summary = "Получение всех объявлений",
@@ -58,25 +60,26 @@ public class AdsController {
 //    public ResponseEntity<AdDto> addAd(@RequestPart CreateOrUpdateAdDto properties, @RequestPart MultipartFile image) {
 //            return new ResponseEntity<AdDto>(adsService.addAd(properties, image),HttpStatus.CREATED);
 //    }
-@Operation(
-        tags = "Объявления",
-        summary = "Добавление объявления",
-        responses = {
-                @ApiResponse(
-                        responseCode = "201",
-                        description = "Created",
-                        content = @Content(
-                                mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                schema = @Schema(implementation = AdDto.class)
-                        )
-                ),
-                @ApiResponse(
-                        responseCode = "401",
-                        description = "Unauthorized",
-                        content = @Content()
-                )
-        }
-)
+
+    @Operation(
+            tags = "Объявления",
+            summary = "Добавление объявления",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Created",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = AdDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content()
+                    )
+            }
+    )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
     public AdDto addAd(@RequestPart CreateOrUpdateAdDto properties,
@@ -85,6 +88,7 @@ public class AdsController {
         logger.info("Запущен метод AdsController addAd: Добавление объявления");
         return adsService.addAd(properties, image, authentication);
     }
+
     @Operation(
             tags = "Объявления",
             summary = "Получить информацию об объявлении",
@@ -110,7 +114,8 @@ public class AdsController {
     public ResponseEntity<ExtendedAdDto> getInfo(@PathVariable Integer id) {
         logger.info("Запущен метод AdsController getInfo: Получить информацию об объявлении");
         return ResponseEntity.ok(adsService.getInfoExtendedAd(id));
-        }
+    }
+
     @Operation(
             tags = "Объявления",
             summary = "Удаление объявления",
@@ -145,6 +150,7 @@ public class AdsController {
             adsService.deleteAd(id);
         }
     }
+
     @Operation(
             tags = "Объявления",
             summary = "Обновление информации об объявлении",
@@ -180,6 +186,7 @@ public class AdsController {
         logger.info("Запущен метод AdsController patchAd: Обновление информации об объявлении");
         return ResponseEntity.ok(adsService.patchAd(id, dto));
     }
+
     @Operation(
             tags = "Объявления",
             summary = "Получение объявлений авторизованного пользователя",
@@ -204,6 +211,7 @@ public class AdsController {
         logger.info("Запущен метод AdsController getUserAds: Получение объявлений авторизованного пользователя");
         return ResponseEntity.ok(adsService.getUserAds());
     }
+
     @Operation(
             tags = "Объявления",
             summary = "Обновление картинки объявления",

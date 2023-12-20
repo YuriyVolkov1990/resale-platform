@@ -1,5 +1,6 @@
 package ru.skypro.homework.mapper;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
@@ -8,7 +9,7 @@ import ru.skypro.homework.entity.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
-@Service
+@Component
 public class CommentMapper {
     public CommentDto mapToCommentDto(Comment comment) {
         CommentDto dto = new CommentDto();

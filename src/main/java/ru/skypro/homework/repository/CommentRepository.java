@@ -8,6 +8,6 @@ import ru.skypro.homework.entity.Comment;
 import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
-    @Query( value = "select * from comments where adid = :adid", nativeQuery = true)
+    @Query(value = "select * from comments where adid = :adid", nativeQuery = true)
     List<Comment> getCommentByAdId(@Param("adid")Integer adId);
 }

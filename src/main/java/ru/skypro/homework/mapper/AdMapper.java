@@ -1,5 +1,6 @@
 package ru.skypro.homework.mapper;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.*;
 import ru.skypro.homework.entity.Ad;
@@ -8,7 +9,7 @@ import ru.skypro.homework.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
-@Service
+@Component
 public class AdMapper {
     private final UserMapper userMapper;
     private final UserService userService;

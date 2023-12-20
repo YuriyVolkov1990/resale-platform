@@ -6,7 +6,7 @@ import java.util.Objects;
 @Entity
 public class Comment {
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     @Column(name = "idcomment")
     private Integer id;
     @Column(name = "iduser")
