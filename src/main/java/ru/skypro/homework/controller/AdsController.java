@@ -207,9 +207,9 @@ public class AdsController {
             }
     )
     @GetMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<AdsDto> getUserAds() {
+    public ResponseEntity<AdsDto> getUserAds(Authentication authentication) {
         logger.info("Запущен метод AdsController getUserAds: Получение объявлений авторизованного пользователя");
-        return ResponseEntity.ok(adsService.getUserAds());
+        return ResponseEntity.ok(adsService.getUserAds(authentication));
     }
 
     @Operation(

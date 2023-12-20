@@ -1,23 +1,25 @@
 package ru.skypro.homework.service.impl;
 
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.RegisterDto;
-import ru.skypro.homework.manager.MyUserDetailsManager;
+import ru.skypro.homework.manager.MyUserDetailsService;
+import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.service.AuthService;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private final MyUserDetailsManager manager;
+    private final MyUserDetailsService manager;
     private final PasswordEncoder encoder;
+    private final UserMapper userMapper;
 
-    public AuthServiceImpl(MyUserDetailsManager manager,
-                           PasswordEncoder passwordEncoder) {
+    public AuthServiceImpl(MyUserDetailsService manager,
+                           PasswordEncoder passwordEncoder, UserMapper userMapper) {
         this.manager = manager;
         this.encoder = passwordEncoder;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -34,14 +36,15 @@ public class AuthServiceImpl implements AuthService {
         if (manager.userExists(register.getUsername())) {
             return false;
         }
-        manager.createUser(
-                User.builder()
-                        .passwordEncoder(this.encoder::encode)
-                        .password(register.getPassword())
-                        .username(register.getUsername())
-                        .roles(register.getRole().name())
-                        .build());
+        register.setPassword(encoder.encode(register.getPassword()));
+        manager.createUser(userMapper.mapFromRegisterDtoToUser(register));
         return true;
     }
 
 }
+//User.builder()
+//        .passwordEncoder(this.encoder::encode)
+//        .password(register.getPassword())
+//        .username(register.getUsername())
+//        .roles(register.getRole().name())
+//        .build()

@@ -1,7 +1,6 @@
 package ru.skypro.homework.service.impl;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.AdDto;
@@ -9,6 +8,7 @@ import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.entity.Ad;
+import ru.skypro.homework.entity.User;
 import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.mapper.UserMapper;
@@ -55,6 +55,9 @@ public class AdsServiceImpl implements AdsService {
             AdDto adDto = adMapper.mapToAdDto(adsList.get(i));
             adDtoList.add(adDto);
         }
+        System.out.println("-----------------");
+        System.out.println("new AdsDto(adDtoList.size(),adDtoList) = " + new AdsDto(adDtoList.size(), adDtoList));
+        System.out.println("-----------------");
         return new AdsDto(adDtoList.size(),adDtoList);// достать все обьявы из репозитория
     }
 
@@ -130,9 +133,17 @@ public class AdsServiceImpl implements AdsService {
      * Метод получает все объявления данного пользователя
      */
     @Override
-    public AdsDto getUserAds () {
-
-        return null;
+    public AdsDto getUserAds(Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        List<Ad> adList = adsRepository.findAdByUser(user);
+        List<AdDto> adDtoList = new ArrayList<>();
+        for (int i = 0; i <= adList.size(); i++) {
+            adDtoList.add(adMapper.mapToAdDto(adList.get(i)));
+        }
+        System.out.println("++++++++++++++++++++++++++++");
+        System.out.println("adMapper.mapToAdsDto(adDtoList) = " + adMapper.mapToAdsDto(adDtoList));
+        System.out.println("++++++++++++++++++++++++++++");
+        return adMapper.mapToAdsDto(adDtoList);
     }//id пользователя берем из userDetails, запрашиваем у репорзитория все обявления с ид нужного пользователя
 
     /**
@@ -157,9 +168,5 @@ public class AdsServiceImpl implements AdsService {
     public Optional<Ad> findById (Integer id){
         return adsRepository.findById(id);
 
-    }
-    public String getCurrentUsername() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth.getName();
     }
     }

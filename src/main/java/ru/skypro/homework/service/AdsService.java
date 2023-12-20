@@ -23,9 +23,10 @@ public interface AdsService {
 
     AdDto patchAd(Integer id, CreateOrUpdateAdDto dto);
 
-    AdsDto getUserAds();
+    AdsDto getUserAds(Authentication authentication);
 
     String patchImage(Integer id, MultipartFile multipartFile) throws IOException;
 
     Optional<Ad> findById(Integer id);
+
 }

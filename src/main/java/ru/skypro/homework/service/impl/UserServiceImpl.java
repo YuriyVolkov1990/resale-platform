@@ -8,7 +8,7 @@ import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.User;
-import ru.skypro.homework.manager.MyUserDetailsManager;
+import ru.skypro.homework.manager.MyUserDetailsService;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.ImageRepository;
 import ru.skypro.homework.repository.UserRepository;
@@ -19,11 +19,11 @@ import java.io.IOException;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
-    private final MyUserDetailsManager manager;
+    private final MyUserDetailsService manager;
     private final PasswordEncoder encoder;
     private UserRepository userRepository;
     private ImageRepository imageRepository;
-    public UserServiceImpl(UserMapper userMapper, MyUserDetailsManager manager, PasswordEncoder encoder, UserRepository userRepository) {
+    public UserServiceImpl(UserMapper userMapper, MyUserDetailsService manager, PasswordEncoder encoder, UserRepository userRepository) {
         this.userMapper = userMapper;
         this.manager = manager;
         this.encoder = encoder;
@@ -38,6 +38,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getInfo(String name) {
         User user = userRepository.findByEmail(name);
+        System.out.println("======================");
+        System.out.println(user.toString());
+        System.out.println("======================");
         return userMapper.mapToUserDto(user);
     }
 

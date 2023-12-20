@@ -81,10 +81,11 @@ public class UserMapper {
 
     public RegisterDto mapFromUserToRegisterDto(User user) {
         RegisterDto dto = new RegisterDto();
-        dto.setUsername(user.getUsername());
+        dto.setUsername(user.getEmail());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setPassword(user.getPassword());
+        dto.setPhone(user.getPhone());
         dto.setRole(user.getRole());
         return dto;
     }
@@ -95,6 +96,7 @@ public class UserMapper {
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
         user.setPassword(dto.getPassword());
+        user.setPhone(dto.getPhone());
         user.setRole(dto.getRole());
         return user;
     }
