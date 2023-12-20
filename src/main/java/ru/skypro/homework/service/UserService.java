@@ -13,7 +13,7 @@ public interface UserService {
 
     UserDto getInfo(String username);
 
-    UpdateUserDto updateUser();
+    UpdateUserDto updateUser(UpdateUserDto updateUser, Authentication authentication);
 
     UserDto findById(Integer userId);
 

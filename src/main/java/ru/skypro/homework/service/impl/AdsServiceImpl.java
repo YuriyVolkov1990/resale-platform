@@ -138,13 +138,13 @@ public class AdsServiceImpl implements AdsService {
     /**
      * Метод меняет аватар пользователя
      *
-     * @param id - идентификатор аватара в базе
+     * @param adId - идентификатор аватара в базе
      * @param multipartFile - файл нового аватара
      * @return возвращает путь к файлу
      */
     @Override
-    public String patchImage (Integer id, MultipartFile multipartFile){
-        return null;
+    public String patchImage (Integer adId, MultipartFile multipartFile) throws IOException {
+        return imageService.uploadImageToAd(adId, multipartFile);
     }//id это ид объявления, не картинки!!!
 
     /**

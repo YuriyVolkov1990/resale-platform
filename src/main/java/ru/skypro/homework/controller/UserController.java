@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,11 +16,9 @@ import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.User;
-import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.UserService;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -105,9 +102,9 @@ public class UserController {
             }
     )
     @PatchMapping(value = "/me", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody(required = false) UpdateUserDto updateUser) {
+    public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody(required = false) UpdateUserDto updateUser, Authentication authentication) {
         logger.info("Запущен метод UserController updateInfo: Изменение данных пользователя");
-        return ResponseEntity.ok(userService.updateUser());
+        return ResponseEntity.ok(userService.updateUser(updateUser, authentication));
         }
     @Operation(
             tags = "Пользователи",

@@ -1,8 +1,10 @@
 package ru.skypro.homework.mapper;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPasswordDto;
+import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.Image;
 import ru.skypro.homework.entity.User;
@@ -58,5 +60,21 @@ public class UserMapper {
             throw new RuntimeException(e);
         }
         return image;
+    }
+
+    public User mapFromUpdateUserDtoToUser(UpdateUserDto dto, Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setPhone(dto.getPhone());
+        return user;
+    }
+
+    public UpdateUserDto mapFromUserToUpdateUserDto(User user) {
+        UpdateUserDto dto = new UpdateUserDto();
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setPhone(user.getPhone());
+        return dto;
     }
 }

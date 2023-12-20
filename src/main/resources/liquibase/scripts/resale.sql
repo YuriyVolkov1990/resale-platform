@@ -4,10 +4,10 @@
 create table Users (
     id bigserial primary key,
     email text not null,
-    firstName text not null,
-    lastName text not null,
-    phone text not null,
-    role text not null,
+    firstName text,
+    lastName text,
+    phone text,
+    role text,
     image text,
     password text not null
 );
