@@ -9,7 +9,6 @@ import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.entity.Ad;
-import ru.skypro.homework.entity.Image;
 import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.mapper.UserMapper;
@@ -20,7 +19,10 @@ import ru.skypro.homework.service.AdsService;
 import ru.skypro.homework.service.ImageService;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class AdsServiceImpl implements AdsService {
@@ -70,11 +72,7 @@ public class AdsServiceImpl implements AdsService {
         ad.setPrice(properties.getPrice());
         ad.setDescription(properties.getDescription());
         ad.setUser(userRepository.findByEmail(authentication.getName()));
-        Image adImage = imageService.uploadImage(ad.getPk(), image);
-        ad.setImage(adImage.getPath());
-        System.out.println("===================================");
-        System.out.println("adImage.getPath() = " + adImage.getPath());
-        System.out.println("===================================");
+        ad.setImage(imageService.uploadImageToAd(ad.getPk(),image));
         adsRepository.save(ad);
         return adMapper.mapToAdDto(ad);
     }
@@ -125,7 +123,6 @@ public class AdsServiceImpl implements AdsService {
         existingAd.setTitle(dto.getTitle());
         existingAd.setPrice(dto.getPrice());
         existingAd.setDescription(dto.getDescription());
-        adsRepository.save(existingAd);
         return adMapper.mapToAdDto(existingAd);
     }//аналогично update student, faculty достать по id, обновить данными, которые пришли из дто
 

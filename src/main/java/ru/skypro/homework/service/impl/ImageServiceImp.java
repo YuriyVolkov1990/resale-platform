@@ -3,26 +3,35 @@ package ru.skypro.homework.service.impl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.Image;
 import ru.skypro.homework.mapper.UserMapper;
+import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.ImageRepository;
 import ru.skypro.homework.service.ImageService;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.nio.file.StandardOpenOption.CREATE_NEW;
+
 @Service
 public class ImageServiceImp implements ImageService {
     private final ImageRepository imageRepository;
     private final UserMapper userMapper;
+    private final AdsRepository adsRepository;
     @Value("${path.to.avatars.folder}")
     private Path imagePath;
-    public ImageServiceImp(ImageRepository imageRepository, UserMapper userMapper) {
+    public ImageServiceImp(ImageRepository imageRepository, UserMapper userMapper, AdsRepository adsRepository, Path imagePath) {
         this.imageRepository = imageRepository;
         this.userMapper = userMapper;
+        this.adsRepository = adsRepository;
+        this.imagePath = imagePath;
     }
 
     @Override
@@ -55,19 +64,41 @@ public class ImageServiceImp implements ImageService {
     }
 
     @Override
-    public Image uploadImage(Integer id, MultipartFile image) throws IOException {
-        getImagePath(id, image);
+    public String uploadImageToAd(Integer adId, MultipartFile image) throws IOException {
+        Ad ad = adsRepository.getAdByPk(adId);
+        Path filePath = imagePath.resolve(adId + "." + getExtensions(Objects.requireNonNull(image.getOriginalFilename())));
+        Files.createDirectories(filePath.getParent());
+        Files.deleteIfExists(filePath);
+        try (
+                InputStream is = image.getInputStream();
+                OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
+                BufferedInputStream bis = new BufferedInputStream(is, 1024);
+                BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
+        ) {
+            bis.transferTo(bos);
+        }
         Image newImage = userMapper.mapMultipartFileToImage(image);
         imageRepository.save(newImage);
-        return newImage;
+        return Arrays.toString(newImage.getData());
+    }
+    private String getExtensions(String fileName) {
+        return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
-    public void getImagePath(Integer id, MultipartFile image) throws IOException {
-        Files.createDirectories(imagePath);
-        int dotIndex = image.getOriginalFilename().lastIndexOf(".");
-        String fileExtension = image.getOriginalFilename().substring(dotIndex + 1);
-        Path filePath = imagePath.resolve(id + "." + fileExtension);
-        byte[] data = image.getBytes();
-        Files.write(filePath, data, StandardOpenOption.CREATE);
-    }
+//    @Override
+//    public Image uploadImage(Integer id, MultipartFile image) throws IOException {
+//        getImagePath(id, image);
+//        Image newImage = userMapper.mapMultipartFileToImage(image);
+//        imageRepository.save(newImage);
+//        return newImage;
+//    }
+//
+//    public void getImagePath(Integer id, MultipartFile image) throws IOException {
+//        Files.createDirectories(imagePath);
+//        int dotIndex = image.getOriginalFilename().lastIndexOf(".");
+//        String fileExtension = image.getOriginalFilename().substring(dotIndex + 1);
+//        Path filePath = imagePath.resolve(id + "." + fileExtension);
+//        byte[] data = image.getBytes();
+//        Files.write(filePath, data, StandardOpenOption.CREATE);
+//    }
 }
