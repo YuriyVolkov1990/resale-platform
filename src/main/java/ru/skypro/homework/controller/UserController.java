@@ -31,10 +31,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
     @Operation(
             tags = "Пользователи",
             summary = "Обновление пароля",

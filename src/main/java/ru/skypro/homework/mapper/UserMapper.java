@@ -1,5 +1,7 @@
 package ru.skypro.homework.mapper;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,12 +16,10 @@ import ru.skypro.homework.repository.UserRepository;
 import java.io.IOException;
 
 @Component
+@Data
+@RequiredArgsConstructor
 public class UserMapper {
     private final UserRepository userRepository;
-
-    public UserMapper(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public UserDto mapToUserDto(User user) {
         UserDto dto = new UserDto();

@@ -33,12 +33,6 @@ public class ImageServiceImp implements ImageService {
     private final AdsRepository adsRepository;
     @Value("${path.to.images.folder}")
     private Path imagePath;
-    public ImageServiceImp(ImageRepository imageRepository, UserMapper userMapper, AdsRepository adsRepository) {
-        this.imageRepository = imageRepository;
-        this.userMapper = userMapper;
-        this.adsRepository = adsRepository;
-    }
-
     @Override
     public Image createImage(MultipartFile image) {
         Image newImage = new Image();

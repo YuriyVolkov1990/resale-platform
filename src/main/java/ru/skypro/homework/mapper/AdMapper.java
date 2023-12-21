@@ -1,7 +1,9 @@
 package ru.skypro.homework.mapper;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.*;
 import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.User;
@@ -10,14 +12,12 @@ import ru.skypro.homework.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 @Component
+@Data
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class AdMapper {
     private final UserMapper userMapper;
     private final UserService userService;
-
-    public AdMapper(UserMapper userMapper, UserService userService) {
-        this.userMapper = userMapper;
-        this.userService = userService;
-    }
 
     public AdDto mapToAdDto(Ad ad) {
         AdDto dto = new AdDto();
@@ -52,18 +52,18 @@ public class AdMapper {
         return dto;
     }
 
-    public Ad mapToAd(ExtendedAdDto dto) {
-        Ad ad = new Ad();
-        ad.setPk(dto.getPk());
-        ad.setImage(dto.getImage());
-        ad.setPrice(dto.getPrice());
-        ad.setTitle(dto.getTitle());
-        ad.setDescription(dto.getDescription());
-        User user = new User(dto.getPk(), dto.getEmail(), dto.getAuthorFirstName(), dto.getAuthorLastName(), dto.getPhone(), null, null, null);
-        userMapper.mapToUserDto(user);
-        ad.setUser(user);
-        return ad;
-    }
+//    public Ad mapToAd(ExtendedAdDto dto) {
+//        Ad ad = new Ad();
+//        ad.setPk(dto.getPk());
+//        ad.setImage(dto.getImage());
+//        ad.setPrice(dto.getPrice());
+//        ad.setTitle(dto.getTitle());
+//        ad.setDescription(dto.getDescription());
+//        User user = new User(dto.getPk(), dto.getEmail(), dto.getAuthorFirstName(), dto.getAuthorLastName(), dto.getPhone(), null, null, null);
+//        userMapper.mapToUserDto(user);
+//        ad.setUser(user);
+//        return ad;
+//    }
     public AdsDto mapToAdsDto(List<AdDto> ads) {
         AdsDto adsDto = new AdsDto();
         adsDto.setResults(ads);

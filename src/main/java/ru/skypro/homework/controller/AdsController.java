@@ -34,10 +34,6 @@ public class AdsController {
     private static final Logger logger = LoggerFactory.getLogger(AdsController.class);
     private final AdsService adsService;
 
-    public AdsController(AdsService adsService) {
-        this.adsService = adsService;
-    }
-
     @Operation(
             tags = "Объявления",
             summary = "Получение всех объявлений",

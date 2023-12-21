@@ -25,12 +25,12 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder encoder;
     private UserRepository userRepository;
     private ImageRepository imageRepository;
-    public UserServiceImpl(UserMapper userMapper, MyUserDetailsService manager, PasswordEncoder encoder, UserRepository userRepository) {
-        this.userMapper = userMapper;
-        this.manager = manager;
-        this.encoder = encoder;
-        this.userRepository = userRepository;
-    }
+//    public UserServiceImpl(UserMapper userMapper, MyUserDetailsService manager, PasswordEncoder encoder, UserRepository userRepository) {
+//        this.userMapper = userMapper;
+//        this.manager = manager;
+//        this.encoder = encoder;
+//        this.userRepository = userRepository;
+//    }
 
     @Override
     public void setPassword(NewPasswordDto newPasswordDto) {
@@ -40,9 +40,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getInfo(String name) {
         User user = userRepository.findByEmail(name);
-        System.out.println("======================");
-        System.out.println(user.toString());
-        System.out.println("======================");
         return userMapper.mapToUserDto(user);
     }
 

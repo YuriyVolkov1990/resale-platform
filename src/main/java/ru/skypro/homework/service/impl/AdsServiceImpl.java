@@ -54,7 +54,7 @@ public class AdsServiceImpl implements AdsService {
             AdDto adDto = adMapper.mapToAdDto(adsList.get(i));
             adDtoList.add(adDto);
         }
-        return new AdsDto(adDtoList.size(),adDtoList);// достать все обьявы из репозитория
+        return new AdsDto(adDtoList, adDtoList.size());// достать все обьявы из репозитория
     }
 
     @Override
@@ -122,6 +122,5 @@ public class AdsServiceImpl implements AdsService {
     @Override
     public Optional<Ad> findById (Integer id){
         return adsRepository.findById(id);
-
     }
     }

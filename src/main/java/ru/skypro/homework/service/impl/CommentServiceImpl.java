@@ -2,7 +2,6 @@ package ru.skypro.homework.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
@@ -24,14 +23,6 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final AdsRepository adsRepository;
     private final AdMapper adMapper;
-
-
-    public CommentServiceImpl(CommentMapper commentMapper, CommentRepository commentRepository, AdsRepository adsRepository, AdMapper adMapper) {
-        this.commentMapper = commentMapper;
-        this.commentRepository = commentRepository;
-        this.adsRepository = adsRepository;
-        this.adMapper = adMapper;
-    }
 
     @Override
     public CommentsDto getCommentsByAd(Integer adId) {

@@ -27,12 +27,6 @@ public class CommentController {
 //    private final AuthService authService;
 //    private final UserRepository userRepository;
 
-    public CommentController(CommentService commentService) {
-        this.commentService = commentService;
-//        this.authService = authService;
-//        this.userRepository = userRepository;
-    }
-
     @Operation(
             tags = "Комментарии",
             summary = "Получение комментариев объявления",
