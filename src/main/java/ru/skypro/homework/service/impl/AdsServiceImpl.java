@@ -46,11 +46,6 @@ public class AdsServiceImpl implements AdsService {
 //        this.imageService = imageService;
 //    }
 
-    /**
-     * Метод возвращает список всех объявлений в виде DTO {@link Ad}.
-     *
-     * @return возвращает все объявления из БД
-     */
     @Override
     public AdsDto getAllAds() {
         List<Ad> adsList = adsRepository.findAll();
@@ -65,13 +60,6 @@ public class AdsServiceImpl implements AdsService {
         return new AdsDto(adDtoList.size(),adDtoList);// достать все обьявы из репозитория
     }
 
-    /**
-     * Метод добавляет новое объявление в БД
-     *
-     * @param properties - DTO модель класса {@link CreateOrUpdateAdDto};
-     * @param image      - фотография объявления
-     * @return возвращает объявление в виде AdDto
-     */
     @Override
     public AdDto addAd(CreateOrUpdateAdDto properties, MultipartFile image, Authentication authentication) throws IOException {
         Ad ad = new Ad();
@@ -84,12 +72,6 @@ public class AdsServiceImpl implements AdsService {
         return adMapper.mapToAdDto(ad);
     }
 
-    /**
-     * Метод получает информацию об объявлении по id
-     *
-     * @param id - id объявления
-     * @return возвращает ExtendedAdDto
-     */
     @Override
     public ExtendedAdDto getInfoExtendedAd(Integer id) {
         Optional<Ad> adOp = adsRepository.findById(id);
@@ -101,11 +83,6 @@ public class AdsServiceImpl implements AdsService {
         //достать обявление по id и положить в dto
     }
 
-    /**
-     * Метод удаляет объявление по id
-     *
-     * @param id - id объявления
-     */
     @Override
     public void deleteAd (Integer id){
         Optional<Ad> adOp = adsRepository.findById(id);
@@ -117,13 +94,6 @@ public class AdsServiceImpl implements AdsService {
         // он void, можно ничего не возвращать
     }
 
-    /**
-     * Метод вносит изменения в объявление
-     *
-     * @param id  - id объявления
-     * @param dto - DTO модель класса {@link CreateOrUpdateAdDto};
-     * @return возвращает DTO модель объявления
-     */
     @Override
     public AdDto patchAd (Integer id, CreateOrUpdateAdDto dto){
         Ad existingAd = adsRepository.findById(id).orElseThrow(AdNotFoundException::new);
@@ -133,9 +103,6 @@ public class AdsServiceImpl implements AdsService {
         return adMapper.mapToAdDto(existingAd);
     }//аналогично update student, faculty достать по id, обновить данными, которые пришли из дто
 
-    /**
-     * Метод получает все объявления данного пользователя
-     */
     @Override
     public AdsDto getUserAds(Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
@@ -150,24 +117,11 @@ public class AdsServiceImpl implements AdsService {
         return adMapper.mapToAdsDto(adDtoList);
     }//id пользователя берем из userDetails, запрашиваем у репорзитория все обявления с ид нужного пользователя
 
-    /**
-     * Метод меняет аватар пользователя
-     *
-     * @param adId - идентификатор аватара в базе
-     * @param multipartFile - файл нового аватара
-     * @return возвращает путь к файлу
-     */
     @Override
     public String patchImage (Integer adId, MultipartFile multipartFile) throws IOException {
         return imageService.uploadImageToAd(adId, multipartFile);
     }//id это ид объявления, не картинки!!!
 
-    /**
-     * Метод ищет объявление по id
-     *
-     * @param id - идентификатор объявления в базе
-     * @return возвращает Optional<Ad>
-     */
     @Override
     public Optional<Ad> findById (Integer id){
         return adsRepository.findById(id);
