@@ -1,5 +1,6 @@
 package ru.skypro.homework.config;
 
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,6 +15,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@NoArgsConstructor
 public class WebSecurityConfig {
 
     private static final String[] AUTH_WHITELIST = {
@@ -24,9 +26,6 @@ public class WebSecurityConfig {
             "/login",
             "/register"
     };
-
-    public WebSecurityConfig() {
-    }
 
 //    @Bean
 //    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {

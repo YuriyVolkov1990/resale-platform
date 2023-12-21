@@ -2,15 +2,15 @@ package ru.skypro.homework.manager;
 
 
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
 
 @Component
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsManager {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -30,7 +30,12 @@ public class MyUserDetailsService implements UserDetailsService {
         userRepository.save(newUser);
     }
 
+    @Override
+    public void createUser(UserDetails user) {
+    }
+
     public void updateUser(UserDetails user) {
+
         //найти пользователья и обновить
     }
 

@@ -2,7 +2,6 @@ package ru.skypro.homework.mapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.skypro.homework.dto.*;
 import ru.skypro.homework.entity.Ad;
@@ -14,7 +13,6 @@ import java.util.List;
 @Component
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class AdMapper {
     private final UserMapper userMapper;
     private final UserService userService;
