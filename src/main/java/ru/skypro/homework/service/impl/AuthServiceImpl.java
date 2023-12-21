@@ -17,13 +17,6 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder encoder;
     private final UserMapper userMapper;
 
-    public AuthServiceImpl(MyUserDetailsService manager,
-                           PasswordEncoder passwordEncoder, UserMapper userMapper) {
-        this.manager = manager;
-        this.encoder = passwordEncoder;
-        this.userMapper = userMapper;
-    }
-
     @Override
     public boolean login(String userName, String password) {
         if (!manager.userExists(userName)) {

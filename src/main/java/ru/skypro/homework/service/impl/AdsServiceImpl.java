@@ -54,9 +54,6 @@ public class AdsServiceImpl implements AdsService {
             AdDto adDto = adMapper.mapToAdDto(adsList.get(i));
             adDtoList.add(adDto);
         }
-        System.out.println("-----------------");
-        System.out.println("new AdsDto(adDtoList.size(),adDtoList) = " + new AdsDto(adDtoList.size(), adDtoList));
-        System.out.println("-----------------");
         return new AdsDto(adDtoList.size(),adDtoList);// достать все обьявы из репозитория
     }
 

@@ -33,7 +33,7 @@ public class UserMapper {
     }
     public User mapToUser(UserDto dto) {
         User user = new User();
-        user.setId(dto.getPk());
+        user.setPk(dto.getPk());
         user.setEmail(dto.getEmail());
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
