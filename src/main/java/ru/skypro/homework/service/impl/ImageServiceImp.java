@@ -1,5 +1,7 @@
 package ru.skypro.homework.service.impl;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +12,7 @@ import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.ImageRepository;
 import ru.skypro.homework.service.ImageService;
 
+import javax.transaction.Transactional;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +24,9 @@ import java.util.UUID;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
+@Transactional
 public class ImageServiceImp implements ImageService {
     private final ImageRepository imageRepository;
     private final UserMapper userMapper;

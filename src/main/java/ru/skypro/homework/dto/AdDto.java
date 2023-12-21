@@ -3,6 +3,8 @@ package ru.skypro.homework.dto;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdDto {
     private Integer author;
     private String image;
@@ -10,8 +12,8 @@ public class AdDto {
     private Integer price;
     private String title;
 
-    public AdDto() {
-    }
+//    public AdDto() {
+//    }
 //
 //    public AdDto(Integer author, String image, Integer pk, Integer price, String title) {
 //        this.author = author;

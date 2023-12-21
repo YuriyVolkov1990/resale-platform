@@ -3,6 +3,8 @@ package ru.skypro.homework.dto;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
     private Integer pk;
     private String email;

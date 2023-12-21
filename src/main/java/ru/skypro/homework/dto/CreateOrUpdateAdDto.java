@@ -7,6 +7,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateOrUpdateAdDto {
     @Size(min = 4, max = 32)
     private String title;

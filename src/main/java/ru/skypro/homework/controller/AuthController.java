@@ -3,6 +3,7 @@ package ru.skypro.homework.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import ru.skypro.homework.service.AuthService;
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final AuthService authService;

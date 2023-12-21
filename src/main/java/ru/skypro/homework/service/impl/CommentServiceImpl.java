@@ -1,6 +1,8 @@
 package ru.skypro.homework.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
     private final CommentRepository commentRepository;

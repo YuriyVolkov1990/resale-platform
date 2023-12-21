@@ -1,7 +1,9 @@
 package ru.skypro.homework.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.AdDto;
 import ru.skypro.homework.dto.AdsDto;
@@ -25,6 +27,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class AdsServiceImpl implements AdsService {
     private final AdsRepository adsRepository;
     private final AdMapper adMapper;
@@ -33,14 +37,14 @@ public class AdsServiceImpl implements AdsService {
     private final UserRepository userRepository;
     private final ImageService imageService;
 
-    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper, ImageRepository imageRepository, UserMapper userMapper, UserRepository userRepository, ImageService imageService) {
-        this.adsRepository = adsRepository;
-        this.adMapper = adMapper;
-        this.imageRepository = imageRepository;
-        this.userMapper = userMapper;
-        this.userRepository = userRepository;
-        this.imageService = imageService;
-    }
+//    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper, ImageRepository imageRepository, UserMapper userMapper, UserRepository userRepository, ImageService imageService) {
+//        this.adsRepository = adsRepository;
+//        this.adMapper = adMapper;
+//        this.imageRepository = imageRepository;
+//        this.userMapper = userMapper;
+//        this.userRepository = userRepository;
+//        this.imageService = imageService;
+//    }
 
     /**
      * Метод возвращает список всех объявлений в виде DTO {@link Ad}.

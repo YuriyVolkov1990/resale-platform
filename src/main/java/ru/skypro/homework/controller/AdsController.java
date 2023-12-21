@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequestMapping("/ads")
+@RequiredArgsConstructor
 public class AdsController {
     private static final Logger logger = LoggerFactory.getLogger(AdsController.class);
     private final AdsService adsService;

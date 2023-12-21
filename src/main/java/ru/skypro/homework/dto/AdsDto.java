@@ -5,6 +5,8 @@ import lombok.*;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdsDto {
 
     private List<AdDto> results;
