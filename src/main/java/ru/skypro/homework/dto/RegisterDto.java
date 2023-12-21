@@ -7,10 +7,6 @@ import javax.validation.constraints.Size;
 
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class RegisterDto {
     @Size(min = 4, max = 32)
     private String username;

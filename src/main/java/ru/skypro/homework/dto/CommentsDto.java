@@ -6,10 +6,6 @@ import ru.skypro.homework.entity.Comment;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class CommentsDto {
     private Integer count;
     private List<Comment> results;

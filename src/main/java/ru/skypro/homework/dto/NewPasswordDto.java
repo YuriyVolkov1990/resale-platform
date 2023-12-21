@@ -5,10 +5,6 @@ import lombok.*;
 import javax.validation.constraints.Size;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class NewPasswordDto {
     @Size(min = 8, max = 16)
     private String currentPassword;

@@ -1,15 +1,13 @@
 package ru.skypro.homework.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 @Entity
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +28,8 @@ public class Ad {
     private List<Comment> comments;
 
 
-    public Ad() {
-    }
+//    public Ad() {
+//    }
 
 //    public Ad(Integer pk, String image, Integer price, String title, String description) {
 //        this.pk = pk;

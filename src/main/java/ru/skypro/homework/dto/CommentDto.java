@@ -3,10 +3,6 @@ package ru.skypro.homework.dto;
 import lombok.*;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class CommentDto {
     private Integer authorId;
     private String authorImage;

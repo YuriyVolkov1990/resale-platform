@@ -6,10 +6,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class UpdateUserDto {
     @Size(min = 3, max = 10)
     private String firstName;

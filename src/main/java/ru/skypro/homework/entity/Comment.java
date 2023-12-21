@@ -1,16 +1,14 @@
 package ru.skypro.homework.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class Comment {
     @Id
     @GeneratedValue()
@@ -38,8 +36,8 @@ public class Comment {
 //        this.ad = adId;
 //    }
 
-    public Comment() {
-    }
+//    public Comment() {
+//    }
 
 //    public Comment(Integer id, Integer author, String authorImage, String authorFirstName, Long createdAt, String text) {
 //        this.id = id;

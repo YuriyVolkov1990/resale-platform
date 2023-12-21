@@ -1,15 +1,13 @@
 package ru.skypro.homework.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +21,8 @@ public class Image {
     @Column(name = "data")
     private byte[] data;
 
-    public Image() {
-    }
+//    public Image() {
+//    }
 
 //    public Image(Integer id, String path, long fileSize, String mediaType, byte[] data) {
 //        this.id = id;
