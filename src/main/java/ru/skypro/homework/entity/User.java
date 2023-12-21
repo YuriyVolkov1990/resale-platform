@@ -1,5 +1,8 @@
 package ru.skypro.homework.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.skypro.homework.dto.Role;
@@ -14,6 +17,9 @@ import java.util.Objects;
 //@Data
 @Entity
 @Table(name = "users")
+@AllArgsConstructor
+@Getter
+@Setter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

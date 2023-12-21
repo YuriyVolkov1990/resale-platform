@@ -33,6 +33,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @Operation(
             tags = "Пользователи",
             summary = "Обновление пароля",
@@ -64,6 +65,7 @@ public class UserController {
         logger.info("Запущен метод UserController setPassword: Обновление пароля");
         userService.setPassword(newPasswordDto);
         }
+
     @Operation(
             tags = "Пользователи",
             summary = "Получение информации об авторизованном пользователе",
@@ -88,6 +90,7 @@ public class UserController {
         logger.info("Запущен метод UserController getInfo: Получение информации об авторизованном пользователе");
         return ResponseEntity.ok(userService.getInfo(authentication.getName()));
         }
+
     @Operation(
             tags = "Пользователи",
             summary = "Изменение данных пользователя",
@@ -106,6 +109,7 @@ public class UserController {
         logger.info("Запущен метод UserController updateInfo: Изменение данных пользователя");
         return ResponseEntity.ok(userService.updateUser(updateUser, authentication));
         }
+
     @Operation(
             tags = "Пользователи",
             summary = "Обновление аватара авторизованного пользователя",

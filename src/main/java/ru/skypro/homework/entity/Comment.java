@@ -1,9 +1,16 @@
 package ru.skypro.homework.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@AllArgsConstructor
+@Getter
+@Setter
 public class Comment {
     @Id
     @GeneratedValue()
@@ -23,76 +30,73 @@ public class Comment {
     @JoinColumn(name = "adid")
     private Ad ad;
 
-    public Ad getAd() {
-        return ad;
-    }
-
-    public void setAd(Ad adId) {
-        this.ad = adId;
-    }
-//    @ManyToOne
-//    @JoinColumn(name = "ad_id", nullable = false)
-//    private Ad ad;
+//    public Ad getAd() {
+//        return ad;
+//    }
+//
+//    public void setAd(Ad adId) {
+//        this.ad = adId;
+//    }
 
     public Comment() {
     }
 
-    public Comment(Integer id, Integer author, String authorImage, String authorFirstName, Long createdAt, String text) {
-        this.id = id;
-        this.author = author;
-        this.authorImage = authorImage;
-        this.authorFirstName = authorFirstName;
-        this.createdAt = createdAt;
-        this.text = text;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Integer author) {
-        this.author = author;
-    }
-
-    public String getAuthorImage() {
-        return authorImage;
-    }
-
-    public void setAuthorImage(String authorImage) {
-        this.authorImage = authorImage;
-    }
-
-    public String getAuthorFirstName() {
-        return authorFirstName;
-    }
-
-    public void setAuthorFirstName(String authorFirstName) {
-        this.authorFirstName = authorFirstName;
-    }
-
-    public Long getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Long createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
+//    public Comment(Integer id, Integer author, String authorImage, String authorFirstName, Long createdAt, String text) {
+//        this.id = id;
+//        this.author = author;
+//        this.authorImage = authorImage;
+//        this.authorFirstName = authorFirstName;
+//        this.createdAt = createdAt;
+//        this.text = text;
+//    }
+//
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
+//
+//    public Integer getAuthor() {
+//        return author;
+//    }
+//
+//    public void setAuthor(Integer author) {
+//        this.author = author;
+//    }
+//
+//    public String getAuthorImage() {
+//        return authorImage;
+//    }
+//
+//    public void setAuthorImage(String authorImage) {
+//        this.authorImage = authorImage;
+//    }
+//
+//    public String getAuthorFirstName() {
+//        return authorFirstName;
+//    }
+//
+//    public void setAuthorFirstName(String authorFirstName) {
+//        this.authorFirstName = authorFirstName;
+//    }
+//
+//    public Long getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public void setCreatedAt(Long createdAt) {
+//        this.createdAt = createdAt;
+//    }
+//
+//    public String getText() {
+//        return text;
+//    }
+//
+//    public void setText(String text) {
+//        this.text = text;
+//    }
 
     @Override
     public boolean equals(Object o) {

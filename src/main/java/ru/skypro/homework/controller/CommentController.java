@@ -8,13 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
-import ru.skypro.homework.repository.UserRepository;
-import ru.skypro.homework.service.AuthService;
 import ru.skypro.homework.service.CommentService;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -33,6 +30,7 @@ public class CommentController {
 //        this.authService = authService;
 //        this.userRepository = userRepository;
     }
+
     @Operation(
             tags = "Комментарии",
             summary = "Получение комментариев объявления",
@@ -62,6 +60,7 @@ public class CommentController {
         logger.info("Запущен метод CommentController getComments: Получение комментариев объявления");
         return ResponseEntity.ok(commentService.getCommentsByAd(id));
         }
+
     @Operation(
             tags = "Комментарии",
             summary = "Добавление комментария к объявлению",
@@ -92,6 +91,7 @@ public class CommentController {
         logger.info("Запущен метод CommentController postComment: Добавление комментария к объявлению");
         return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
         }
+
     @Operation(
             tags = "Комментарии",
             summary = "Удаление комментария",
@@ -124,6 +124,7 @@ public class CommentController {
         logger.info("Запущен метод CommentController deleteComment: Удаление комментария");
         commentService.deleteCommentAtAd(/*adId,*/ commentId);
         }
+
     @Operation(
             tags = "Комментарии",
             summary = "Обновление комментария",

@@ -27,6 +27,7 @@ public class AuthController {
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
+
     @Operation(
             tags = "Авторизация",
             summary = "Авторизация",
@@ -52,6 +53,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
     @Operation(
             tags = "Регистрация",
             summary = "Регистрация",
