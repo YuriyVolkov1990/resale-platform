@@ -3,9 +3,9 @@ package ru.skypro.homework.mapper;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.RegisterDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
@@ -20,7 +20,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserMapper {
     private final UserRepository userRepository;
-
+    private final PasswordEncoder encoder;
     public UserDto mapToUserDto(User user) {
         UserDto dto = new UserDto();
         dto.setPk(user.getPk());
@@ -41,16 +41,15 @@ public class UserMapper {
         user.setRole(dto.getRole());
         return user;
     }
-    public NewPasswordDto mapToNewPasswordDto(User user) {
-        NewPasswordDto dto = new NewPasswordDto();
-        dto.setNewPassword(user.getPassword());
-        return dto;
-    }
-    public User mapToNewPassword(NewPasswordDto newPasswordDto) {
-       User user = userRepository.findByPassword(newPasswordDto.getCurrentPassword());
-       user.setPassword(newPasswordDto.getNewPassword());
-       return user;
-    }
+//    public NewPasswordDto mapToNewPasswordDto(User user) {
+//        NewPasswordDto dto = new NewPasswordDto();
+//        dto.setNewPassword(user.getPassword());
+//        return dto;
+//    }
+//    public User mapFromNewPasswordToUser(NewPasswordDto newPasswordDto) {
+//       user.setPassword(newPasswordDto.getNewPassword());
+//       return user;
+//    }
     public Image mapMultipartFileToImage(MultipartFile imageMulti) {
         Image image = new Image();
         try {

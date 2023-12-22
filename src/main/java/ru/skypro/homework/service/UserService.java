@@ -17,7 +17,7 @@ public interface UserService {
      * Метод меняет пароль для входа в аккаунт
      * @param newPasswordDto - DTO, содержащий старый и новый пароли
      */
-    void setPassword(NewPasswordDto newPasswordDto);
+    void setPassword(NewPasswordDto newPasswordDto, Authentication authentication);
 
     /**
      * Метод для получения информации об авторизованном пользователе

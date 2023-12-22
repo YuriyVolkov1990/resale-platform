@@ -58,9 +58,9 @@ public class UserController {
             }
     )
     @PostMapping("/set_password")
-    public void setPassword(@RequestBody(required = false) NewPasswordDto newPasswordDto) {
+    public void setPassword(@RequestBody(required = false) NewPasswordDto newPasswordDto, Authentication authentication) {
         logger.info("Запущен метод UserController setPassword: Обновление пароля");
-        userService.setPassword(newPasswordDto);
+        userService.setPassword(newPasswordDto, authentication);
         }
 
     @Operation(

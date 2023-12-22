@@ -105,12 +105,9 @@ public class AdsServiceImpl implements AdsService {
         User user = userRepository.findByEmail(authentication.getName());
         List<Ad> adList = adsRepository.findAdByUser(user);
         List<AdDto> adDtoList = new ArrayList<>();
-        for (int i = 0; i <= adList.size(); i++) {
+        for (int i = 0; i <= adList.size()-1; i++) {
             adDtoList.add(adMapper.mapToAdDto(adList.get(i)));
         }
-        System.out.println("++++++++++++++++++++++++++++");
-        System.out.println("adMapper.mapToAdsDto(adDtoList) = " + adMapper.mapToAdsDto(adDtoList));
-        System.out.println("++++++++++++++++++++++++++++");
         return adMapper.mapToAdsDto(adDtoList);
     }//id пользователя берем из userDetails, запрашиваем у репорзитория все обявления с ид нужного пользователя
 

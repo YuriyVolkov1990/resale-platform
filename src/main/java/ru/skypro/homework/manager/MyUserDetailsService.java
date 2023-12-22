@@ -1,8 +1,11 @@
 package ru.skypro.homework.manager;
 
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 import ru.skypro.homework.entity.User;
@@ -10,15 +13,12 @@ import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
 
 @Component
+@Data
+@RequiredArgsConstructor
 public class MyUserDetailsService implements UserDetailsManager {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-
-    public MyUserDetailsService(UserRepository userRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-    }
-
+    private final PasswordEncoder encoder;
     public void createUser(User user) {
         User newUser = new User();
         newUser.setEmail(user.getEmail());
@@ -44,8 +44,6 @@ public class MyUserDetailsService implements UserDetailsManager {
     }
 
     public void changePassword(String oldPassword, String newPassword) {
-        User user = userRepository.findByPassword(oldPassword);
-        user.setPassword(newPassword);
     }
 
     public boolean userExists(String username) {
