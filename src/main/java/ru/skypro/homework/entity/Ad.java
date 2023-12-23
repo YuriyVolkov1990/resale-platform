@@ -1,5 +1,6 @@
 package ru.skypro.homework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,7 +24,9 @@ public class Ad {
     private String description;
     @ManyToOne
     @JoinColumn(name = "authorId")
+    @JsonIgnore
     private User user;
     @OneToMany(mappedBy = "ad")
+    @JsonIgnore
     private List<Comment> comments;
 }

@@ -25,7 +25,7 @@ public class Comment {
     @Column(name = "message")
     private String text;
     @ManyToOne
-    @JoinColumn(name = "adid")
+    @JoinColumn(name = "adpk")
     private Ad ad;
 
     @Override

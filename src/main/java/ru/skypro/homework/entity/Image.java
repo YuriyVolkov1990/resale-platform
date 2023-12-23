@@ -22,5 +22,6 @@ public class Image {
     private byte[] data;
 
     @OneToOne
+    @JoinColumn(name = "adid")
     private Ad ad;
 }

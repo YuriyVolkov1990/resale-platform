@@ -1,5 +1,6 @@
 package ru.skypro.homework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +44,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Ad> ads;
 
     @Override

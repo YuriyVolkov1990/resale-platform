@@ -12,6 +12,4 @@ public interface AdsRepository extends JpaRepository<Ad, Integer> {
     List<Ad> findAdByUser(User user);
 
     Ad getAdByPk(Integer adId);
-
-    Ad findFirstById(Integer adId);
 }

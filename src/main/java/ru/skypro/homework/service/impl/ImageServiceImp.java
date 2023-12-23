@@ -68,8 +68,15 @@ public class ImageServiceImp implements ImageService {
         Path filePath = imagePath.resolve(adId + "." + fileExtension);
         byte[] data = image.getBytes();
         Files.write(filePath, data, StandardOpenOption.CREATE);
-        Ad ad = adsRepository.getReferenceById(adId);
+        Ad ad = adsRepository.findAdByPk(adId);
         Image newImage = imageRepository.findFirstByAd(ad).orElse(new Image());
+        ad.setImage(newImage.getPath());
+        newImage.setMediaType(image.getContentType());
+        newImage.setFileSize(image.getSize());
+        newImage.setData(data);
+        newImage.setPath(filePath.toAbsolutePath().toString());
+        newImage.setAd(ad);
+        imageRepository.save(newImage);
         return Arrays.toString(image.getBytes());
     }
 //    private String getExtensions(String fileName) {

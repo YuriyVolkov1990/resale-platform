@@ -17,8 +17,7 @@ create table Ad (
     price serial not null,
     title text not null,
     description text,
-    comments text,
-    image not null
+    comments text
 );
 create table Comment (
     idComment bigserial primary key,
@@ -34,5 +33,6 @@ create table Image (
     path text not null,
     fileSize int8 not null,
     mediaType text not null,
-    data bytea not null
-)
+    data bytea not null,
+    adId serial not null
+);
