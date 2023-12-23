@@ -64,10 +64,6 @@ public class AdsServiceImpl implements AdsService {
         ad.setPrice(properties.getPrice());
         ad.setDescription(properties.getDescription());
         ad.setUser(userRepository.findByEmail(authentication.getName()));
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&");
-        System.out.println("userRepository.findByEmail(authentication.getName()) = " + userRepository.findByEmail(authentication.getName()));
-        System.out.println("???????????????????");
-        System.out.println("ad.getUser() = " + ad.getUser());
         adsRepository.save(ad);
         ad.setImage(patchImage(ad.getPk(),image));
         return adMapper.mapToAdDto(ad);

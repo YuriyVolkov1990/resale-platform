@@ -79,55 +79,8 @@ public class ImageServiceImp implements ImageService {
         imageRepository.save(newImage);
         return Arrays.toString(image.getBytes());
     }
-//    private String getExtensions(String fileName) {
-//        return fileName.substring(fileName.lastIndexOf(".") + 1);
-    }
-//    @Override
-//    public Image uploadImage(Integer id, MultipartFile image) throws IOException {
-//        getImagePath(id, image);
-//        Image newImage = userMapper.mapMultipartFileToImage(image);
-//        imageRepository.save(newImage);
-//        return newImage;
-//    }
-//
-//    public void getImagePath(Integer id, MultipartFile image) throws IOException {
-//        Files.createDirectories(imagePath);
-//        int dotIndex = image.getOriginalFilename().lastIndexOf(".");
-//        String fileExtension = image.getOriginalFilename().substring(dotIndex + 1);
-//        Path filePath = imagePath.resolve(id + "." + fileExtension);
-//        byte[] data = image.getBytes();
-//        Files.write(filePath, data, StandardOpenOption.CREATE);
-//    }
+}
 
 
 
-//
-//        System.out.println("---------------------");
-//                System.out.println("image.getOriginalFilename() = " + image.getOriginalFilename());
-//                System.out.println("---------------------");
-//                System.out.println("=====================");
-//                System.out.println("filePath = " + filePath);
-//                System.out.println("=====================");
-//                Files.createDirectories(filePath.getParent());
-//                System.out.println("+++++++++++++++++++++");
-//                System.out.println("filePath.getParent() = " + filePath.getParent());
-//                System.out.println("+++++++++++++++++++++");
 
-
-
-//    Image newImage = userMapper.mapMultipartFileToImage(image);
-//    Ad ad = adsRepository.getAdByPk(adId);
-//    Path filePath = imagePath.resolve(newImage.getId() + "." + getExtensions(Objects.requireNonNull(image.getOriginalFilename())));
-//        Files.deleteIfExists(filePath);
-//        try (
-//    InputStream is = image.getInputStream();
-//    OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
-//    BufferedInputStream bis = new BufferedInputStream(is, 1024);
-//    BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
-//        ) {
-//        bis.transferTo(bos);
-//    }
-//        imageRepository.save(newImage);
-//        ad.setImage(Arrays.toString(newImage.getData()));
-//        Files.createDirectories(filePath.getParent());
-//        return Arrays.toString(newImage.getData());
