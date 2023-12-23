@@ -13,15 +13,13 @@ import ru.skypro.homework.repository.ImageRepository;
 import ru.skypro.homework.service.ImageService;
 
 import javax.transaction.Transactional;
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
-
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
 @RequiredArgsConstructor
@@ -64,26 +62,19 @@ public class ImageServiceImp implements ImageService {
 
     @Override
     public String uploadImageToAd(Integer adId, MultipartFile image) throws IOException {
-        Ad ad = adsRepository.getAdByPk(adId);
-        Path filePath = imagePath.resolve(adId + "." + getExtensions(Objects.requireNonNull(image.getOriginalFilename())));
-        Files.createDirectories(filePath.getParent());
-        Files.deleteIfExists(filePath);
-        try (
-                InputStream is = image.getInputStream();
-                OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
-                BufferedInputStream bis = new BufferedInputStream(is, 1024);
-                BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
-        ) {
-            bis.transferTo(bos);
-        }
-        Image newImage = userMapper.mapMultipartFileToImage(image);
-        imageRepository.save(newImage);
-        return Arrays.toString(newImage.getData());
+        Files.createDirectories(imagePath);
+        int dotIndex = image.getOriginalFilename().lastIndexOf(".");
+        String fileExtension = image.getOriginalFilename().substring(dotIndex + 1);
+        Path filePath = imagePath.resolve(adId + "." + fileExtension);
+        byte[] data = image.getBytes();
+        Files.write(filePath, data, StandardOpenOption.CREATE);
+        Ad ad = adsRepository.getReferenceById(adId);
+        Image newImage = imageRepository.findFirstByAd(ad).orElse(new Image());
+        return Arrays.toString(image.getBytes());
     }
-    private String getExtensions(String fileName) {
-        return fileName.substring(fileName.lastIndexOf(".") + 1);
+//    private String getExtensions(String fileName) {
+//        return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
-
 //    @Override
 //    public Image uploadImage(Integer id, MultipartFile image) throws IOException {
 //        getImagePath(id, image);
@@ -100,4 +91,36 @@ public class ImageServiceImp implements ImageService {
 //        byte[] data = image.getBytes();
 //        Files.write(filePath, data, StandardOpenOption.CREATE);
 //    }
-}
+
+
+
+//
+//        System.out.println("---------------------");
+//                System.out.println("image.getOriginalFilename() = " + image.getOriginalFilename());
+//                System.out.println("---------------------");
+//                System.out.println("=====================");
+//                System.out.println("filePath = " + filePath);
+//                System.out.println("=====================");
+//                Files.createDirectories(filePath.getParent());
+//                System.out.println("+++++++++++++++++++++");
+//                System.out.println("filePath.getParent() = " + filePath.getParent());
+//                System.out.println("+++++++++++++++++++++");
+
+
+
+//    Image newImage = userMapper.mapMultipartFileToImage(image);
+//    Ad ad = adsRepository.getAdByPk(adId);
+//    Path filePath = imagePath.resolve(newImage.getId() + "." + getExtensions(Objects.requireNonNull(image.getOriginalFilename())));
+//        Files.deleteIfExists(filePath);
+//        try (
+//    InputStream is = image.getInputStream();
+//    OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
+//    BufferedInputStream bis = new BufferedInputStream(is, 1024);
+//    BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
+//        ) {
+//        bis.transferTo(bos);
+//    }
+//        imageRepository.save(newImage);
+//        ad.setImage(Arrays.toString(newImage.getData()));
+//        Files.createDirectories(filePath.getParent());
+//        return Arrays.toString(newImage.getData());

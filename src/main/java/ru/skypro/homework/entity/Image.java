@@ -14,10 +14,13 @@ public class Image {
     private Integer id;
     @Column(name = "path")
     private String path;
-    @Column(name = "fileSize")
+    @Column(name = "filesize")
     private long fileSize;
-    @Column(name = "mediaType")
+    @Column(name = "mediatype")
     private String mediaType;
     @Column(name = "data")
     private byte[] data;
+
+    @OneToOne
+    private Ad ad;
 }
