@@ -41,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
         Ad ad = adsRepository.getAdByPk(adId);
         comment.setAuthor(ad.getUser().getPk());
         comment.setAuthorFirstName(ad.getUser().getFirstName());
-        comment.setCreatedAt(121212L);/////Сделать норм дату!!!!
+        comment.setCreatedAt(System.currentTimeMillis());
         comment.setAd(ad);
         List<Comment> newComment = new ArrayList<>();
         newComment.add(comment);
