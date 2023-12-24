@@ -28,7 +28,7 @@ public interface CommentService {
      * @param adId - идентификатор объявления
      * @param id - идентификатор комментария
      */
-    void deleteCommentAtAd(/*Integer adId,*/ Integer id);
+    void deleteCommentAtAd(Integer adId, Integer id);
 
     /**
      * Метод изменяет текст комментария

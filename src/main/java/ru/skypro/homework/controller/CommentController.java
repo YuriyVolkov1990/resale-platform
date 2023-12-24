@@ -114,11 +114,11 @@ public class CommentController {
                     )
             }
     )
-    @DeleteMapping(value = "/comments/{commentId}")///{adId}
-    public void deleteComment(/*@PathVariable(required = false) Integer adId,*/
+    @DeleteMapping(value = "/{adId}/comments/{commentId}")//
+    public void deleteComment(@PathVariable(required = false) Integer adId,
                               @PathVariable(required = true) Integer commentId) {
         logger.info("Запущен метод CommentController deleteComment: Удаление комментария");
-        commentService.deleteCommentAtAd(/*adId,*/ commentId);
+        commentService.deleteCommentAtAd(adId, commentId);
         }
 
     @Operation(
@@ -152,9 +152,9 @@ public class CommentController {
     )
     @PatchMapping(value = "/{adId}/comments/{commentId}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId,
-                                                   @PathVariable(required = true) Integer id,
+                                                   @PathVariable(required = true) Integer commentId,
                                                    @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
         logger.info("Запущен метод CommentController patchComment: Обновление комментария");
-        return ResponseEntity.ok(commentService.patchCommentAtAd(adId, id, createOrUpdateCommentDto));
+        return ResponseEntity.ok(commentService.patchCommentAtAd(adId, commentId, createOrUpdateCommentDto));
         }
 }

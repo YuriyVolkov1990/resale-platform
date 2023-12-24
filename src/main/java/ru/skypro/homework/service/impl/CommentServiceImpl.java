@@ -26,7 +26,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentsDto getCommentsByAd(Integer adId) {
-        Ad ad = adsRepository.getAdByPk(adId);
+        Ad ad = adsRepository.findAdByPk(adId);
         List<Comment> comments = commentRepository.findAllByAd(ad);
         ad.setComments(comments);
         adsRepository.save(ad);
@@ -38,7 +38,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = new Comment();
         String text = createOrUpdateCommentDto.getText();
         comment.setText(text);
-        Ad ad = adsRepository.getAdByPk(adId);
+        Ad ad = adsRepository.findAdByPk(adId);
         comment.setAuthor(ad.getUser().getPk());
         comment.setAuthorFirstName(ad.getUser().getFirstName());
         comment.setCreatedAt(System.currentTimeMillis());
@@ -51,12 +51,16 @@ public class CommentServiceImpl implements CommentService {
     }// по ид объявления добавить коментарий
 
     @Override
-    public void deleteCommentAtAd(/*Integer adId,*/ Integer id) {
+    public void deleteCommentAtAd(Integer adId, Integer id) {
         commentRepository.deleteById(id);
     }//
 
     @Override
-    public CommentDto patchCommentAtAd(Integer adId, Integer id, CreateOrUpdateCommentDto createOrUpdateCommentDt) {
-        return null;
+    public CommentDto patchCommentAtAd(Integer adId, Integer id, CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+        Ad ad = adsRepository.findAdByPk(adId);
+        Comment comment = commentRepository.findCommentByPk(id);
+        comment.setText(createOrUpdateCommentDto.getText());
+        commentRepository.save(comment);
+        return commentMapper.mapToCommentDto(comment);
     }// как удаление, толкьо на вход ещё реквест бади
 }
