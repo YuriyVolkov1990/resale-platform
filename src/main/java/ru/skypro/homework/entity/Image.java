@@ -25,7 +25,7 @@ public class Image {
     @JoinColumn(name = "adid")
     private Ad ad;
 
-    @OneToOne
-    @JoinColumn(name = "userid")
-    private User user;
+//    @OneToOne
+//    @JoinColumn(name = "userid")
+//    private User user;
 }

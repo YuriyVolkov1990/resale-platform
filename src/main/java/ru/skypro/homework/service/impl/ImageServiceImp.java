@@ -3,12 +3,10 @@ package ru.skypro.homework.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.Image;
-import ru.skypro.homework.entity.User;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.ImageRepository;
@@ -84,24 +82,24 @@ public class ImageServiceImp implements ImageService {
         return Arrays.toString(image.getBytes());
     }
 
-    @Override
-    public void uploadImageToUser(MultipartFile image, Authentication authentication) throws IOException {
-        User user = userRepository.findByEmail(authentication.getName());
-        Files.createDirectories(imagePath);
-        int dotIndex = image.getOriginalFilename().lastIndexOf(".");
-        String fileExtension = image.getOriginalFilename().substring(dotIndex + 1);
-        Path filePath = imagePath.resolve(user.getPk() + "." + fileExtension);
-        byte[] data = image.getBytes();
-        Files.write(filePath, data, StandardOpenOption.CREATE);
-        Image newImage = imageRepository.findFirstByUser(user).orElse(new Image());
-        user.setImage(newImage.getPath());
-        newImage.setMediaType(image.getContentType());
-        newImage.setFileSize(image.getSize());
-        newImage.setData(data);
-        newImage.setPath(filePath.toAbsolutePath().toString());
-        newImage.setUser(user);
-        imageRepository.save(newImage);
-    }
+//    @Override
+//    public void uploadImageToUser(MultipartFile image, Authentication authentication) throws IOException {
+//        User user = userRepository.findByEmail(authentication.getName());
+//        Files.createDirectories(imagePath);
+//        int dotIndex = image.getOriginalFilename().lastIndexOf(".");
+//        String fileExtension = image.getOriginalFilename().substring(dotIndex + 1);
+//        Path filePath = imagePath.resolve(user.getPk() + "." + fileExtension);
+//        byte[] data = image.getBytes();
+//        Files.write(filePath, data, StandardOpenOption.CREATE);
+//        Image newImage = imageRepository.findFirstByUser(user).orElse(new Image());
+//        user.setImage(newImage.getPath());
+//        newImage.setMediaType(image.getContentType());
+//        newImage.setFileSize(image.getSize());
+//        newImage.setData(data);
+//        newImage.setPath(filePath.toAbsolutePath().toString());
+//        newImage.setUser(user);
+//        imageRepository.save(newImage);
+//    }
 }
 
 

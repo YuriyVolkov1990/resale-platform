@@ -129,6 +129,6 @@ public class UserController {
     public void updateImage(@RequestPart MultipartFile image,
                             Authentication authentication) throws IOException {
         logger.info("Запущен метод UserController updateImage: Обновление аватара авторизованного пользователя");
-        imageService.uploadImageToUser(image, authentication);
+//        imageService.uploadImageToUser(image, authentication);
     }
 }

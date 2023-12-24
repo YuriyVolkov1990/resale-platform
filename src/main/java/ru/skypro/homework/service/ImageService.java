@@ -1,6 +1,5 @@
 package ru.skypro.homework.service;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.entity.Image;
 
@@ -47,5 +46,5 @@ public interface ImageService {
 //     * @param image - MultipartFile файл, содержащий изображение
 //     * @param authentication - объект класса Authentication, содержащий данные о текущей сессии
 //     */
-    void uploadImageToUser (MultipartFile image, Authentication authentication) throws IOException;
+//    void uploadImageToUser (MultipartFile image, Authentication authentication) throws IOException;
 }
