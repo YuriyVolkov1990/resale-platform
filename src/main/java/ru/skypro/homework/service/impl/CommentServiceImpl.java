@@ -26,7 +26,10 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentsDto getCommentsByAd(Integer adId) {
-        List<Comment> comments = commentRepository.getCommentByAdId(adId);
+        Ad ad = adsRepository.getAdByPk(adId);
+        List<Comment> comments = commentRepository.findAllByAd(ad);
+        ad.setComments(comments);
+        adsRepository.save(ad);
         return commentMapper.mapToCommentsDto(comments);
     }// по ид объявления нужно вытащить все коменты
 

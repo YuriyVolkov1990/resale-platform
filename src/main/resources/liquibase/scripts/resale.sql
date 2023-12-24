@@ -16,8 +16,7 @@ create table Ad (
     image text,
     price serial not null,
     title text not null,
-    description text,
-    comments text
+    description text
 );
 create table Comment (
     idComment bigserial primary key,
@@ -25,8 +24,7 @@ create table Comment (
     authorImage text,
     authorFirstName text not null,
     createdAt bigserial not null,
-    message text not null,
-    adId serial not null
+    message text not null
 );
 create table Image (
     id bigserial primary key,

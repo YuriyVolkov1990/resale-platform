@@ -13,7 +13,7 @@ public class Comment {
     @Id
     @GeneratedValue()
     @Column(name = "idcomment")
-    private Integer id;
+    private Integer pk;
     @Column(name = "iduser")
     private Integer author;
     @Column(name = "authorimage")
@@ -25,7 +25,7 @@ public class Comment {
     @Column(name = "message")
     private String text;
     @ManyToOne
-    @JoinColumn(name = "adpk")
+    @JoinColumn(name = "ad")
     private Ad ad;
 
     @Override
@@ -33,18 +33,18 @@ public class Comment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id) && Objects.equals(author, comment.author) && Objects.equals(authorImage, comment.authorImage) && Objects.equals(authorFirstName, comment.authorFirstName) && Objects.equals(createdAt, comment.createdAt) && Objects.equals(text, comment.text);
+        return Objects.equals(pk, comment.pk) && Objects.equals(author, comment.author) && Objects.equals(authorImage, comment.authorImage) && Objects.equals(authorFirstName, comment.authorFirstName) && Objects.equals(createdAt, comment.createdAt) && Objects.equals(text, comment.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, authorImage, authorFirstName, createdAt, text);
+        return Objects.hash(pk, author, authorImage, authorFirstName, createdAt, text);
     }
 
     @Override
     public String toString() {
         return "Comment{" +
-                "id=" + id +
+                "pk=" + pk +
                 ", author=" + author +
                 ", authorImage='" + authorImage + '\'' +
                 ", authorFirstName='" + authorFirstName + '\'' +
