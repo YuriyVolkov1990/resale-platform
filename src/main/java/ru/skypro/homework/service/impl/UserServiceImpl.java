@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
@@ -15,7 +14,6 @@ import ru.skypro.homework.repository.ImageRepository;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.UserService;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,13 +50,6 @@ public class UserServiceImpl implements UserService {
         List<User> user = userRepository.findAllById(Collections.singleton(userId));
         return userMapper.mapToUserDto(user.get(0));/// Как проще это сделать? это топорный способ. А это вообще нужно?(используется в admapper в методе mapToAd)
     }
-
-    @Override
-    public void updateUserImage(MultipartFile image, Authentication authentication) throws IOException {
-//        UserDetails user = userRepository.findUserByEmail(authentication.getName());
-//        Image newImage = imageRepository.
-    }
-
     public UserDto findByPassword(String password) {
         return null;
     }// как в домашке про хогвартс

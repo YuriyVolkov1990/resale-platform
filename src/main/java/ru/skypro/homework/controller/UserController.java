@@ -17,6 +17,7 @@ import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.User;
+import ru.skypro.homework.service.ImageService;
 import ru.skypro.homework.service.UserService;
 
 import java.io.IOException;
@@ -31,6 +32,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
+    private final ImageService imageService;
     @Operation(
             tags = "Пользователи",
             summary = "Обновление пароля",
@@ -127,6 +129,6 @@ public class UserController {
     public void updateImage(@RequestPart MultipartFile image,
                             Authentication authentication) throws IOException {
         logger.info("Запущен метод UserController updateImage: Обновление аватара авторизованного пользователя");
-        userService.updateUserImage(image, authentication);
+        imageService.uploadImageToUser(image, authentication);
     }
 }

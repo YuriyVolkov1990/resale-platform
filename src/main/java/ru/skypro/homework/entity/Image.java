@@ -24,4 +24,8 @@ public class Image {
     @OneToOne
     @JoinColumn(name = "adid")
     private Ad ad;
+
+    @OneToOne
+    @JoinColumn(name = "userid")
+    private User user;
 }

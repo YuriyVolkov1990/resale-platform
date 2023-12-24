@@ -1,12 +1,9 @@
 package ru.skypro.homework.service;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
-
-import java.io.IOException;
 
 /**
  * Интерфейс содержит методы для работы с пользователями
@@ -41,10 +38,10 @@ public interface UserService {
      */
     UserDto findById(Integer userId);
 
-    /**
-     * Метод обновляет аватар пользователя
-     * @param image - MultipartFile файл, содержащий изображение
-     * @param authentication - объект класса Authentication, содержащий данные о текущей сессии
-     */
-    void updateUserImage(MultipartFile image, Authentication authentication) throws IOException;
+//    /**
+//     * Метод обновляет аватар пользователя
+//     * @param image - MultipartFile файл, содержащий изображение
+//     * @param authentication - объект класса Authentication, содержащий данные о текущей сессии
+//     */
+//    void updateUserImage(MultipartFile image, Authentication authentication) throws IOException;
 }
