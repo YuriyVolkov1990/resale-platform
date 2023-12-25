@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -57,9 +56,9 @@ public class ImageServiceImp implements ImageService {
     }
 
     @Override
-    public byte[] getImage(Integer id) {
+    public Image getImage(Integer id) {
         Optional<Image> image = imageRepository.findById(id);
-        return image.get().getData();
+        return image.get();
     }
 
     @Override
@@ -72,14 +71,16 @@ public class ImageServiceImp implements ImageService {
         Files.write(filePath, data, StandardOpenOption.CREATE);
         Ad ad = adsRepository.findAdByPk(adId);
         Image newImage = imageRepository.findFirstByAd(ad).orElse(new Image());
-        ad.setImage(newImage.getPath());
         newImage.setMediaType(image.getContentType());
         newImage.setFileSize(image.getSize());
         newImage.setData(data);
         newImage.setPath(filePath.toAbsolutePath().toString());
         newImage.setAd(ad);
         imageRepository.save(newImage);
-        return Arrays.toString(image.getBytes());
+        String url = "http://localhost:8080/ads/image/";
+        url = url.concat(newImage.getId().toString());
+        ad.setImage(url);
+        return url;
     }
 
 //    @Override

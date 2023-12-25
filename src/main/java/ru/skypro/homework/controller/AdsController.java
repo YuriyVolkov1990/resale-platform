@@ -18,7 +18,9 @@ import ru.skypro.homework.dto.AdDto;
 import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
+import ru.skypro.homework.entity.Image;
 import ru.skypro.homework.service.AdsService;
+import ru.skypro.homework.service.ImageService;
 
 
 import java.io.IOException;
@@ -33,6 +35,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class AdsController {
     private static final Logger logger = LoggerFactory.getLogger(AdsController.class);
     private final AdsService adsService;
+    private final ImageService imageService;
 
     @Operation(
             tags = "Объявления",
@@ -245,5 +248,9 @@ public class AdsController {
                                              Authentication authentication) throws IOException {
         logger.info("Запущен метод AdsController patchImage: Обновление картинки объявления");
         return ResponseEntity.ok(adsService.patchImage(id, image));
+    }
+    @GetMapping(value = "/image/{id}")
+    public Image getImage(@PathVariable(required = true) Integer id) {
+        return imageService.getImage(id);
     }
 }

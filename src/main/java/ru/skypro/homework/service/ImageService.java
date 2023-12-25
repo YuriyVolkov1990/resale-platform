@@ -30,7 +30,7 @@ public interface ImageService {
      * @param id - идентификатор изображения
      * @return массив byte???????
      */
-    byte[] getImage(Integer id);
+    Image getImage(Integer id);
 
 
     /**
