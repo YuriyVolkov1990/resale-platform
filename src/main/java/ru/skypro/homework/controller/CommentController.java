@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
@@ -83,9 +84,10 @@ public class CommentController {
     )
     @PostMapping(value = "/{id}/comments", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentDto> postComment(@PathVariable(required = true) Integer id,
-                                                 @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+                                                  @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto,
+                                                  Authentication authentication) {
         logger.info("Запущен метод CommentController postComment: Добавление комментария к объявлению");
-        return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto));
+        return ResponseEntity.ok(commentService.postCommentToAd(id, createOrUpdateCommentDto, authentication));
         }
 
     @Operation(

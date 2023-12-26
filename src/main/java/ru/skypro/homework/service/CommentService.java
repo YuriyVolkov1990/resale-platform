@@ -1,5 +1,6 @@
 package ru.skypro.homework.service;
 
+import org.springframework.security.core.Authentication;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
@@ -21,7 +22,7 @@ public interface CommentService {
      * @param createOrUpdateCommentDto - DTO, содержащий текст, который нужно преобразовать в комментарий
      * @return объект класса CommentDto, содержащий текст комментария.
      */
-    CommentDto postCommentToAd(Integer adId, CreateOrUpdateCommentDto createOrUpdateCommentDto);
+    CommentDto postCommentToAd(Integer adId, CreateOrUpdateCommentDto createOrUpdateCommentDto, Authentication authentication);
 
     /**
      * Метод удаляет комментарий

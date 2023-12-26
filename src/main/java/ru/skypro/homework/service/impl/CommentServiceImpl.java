@@ -1,16 +1,19 @@
 package ru.skypro.homework.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.CommentDto;
 import ru.skypro.homework.dto.CommentsDto;
 import ru.skypro.homework.dto.CreateOrUpdateCommentDto;
 import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.Comment;
+import ru.skypro.homework.entity.User;
 import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.mapper.CommentMapper;
 import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.CommentRepository;
+import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.CommentService;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final AdsRepository adsRepository;
     private final AdMapper adMapper;
+    private final UserRepository userRepository;
 
     @Override
     public CommentsDto getCommentsByAd(Integer adId) {
@@ -34,13 +38,14 @@ public class CommentServiceImpl implements CommentService {
     }// по ид объявления нужно вытащить все коменты
 
     @Override
-    public CommentDto postCommentToAd(Integer adId, CreateOrUpdateCommentDto createOrUpdateCommentDto) {
+    public CommentDto postCommentToAd(Integer adId, CreateOrUpdateCommentDto createOrUpdateCommentDto, Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
         Comment comment = new Comment();
         String text = createOrUpdateCommentDto.getText();
         comment.setText(text);
         Ad ad = adsRepository.findAdByPk(adId);
-        comment.setAuthor(ad.getUser().getPk());
-        comment.setAuthorFirstName(ad.getUser().getFirstName());
+        comment.setAuthor(user.getPk());
+        comment.setAuthorFirstName(user.getFirstName());
         comment.setCreatedAt(System.currentTimeMillis());
         comment.setAd(ad);
         List<Comment> newComment = new ArrayList<>();

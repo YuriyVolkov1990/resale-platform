@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -29,4 +30,7 @@ public class Ad {
     @OneToMany(mappedBy = "ad")
     @JsonIgnore
     private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "imageId")
+    private Image imageId;
 }
