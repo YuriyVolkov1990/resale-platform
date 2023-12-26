@@ -91,7 +91,7 @@ public class ImageServiceImp implements ImageService {
     }
 
     @Override
-    public void uploadImageToUser(MultipartFile image, Authentication authentication) throws IOException {
+    public String uploadImageToUser(MultipartFile image, Authentication authentication) throws IOException {
         User user = userRepository.findByEmail(authentication.getName());
         Files.createDirectories(imagePath);
         int dotIndex = image.getOriginalFilename().lastIndexOf(".");
@@ -99,9 +99,20 @@ public class ImageServiceImp implements ImageService {
         Path filePath = imagePath.resolve(user.getPk() + "." + fileExtension);
         byte[] data = image.getBytes();
         Files.write(filePath, data, StandardOpenOption.CREATE);
+        List<User> users = new ArrayList<>();
+        users.add(user);
         Image newImage = imageRepository.findFirstByUser(user).orElse(new Image());
-
+        newImage.setMediaType(image.getContentType());
+        newImage.setFileSize(image.getSize());
+        newImage.setData(data);
+        newImage.setPath(filePath.toAbsolutePath().toString());
+        newImage.setUser(users);
         imageRepository.save(newImage);
+        String url = "/users/image/";
+        url = url.concat(newImage.getId().toString());
+        user.setImage(url);
+        user.setImageId(newImage);
+        return url;
     }
 }
 
