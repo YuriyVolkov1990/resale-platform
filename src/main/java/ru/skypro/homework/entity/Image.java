@@ -1,8 +1,11 @@
 package ru.skypro.homework.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,10 +23,11 @@ public class Image {
     private String mediaType;
     @Column(name = "data")
     private byte[] data;
-
-    @OneToOne
-    @JoinColumn(name = "adid")
-    private Ad ad;
+    @OneToMany(mappedBy = "imageId")
+    private List<Ad> ad;
+//    @OneToOne
+//    @JoinColumn(name = "adid")
+//    private Ad ad;
 
 //    @OneToOne
 //    @JoinColumn(name = "userid")

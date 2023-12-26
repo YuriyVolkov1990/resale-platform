@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -70,16 +72,19 @@ public class ImageServiceImp implements ImageService {
         byte[] data = image.getBytes();
         Files.write(filePath, data, StandardOpenOption.CREATE);
         Ad ad = adsRepository.findAdByPk(adId);
+        List<Ad> ads = new ArrayList<>();
+        ads.add(ad);
         Image newImage = imageRepository.findFirstByAd(ad).orElse(new Image());
         newImage.setMediaType(image.getContentType());
         newImage.setFileSize(image.getSize());
         newImage.setData(data);
         newImage.setPath(filePath.toAbsolutePath().toString());
-        newImage.setAd(ad);
+        newImage.setAd(ads);
         imageRepository.save(newImage);
         String url = "/ads/image/";
         url = url.concat(newImage.getId().toString());
         ad.setImage(url);
+        ad.setImageId(newImage);
         return url;
     }
 

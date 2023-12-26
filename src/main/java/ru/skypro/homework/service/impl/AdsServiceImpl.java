@@ -37,15 +37,6 @@ public class AdsServiceImpl implements AdsService {
     private final UserRepository userRepository;
     private final ImageService imageService;
 
-//    public AdsServiceImpl(AdsRepository adsRepository, AdMapper adMapper, ImageRepository imageRepository, UserMapper userMapper, UserRepository userRepository, ImageService imageService) {
-//        this.adsRepository = adsRepository;
-//        this.adMapper = adMapper;
-//        this.imageRepository = imageRepository;
-//        this.userMapper = userMapper;
-//        this.userRepository = userRepository;
-//        this.imageService = imageService;
-//    }
-
     @Override
     public AdsDto getAllAds() {
         List<Ad> adsList = adsRepository.findAll();
