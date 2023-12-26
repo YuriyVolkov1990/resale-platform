@@ -46,7 +46,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Ad> ads;
-
+    @ManyToOne
+    @JoinColumn(name = "imageId")
+    private Image imageId;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + getRole()));

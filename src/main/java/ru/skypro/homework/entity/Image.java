@@ -25,6 +25,8 @@ public class Image {
     private byte[] data;
     @OneToMany(mappedBy = "imageId")
     private List<Ad> ad;
+    @OneToMany(mappedBy = "imageId")
+    private List<User> user;
 //    @OneToOne
 //    @JoinColumn(name = "adid")
 //    private Ad ad;
