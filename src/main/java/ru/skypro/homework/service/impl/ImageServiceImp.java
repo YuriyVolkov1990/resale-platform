@@ -56,9 +56,9 @@ public class ImageServiceImp implements ImageService {
     }
 
     @Override
-    public Image getImage(Integer id) {
+    public byte[] getImage(Integer id) {
         Optional<Image> image = imageRepository.findById(id);
-        return image.get();
+        return image.get().getData();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class ImageServiceImp implements ImageService {
         newImage.setPath(filePath.toAbsolutePath().toString());
         newImage.setAd(ad);
         imageRepository.save(newImage);
-        String url = "http://localhost:8080/ads/image/";
+        String url = "/ads/image/";
         url = url.concat(newImage.getId().toString());
         ad.setImage(url);
         return url;

@@ -250,7 +250,7 @@ public class AdsController {
         return ResponseEntity.ok(adsService.patchImage(id, image));
     }
     @GetMapping(value = "/image/{id}")
-    public Image getImage(@PathVariable(required = true) Integer id) {
+    public byte[] getImage(@PathVariable(required = true) Integer id) {
         return imageService.getImage(id);
     }
 }
