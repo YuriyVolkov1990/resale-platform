@@ -43,7 +43,7 @@ public class AdsServiceImpl implements AdsService {
             AdDto adDto = adMapper.mapToAdDto(adsList.get(i));
             adDtoList.add(adDto);
         }
-        return new AdsDto(adDtoList, adDtoList.size());// достать все обьявы из репозитория
+        return new AdsDto(adDtoList, adDtoList.size());
     }
 
     @Override
@@ -109,4 +109,9 @@ public class AdsServiceImpl implements AdsService {
     public Optional<Ad> findById (Integer id){
         return adsRepository.findById(id);
     }
+    public boolean isUserAd(String username, Integer adId) {
+        Ad ad = adsRepository.findById(adId).orElseThrow(RuntimeException::new);
+        return ad.getUser().getEmail().equals(username);
     }
+}
+
