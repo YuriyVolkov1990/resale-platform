@@ -23,8 +23,8 @@ import ru.skypro.homework.service.AuthService;
 @RequiredArgsConstructor
 public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
-    private final AuthService authService;
 
+    private final AuthService authService;
     @Operation(
             tags = "Авторизация",
             summary = "Авторизация",

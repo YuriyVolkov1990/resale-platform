@@ -31,7 +31,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     private final UserService userService;
+
     private final ImageService imageService;
 
     @Operation(

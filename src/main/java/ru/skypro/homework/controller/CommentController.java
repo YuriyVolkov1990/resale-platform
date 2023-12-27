@@ -24,9 +24,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class CommentController {
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+
     private final CommentService commentService;
-//    private final AuthService authService;
-//    private final UserRepository userRepository;
 
     @Operation(
             tags = "Комментарии",
