@@ -4,16 +4,18 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.manager.MyUserDetailsService;
 import ru.skypro.homework.mapper.UserMapper;
-import ru.skypro.homework.repository.ImageRepository;
 import ru.skypro.homework.repository.UserRepository;
+import ru.skypro.homework.service.ImageService;
 import ru.skypro.homework.service.UserService;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class UserServiceImpl implements UserService {
     private final MyUserDetailsService manager;
     private final PasswordEncoder encoder;
     private UserRepository userRepository;
-    private ImageRepository imageRepository;
+    private final ImageService imageService;
     @Override
     public void setPassword(NewPasswordDto newPasswordDto, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
@@ -49,6 +51,11 @@ public class UserServiceImpl implements UserService {
     public UserDto findById(Integer userId) {
         List<User> user = userRepository.findAllById(Collections.singleton(userId));
         return userMapper.mapToUserDto(user.get(0));/// Как проще это сделать? это топорный способ. А это вообще нужно?(используется в admapper в методе mapToAd)
+    }
+
+    @Override
+    public void patchImage (MultipartFile image, Authentication authentication) throws IOException {
+        imageService.uploadImageToUser(image, authentication);
     }
     public UserDto findByPassword(String password) {
         return null;

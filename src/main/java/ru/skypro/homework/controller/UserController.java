@@ -127,10 +127,10 @@ public class UserController {
             }
     )
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void updateImage(@RequestPart MultipartFile image,
+    public void patchImage(@RequestPart MultipartFile image,
                             Authentication authentication) throws IOException {
-        logger.info("Запущен метод UserController updateImage: Обновление аватара авторизованного пользователя");
-        imageService.uploadImageToUser(image, authentication);
+        logger.info("Запущен метод UserController patchImage: Обновление аватара авторизованного пользователя");
+        userService.patchImage(image, authentication);
     }
 
     @GetMapping(value = "/image/{id}")
