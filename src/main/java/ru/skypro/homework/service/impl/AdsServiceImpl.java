@@ -13,7 +13,6 @@ import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.AdMapper;
-import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.AdsService;
@@ -31,7 +30,6 @@ import java.util.Optional;
 public class AdsServiceImpl implements AdsService {
     private final AdsRepository adsRepository;
     private final AdMapper adMapper;
-    private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final ImageService imageService;
 
@@ -66,7 +64,6 @@ public class AdsServiceImpl implements AdsService {
             ad = adOp.get();
         }
         return adMapper.mapToExtendedAdDto(Objects.requireNonNull(ad), ad.getUser());
-        //достать обявление по id и положить в dto
     }
 
     @Override
@@ -77,7 +74,6 @@ public class AdsServiceImpl implements AdsService {
             ad = adOp.get();
             adsRepository.delete(ad);
         }
-        // он void, можно ничего не возвращать
     }
 
     @Override
@@ -87,7 +83,7 @@ public class AdsServiceImpl implements AdsService {
         existingAd.setPrice(dto.getPrice());
         existingAd.setDescription(dto.getDescription());
         return adMapper.mapToAdDto(existingAd);
-    }//аналогично update student, faculty достать по id, обновить данными, которые пришли из дто
+    }
 
     @Override
     public AdsDto getUserAds(Authentication authentication) {
@@ -98,19 +94,19 @@ public class AdsServiceImpl implements AdsService {
             adDtoList.add(adMapper.mapToAdDto(adList.get(i)));
         }
         return adMapper.mapToAdsDto(adDtoList);
-    }//id пользователя берем из userDetails, запрашиваем у репорзитория все обявления с ид нужного пользователя
+    }
 
     @Override
     public String patchImage (Integer adId, MultipartFile multipartFile) throws IOException {
         return imageService.uploadImageToAd(adId, multipartFile);
-    }//id это ид объявления, не картинки!!!
+    }
 
     @Override
     public Optional<Ad> findById (Integer id){
         return adsRepository.findById(id);
     }
-    public boolean isUserAd(String username, Integer adId) {
-        Ad ad = adsRepository.findById(adId).orElseThrow(RuntimeException::new);
+    public boolean isUserAd(String username, Integer id) {
+        Ad ad = adsRepository.findById(id).orElseThrow(RuntimeException::new);
         return ad.getUser().getEmail().equals(username);
     }
 }

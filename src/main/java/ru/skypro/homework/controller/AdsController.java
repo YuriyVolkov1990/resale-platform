@@ -144,7 +144,7 @@ public class AdsController {
     )
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #adId)")
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
     public void deleteAd(@PathVariable Integer id) {
         logger.info("Запущен метод AdsController deleteAd: Удаление объявления");
         if (adsService.findById(id).isPresent()) {
@@ -182,6 +182,7 @@ public class AdsController {
             }
     )
     @PatchMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
     public ResponseEntity<AdDto> patchAd(@PathVariable Integer id,
                                          @RequestBody(required = false) CreateOrUpdateAdDto dto) {
         logger.info("Запущен метод AdsController patchAd: Обновление информации об объявлении");
@@ -243,6 +244,7 @@ public class AdsController {
             }
     )
     @PatchMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
     public ResponseEntity<String> patchImage(@PathVariable Integer id,
                                              @RequestPart MultipartFile image,
                                              Authentication authentication) throws IOException {

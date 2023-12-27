@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.CommentDto;
@@ -25,8 +26,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CommentController {
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
     private final CommentService commentService;
-//    private final AuthService authService;
-//    private final UserRepository userRepository;
 
     @Operation(
             tags = "Комментарии",
@@ -116,7 +115,8 @@ public class CommentController {
                     )
             }
     )
-    @DeleteMapping(value = "/{adId}/comments/{commentId}")//
+    @DeleteMapping(value = "/{adId}/comments/{commentId}")
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
     public void deleteComment(@PathVariable(required = false) Integer adId,
                               @PathVariable(required = true) Integer commentId) {
         logger.info("Запущен метод CommentController deleteComment: Удаление комментария");
@@ -153,6 +153,7 @@ public class CommentController {
             }
     )
     @PatchMapping(value = "/{adId}/comments/{commentId}", produces = APPLICATION_JSON_VALUE)
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
     public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId,
                                                    @PathVariable(required = true) Integer commentId,
                                                    @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
