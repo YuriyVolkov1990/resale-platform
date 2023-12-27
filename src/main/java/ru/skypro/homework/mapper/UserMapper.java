@@ -29,6 +29,7 @@ public class UserMapper {
         dto.setLastName(user.getLastName());
         dto.setPhone(user.getPhone());
         dto.setRole(user.getRole());
+        dto.setImage(user.getImage());
         return dto;
     }
     public User mapToUser(UserDto dto) {

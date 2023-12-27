@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     public void setPassword(NewPasswordDto newPasswordDto, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         user.setPassword(encoder.encode(newPasswordDto.getNewPassword()));
-        userRepository.save(user);///Добавить проверку на совпадение нового и старого паролей
+        userRepository.save(user);
     }
 
     @Override
@@ -45,20 +45,16 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.mapFromUpdateUserDtoToUser(updateUser, authentication);
         userRepository.save(user);
         return userMapper.mapFromUserToUpdateUserDto(user);
-    }//достать юзера из сессии и обновить
+    }
 
     @Override
     public UserDto findById(Integer userId) {
         List<User> user = userRepository.findAllById(Collections.singleton(userId));
-        return userMapper.mapToUserDto(user.get(0));/// Как проще это сделать? это топорный способ. А это вообще нужно?(используется в admapper в методе mapToAd)
+        return userMapper.mapToUserDto(user.get(0));
     }
 
     @Override
     public void patchImage (MultipartFile image, Authentication authentication) throws IOException {
         imageService.uploadImageToUser(image, authentication);
     }
-    public UserDto findByPassword(String password) {
-        return null;
-    }// как в домашке про хогвартс
-
 }
