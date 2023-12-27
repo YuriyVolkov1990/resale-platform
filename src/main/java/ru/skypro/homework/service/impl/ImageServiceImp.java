@@ -91,7 +91,7 @@ public class ImageServiceImp implements ImageService {
     }
 
     @Override
-    public String uploadImageToUser(MultipartFile image, Authentication authentication) throws IOException {
+    public void uploadImageToUser(MultipartFile image, Authentication authentication) throws IOException {
         User user = userRepository.findByEmail(authentication.getName());
         Files.createDirectories(imagePath);
         int dotIndex = image.getOriginalFilename().lastIndexOf(".");
@@ -112,7 +112,6 @@ public class ImageServiceImp implements ImageService {
         url = url.concat(newImage.getId().toString());
         user.setImage(url);
         user.setImageId(newImage);
-        return url;
     }
 }
 

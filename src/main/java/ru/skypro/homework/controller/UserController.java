@@ -33,6 +33,7 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final ImageService imageService;
+
     @Operation(
             tags = "Пользователи",
             summary = "Обновление пароля",
@@ -63,7 +64,7 @@ public class UserController {
     public void setPassword(@RequestBody(required = false) NewPasswordDto newPasswordDto, Authentication authentication) {
         logger.info("Запущен метод UserController setPassword: Обновление пароля");
         userService.setPassword(newPasswordDto, authentication);
-        }
+    }
 
     @Operation(
             tags = "Пользователи",
@@ -88,7 +89,7 @@ public class UserController {
     public ResponseEntity<UserDto> getInfo(Authentication authentication) {
         logger.info("Запущен метод UserController getInfo: Получение информации об авторизованном пользователе");
         return ResponseEntity.ok(userService.getInfo(authentication.getName()));
-        }
+    }
 
     @Operation(
             tags = "Пользователи",
@@ -107,7 +108,7 @@ public class UserController {
     public ResponseEntity<UpdateUserDto> updateInfo(@RequestBody(required = false) UpdateUserDto updateUser, Authentication authentication) {
         logger.info("Запущен метод UserController updateInfo: Изменение данных пользователя");
         return ResponseEntity.ok(userService.updateUser(updateUser, authentication));
-        }
+    }
 
     @Operation(
             tags = "Пользователи",
@@ -129,6 +130,11 @@ public class UserController {
     public void updateImage(@RequestPart MultipartFile image,
                             Authentication authentication) throws IOException {
         logger.info("Запущен метод UserController updateImage: Обновление аватара авторизованного пользователя");
-//        imageService.uploadImageToUser(image, authentication);
+        imageService.uploadImageToUser(image, authentication);
+    }
+
+    @GetMapping(value = "/image/{id}")
+    public byte[] getImage(@PathVariable(required = true) Integer id) {
+        return imageService.getImage(id);
     }
 }

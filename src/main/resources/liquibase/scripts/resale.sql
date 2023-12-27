@@ -31,6 +31,5 @@ create table Image (
     path text not null,
     fileSize int8 not null,
     mediaType text not null,
-    data bytea not null,
-    adId serial
+    data bytea not null
 );

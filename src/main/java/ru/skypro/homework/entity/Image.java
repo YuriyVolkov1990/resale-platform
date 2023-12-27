@@ -27,11 +27,4 @@ public class Image {
     private List<Ad> ad;
     @OneToMany(mappedBy = "imageId")
     private List<User> user;
-//    @OneToOne
-//    @JoinColumn(name = "adid")
-//    private Ad ad;
-
-//    @OneToOne
-//    @JoinColumn(name = "userid")
-//    private User user;
 }
