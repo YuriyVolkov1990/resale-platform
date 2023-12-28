@@ -17,13 +17,13 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer pk;
-    @Column(name = "image")
+
     private String image;
-    @Column(name = "price")
+
     private Integer price;
-    @Column(name = "title")
+
     private String title;
-    @Column(name = "description")
+
     private String description;
     @ManyToOne
     @JoinColumn(name = "authorId")

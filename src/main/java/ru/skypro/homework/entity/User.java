@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Класс, описывающий сущность User
  */
-@Table(name = "users")
+@Table(name = "Users")
 @Entity
 @Data
 @NoArgsConstructor
@@ -28,28 +28,26 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer pk;
-    @Column(name = "email")
+
     private String email;
-    @Column(name = "firstname")
+
     private String firstName;
-    @Column(name = "lastname")
+
     private String lastName;
-    @Column(name = "phone")
+
     private String phone;
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
     private Role role;
-    @Column(name = "image")
     private String image;
     @Min(value = 8, message = "minLength: 8")
     @Max(value = 16, message = "maxLength: 16")
-    @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Ad> ads;
     @ManyToOne
     @JoinColumn(name = "imageId")
+    @JsonIgnore
     private Image imageId;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

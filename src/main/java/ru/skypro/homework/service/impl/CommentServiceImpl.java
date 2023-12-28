@@ -49,6 +49,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setAuthorFirstName(user.getFirstName());
         comment.setCreatedAt(System.currentTimeMillis());
         comment.setAd(ad);
+        comment.setAuthorImage(user.getImage());
         List<Comment> newComment = new ArrayList<>();
         newComment.add(comment);
         ad.setComments(newComment);

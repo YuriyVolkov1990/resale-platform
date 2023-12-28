@@ -1,6 +1,9 @@
 package ru.skypro.homework.entity;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -14,19 +17,20 @@ import java.util.Objects;
 public class Comment {
     @Id
     @GeneratedValue()
-    @Column(name = "idcomment")
+    @Column(name = "id_comment")
     private Integer pk;
-    @Column(name = "iduser")
+    @Column(name = "id_user")
     private Integer author;
-    @Column(name = "authorimage")
+
     private String authorImage;
-    @Column(name = "authorfirstname")
+
     private String authorFirstName;
-    @Column(name = "createdat")
+
     private Long createdAt;
     @Column(name = "message")
     private String text;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "ad")
     private Ad ad;
 

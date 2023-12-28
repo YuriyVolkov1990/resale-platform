@@ -4,8 +4,8 @@
 create table Users (
     id bigserial primary key,
     email text not null,
-    firstName text,
-    lastName text,
+    first_name text,
+    last_name text,
     phone text,
     role text,
     image text,
@@ -19,17 +19,17 @@ create table Ad (
     description text
 );
 create table Comment (
-    idComment bigserial primary key,
-    idUser serial not null,
-    authorImage text,
-    authorFirstName text not null,
-    createdAt bigserial not null,
+    id_comment bigserial primary key,
+    id_user serial not null,
+    author_image text,
+    author_first_name text not null,
+    created_at bigserial not null,
     message text not null
 );
 create table Image (
     id bigserial primary key,
     path text not null,
-    fileSize int8 not null,
-    mediaType text not null,
+    file_size int8 not null,
+    media_type text not null,
     data bytea not null
 );

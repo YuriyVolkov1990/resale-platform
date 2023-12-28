@@ -17,13 +17,13 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "path")
+
     private String path;
-    @Column(name = "filesize")
+
     private long fileSize;
-    @Column(name = "mediatype")
+
     private String mediaType;
-    @Column(name = "data")
+
     private byte[] data;
     @OneToMany(mappedBy = "imageId")
     private List<Ad> ad;
