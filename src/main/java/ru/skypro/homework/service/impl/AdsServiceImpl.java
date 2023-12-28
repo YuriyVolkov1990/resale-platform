@@ -10,9 +10,11 @@ import ru.skypro.homework.dto.AdsDto;
 import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.entity.Ad;
+import ru.skypro.homework.entity.Comment;
 import ru.skypro.homework.entity.User;
 import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.repository.AdsRepository;
+import ru.skypro.homework.repository.CommentRepository;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.AdsService;
 import ru.skypro.homework.service.ImageService;
@@ -33,6 +35,7 @@ public class AdsServiceImpl implements AdsService {
     private final AdMapper adMapper;
     private final UserRepository userRepository;
     private final ImageService imageService;
+    private final CommentRepository commentRepository;
 
     @Override
     public AdsDto getAllAds() {
@@ -73,6 +76,8 @@ public class AdsServiceImpl implements AdsService {
         Ad ad = null;
         if (adOp.isPresent()) {
             ad = adOp.get();
+            List<Comment> comments = commentRepository.findAllByAd(ad);
+            commentRepository.deleteAll(comments);
             adsRepository.delete(ad);
         }
     }
