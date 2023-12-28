@@ -33,7 +33,6 @@ public interface ImageService {
      */
     byte[] getImage(Integer id);
 
-
     /**
      * Метод добавляет изображение к объявлению
      * @param adId - идентификатор объявления

@@ -36,6 +36,7 @@ public class ImageServiceImp implements ImageService {
     private final UserRepository userRepository;
     @Value("${path.to.images.folder}")
     private Path imagePath;
+
     @Override
     public Image createImage(MultipartFile image) {
         Image newImage = new Image();

@@ -154,8 +154,8 @@ public class CommentController {
     )
     @PatchMapping(value = "/{adId}/comments/{commentId}", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
-    public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId,
-                                                   @PathVariable(required = true) Integer commentId,
+    public ResponseEntity<CommentDto> patchComment(@PathVariable Integer adId,
+                                                   @PathVariable Integer commentId,
                                                    @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
         logger.info("Запущен метод CommentController patchComment: Обновление комментария");
         return ResponseEntity.ok(commentService.patchCommentAtAd(adId, commentId, createOrUpdateCommentDto));

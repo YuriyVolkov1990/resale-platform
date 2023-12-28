@@ -105,6 +105,7 @@ public class AdsServiceImpl implements AdsService {
     public Optional<Ad> findById (Integer id){
         return adsRepository.findById(id);
     }
+
     public boolean isUserAd(String username, Integer id) {
         Ad ad = adsRepository.findById(id).orElseThrow(RuntimeException::new);
         return ad.getUser().getEmail().equals(username);

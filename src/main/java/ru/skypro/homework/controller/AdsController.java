@@ -56,11 +56,6 @@ public class AdsController {
         return ResponseEntity.ok(adsService.getAllAds());
     }
 
-//    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<AdDto> addAd(@RequestPart CreateOrUpdateAdDto properties, @RequestPart MultipartFile image) {
-//            return new ResponseEntity<AdDto>(adsService.addAd(properties, image),HttpStatus.CREATED);
-//    }
-
     @Operation(
             tags = "Объявления",
             summary = "Добавление объявления",
@@ -251,6 +246,7 @@ public class AdsController {
         logger.info("Запущен метод AdsController patchImage: Обновление картинки объявления");
         return ResponseEntity.ok(adsService.patchImage(id, image));
     }
+
     @GetMapping(value = "/image/{id}")
     public byte[] getImage(@PathVariable(required = true) Integer id) {
         return imageService.getImage(id);

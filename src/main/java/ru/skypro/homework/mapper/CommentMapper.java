@@ -12,6 +12,7 @@ import java.util.List;
 @Component
 @Data
 public class CommentMapper {
+
     public CommentDto mapToCommentDto(Comment comment) {
         CommentDto dto = new CommentDto();
         dto.setAuthorId(comment.getAuthor());
@@ -22,6 +23,7 @@ public class CommentMapper {
         dto.setPk(comment.getPk());
         return dto;
     }
+
     public Comment mapToComment(CommentDto dto) {
         Comment comment = new Comment();
         comment.setAuthor(dto.getAuthorId());
@@ -32,6 +34,7 @@ public class CommentMapper {
         dto.setPk(comment.getPk());
         return comment;
     }
+
     public CommentsDto mapToCommentsDto(List<Comment> comments) {
         CommentsDto commentsDto = new CommentsDto();
         commentsDto.setResults(comments);

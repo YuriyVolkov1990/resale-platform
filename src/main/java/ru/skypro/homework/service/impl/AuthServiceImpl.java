@@ -35,11 +35,4 @@ public class AuthServiceImpl implements AuthService {
         manager.createUser(userMapper.mapFromRegisterDtoToUser(register));
         return true;
     }
-
 }
-//User.builder()
-//        .passwordEncoder(this.encoder::encode)
-//        .password(register.getPassword())
-//        .username(register.getUsername())
-//        .roles(register.getRole().name())
-//        .build()

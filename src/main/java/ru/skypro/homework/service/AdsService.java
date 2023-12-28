@@ -59,10 +59,10 @@ public interface AdsService {
     AdsDto getUserAds(Authentication authentication);
 
     /**
-     * Метод меняет аватар пользователя
+     * Метод меняет картинку в объявлении
      *
-     * @param id - идентификатор аватара в базе
-     * @param multipartFile - файл нового аватара
+     * @param id - идентификатор картинки в базе
+     * @param multipartFile - файл новой картинки
      * @return возвращает путь к файлу
      */
     String patchImage(Integer id, MultipartFile multipartFile) throws IOException;

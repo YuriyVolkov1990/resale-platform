@@ -9,7 +9,6 @@ import ru.skypro.homework.dto.NewPasswordDto;
 import ru.skypro.homework.dto.UpdateUserDto;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.entity.User;
-import ru.skypro.homework.UserDetailsService.MyUserDetailsService;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.ImageService;
@@ -23,10 +22,10 @@ import java.util.List;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
-    private final MyUserDetailsService manager;
     private final PasswordEncoder encoder;
     private UserRepository userRepository;
     private final ImageService imageService;
+
     @Override
     public void setPassword(NewPasswordDto newPasswordDto, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
