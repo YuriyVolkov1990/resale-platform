@@ -18,6 +18,9 @@ import ru.skypro.homework.service.CommentService;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс, имплементирующий CommentService
+ */
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {

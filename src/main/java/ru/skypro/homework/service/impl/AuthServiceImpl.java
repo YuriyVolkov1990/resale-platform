@@ -9,6 +9,9 @@ import ru.skypro.homework.UserDetailsService.MyUserDetailsService;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.service.AuthService;
 
+/**
+ * Класс, имплементирующий AuthService
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {

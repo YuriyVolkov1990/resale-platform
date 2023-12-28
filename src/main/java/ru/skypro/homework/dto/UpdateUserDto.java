@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
+/**
+ * Класс, описывающий Data Transfer Object для обновления информации о пользователе
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

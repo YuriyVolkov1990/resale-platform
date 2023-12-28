@@ -6,6 +6,9 @@ import ru.skypro.homework.entity.Comment;
 
 import java.util.List;
 
+/**
+ * Класс-репозиторий для взаимодействия с массивом объектов класса Comment
+ */
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     List<Comment> findAllByAd(Ad ad);

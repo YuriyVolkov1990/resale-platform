@@ -15,6 +15,9 @@ import ru.skypro.homework.repository.UserRepository;
 
 import java.io.IOException;
 
+/**
+ * Класс-маппер, сопоставляющий поля класса User с полями DTO классов
+ */
 @Component
 @Data
 @RequiredArgsConstructor

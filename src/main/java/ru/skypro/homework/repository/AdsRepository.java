@@ -6,6 +6,9 @@ import ru.skypro.homework.entity.User;
 
 import java.util.List;
 
+/**
+ * Класс-репозиторий для взаимодействия с массивом объектов класса Ad
+ */
 public interface AdsRepository extends JpaRepository<Ad, Integer> {
     Ad findAdByPk(Integer pk);
 

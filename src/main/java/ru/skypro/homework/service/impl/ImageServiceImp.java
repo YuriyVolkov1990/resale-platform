@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Класс, имплементирующий ImageService
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j

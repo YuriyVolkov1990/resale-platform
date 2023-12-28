@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Класс, имплементирующий UserService
+ */
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {

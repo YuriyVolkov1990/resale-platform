@@ -1,7 +1,9 @@
 package ru.skypro.homework.dto;
 
 import lombok.*;
-
+/**
+ * Класс, описывающий Data Transfer Object для сущности Comment
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

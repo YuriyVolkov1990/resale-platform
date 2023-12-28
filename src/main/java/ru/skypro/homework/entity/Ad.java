@@ -5,7 +5,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
-
+/**
+ * Класс, описывающий сущность Ad
+ */
 @Entity
 @Data
 @NoArgsConstructor

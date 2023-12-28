@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
-
+/**
+ * Класс, описывающий сущность Comment
+ */
 @Entity
 @Data
 @NoArgsConstructor

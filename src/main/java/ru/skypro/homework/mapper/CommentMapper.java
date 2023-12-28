@@ -9,6 +9,10 @@ import ru.skypro.homework.entity.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Класс-маппер, сопоставляющий поля класса Comment с полями DTO классов
+ */
 @Component
 @Data
 public class CommentMapper {

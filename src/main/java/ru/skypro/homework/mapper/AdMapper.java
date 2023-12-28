@@ -10,6 +10,10 @@ import ru.skypro.homework.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Класс-маппер, сопоставляющий поля класса Ad с полями DTO классов
+ */
 @Component
 @Data
 @AllArgsConstructor

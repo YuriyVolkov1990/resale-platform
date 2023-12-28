@@ -15,7 +15,9 @@ import javax.validation.constraints.Min;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
+/**
+ * Класс, описывающий сущность User
+ */
 @Table(name = "users")
 @Entity
 @Data

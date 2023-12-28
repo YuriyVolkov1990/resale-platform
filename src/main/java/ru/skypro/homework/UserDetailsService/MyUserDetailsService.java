@@ -12,6 +12,9 @@ import ru.skypro.homework.entity.User;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
 
+/**
+ * Класс, имплементирующий UserDetailsManager
+ */
 @Component
 @Data
 @RequiredArgsConstructor
