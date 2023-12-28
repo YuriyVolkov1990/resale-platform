@@ -13,6 +13,7 @@ public interface ImageService {
 
     /**
      * Метод сохраняет изображение в репозитории
+     *
      * @param image - MultipartFile файл, содержащий изображение
      * @return объект класса Image
      */
@@ -20,6 +21,7 @@ public interface ImageService {
 
     /**
      * Метод обновляет изображение в репозитории
+     *
      * @param newImage - MultipartFile файл, содержащий новое изображение
      * @param oldImage - MultipartFile файл, содержащий старое изображение
      * @return объект класса Image
@@ -28,23 +30,26 @@ public interface ImageService {
 
     /**
      * Метод получает изображение из репозитория
+     *
      * @param id - идентификатор изображения
-     * @return массив byte???????
+     * @return массив byte
      */
     byte[] getImage(Integer id);
 
     /**
      * Метод добавляет изображение к объявлению
+     *
      * @param adId - идентификатор объявления
      * @param image - MultipartFile файл, содержащий изображение
-     * @return строковое представление массива байтов, хранящих информацию об изображении
+     * @return строку с URL для доступа к файлу
      */
     String uploadImageToAd (Integer adId, MultipartFile image) throws IOException;
 
-        /**
-         * Метод обновляет аватар пользователя
-         * @param image          - MultipartFile файл, содержащий изображение
-         * @param authentication - объект класса Authentication, содержащий данные о текущей сессии
-         */
+    /**
+     * Метод обновляет аватар пользователя
+     *
+     * @param image - MultipartFile файл, содержащий изображение
+     * @param authentication - объект класса Authentication, содержащий данные об авторизованном пользователе
+     */
     void uploadImageToUser (MultipartFile image, Authentication authentication) throws IOException;
 }

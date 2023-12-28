@@ -11,6 +11,7 @@ public interface CommentService {
 
     /**
      * Метод получает все комментарии к объявлению
+     *
      * @param adId - идентификатор объявления
      * @return объект класса CommentsDto, содержащий List<Comment> и общее количество комментариев.
      */
@@ -18,6 +19,7 @@ public interface CommentService {
 
     /**
      * Метод добавляет новый комментарий к объявлению
+     *
      * @param adId - идентификатор объявления
      * @param createOrUpdateCommentDto - DTO, содержащий текст, который нужно преобразовать в комментарий
      * @return объект класса CommentDto, содержащий текст комментария.
@@ -26,6 +28,7 @@ public interface CommentService {
 
     /**
      * Метод удаляет комментарий
+     *
      * @param adId - идентификатор объявления
      * @param id - идентификатор комментария
      */
@@ -33,6 +36,7 @@ public interface CommentService {
 
     /**
      * Метод изменяет текст комментария
+     *
      * @param adId - идентификатор объявления
      * @param id - идентификатор комментария
      * @return объект класса CommentDto, содержащий текст комментария.

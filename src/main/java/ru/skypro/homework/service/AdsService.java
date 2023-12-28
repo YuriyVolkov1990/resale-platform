@@ -10,13 +10,15 @@ import ru.skypro.homework.entity.Ad;
 
 import java.io.IOException;
 import java.util.Optional;
-
+/**
+ * Интерфейс содержит методы для работы с объявлениями
+ */
 public interface AdsService {
 
     /**
      * Метод возвращает список всех объявлений в виде DTO {@link Ad}.
      *
-     * @return возвращает все объявления из БД
+     * @return возвращает все объявления из БД в виде AdsDto
      */
     AdsDto getAllAds();
 
@@ -55,6 +57,9 @@ public interface AdsService {
 
     /**
      * Метод получает все объявления данного пользователя
+     *
+     * @param authentication - класс, позволяющий работать с параметрами авторизованного пользователя
+     * @return возвращает список объявлений пользователя в виде AdsDto
      */
     AdsDto getUserAds(Authentication authentication);
 
