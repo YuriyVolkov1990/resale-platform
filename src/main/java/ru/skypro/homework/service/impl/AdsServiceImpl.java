@@ -11,7 +11,6 @@ import ru.skypro.homework.dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.ExtendedAdDto;
 import ru.skypro.homework.entity.Ad;
 import ru.skypro.homework.entity.User;
-import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.repository.AdsRepository;
 import ru.skypro.homework.repository.UserRepository;
@@ -80,7 +79,7 @@ public class AdsServiceImpl implements AdsService {
 
     @Override
     public AdDto patchAd (Integer id, CreateOrUpdateAdDto dto){
-        Ad existingAd = adsRepository.findById(id).orElseThrow(AdNotFoundException::new);
+        Ad existingAd = adsRepository.findById(id).orElseThrow(RuntimeException::new);
         existingAd.setTitle(dto.getTitle());
         existingAd.setPrice(dto.getPrice());
         existingAd.setDescription(dto.getDescription());

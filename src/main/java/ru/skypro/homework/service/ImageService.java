@@ -2,7 +2,6 @@ package ru.skypro.homework.service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.web.multipart.MultipartFile;
-import ru.skypro.homework.entity.Image;
 
 import java.io.IOException;
 
@@ -10,23 +9,6 @@ import java.io.IOException;
  * Интерфейс содержит методы для работы с изображениями
  */
 public interface ImageService {
-
-    /**
-     * Метод сохраняет изображение в репозитории
-     *
-     * @param image - MultipartFile файл, содержащий изображение
-     * @return объект класса Image
-     */
-    Image createImage(MultipartFile image);
-
-    /**
-     * Метод обновляет изображение в репозитории
-     *
-     * @param newImage - MultipartFile файл, содержащий новое изображение
-     * @param oldImage - MultipartFile файл, содержащий старое изображение
-     * @return объект класса Image
-     */
-    Image updateImage(MultipartFile newImage, Image oldImage);
 
     /**
      * Метод получает изображение из репозитория
