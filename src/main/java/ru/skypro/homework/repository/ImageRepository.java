@@ -7,6 +7,9 @@ import ru.skypro.homework.entity.User;
 
 import java.util.Optional;
 
+/**
+ * Класс-репозиторий для взаимодействия с массивом объектов класса Image
+ */
 public interface ImageRepository extends JpaRepository<Image, Integer> {
     Optional<Image> findFirstByAd(Ad ad);
     Optional<Image> findFirstByUser(User user);

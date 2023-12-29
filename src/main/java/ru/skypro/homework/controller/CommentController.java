@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.CommentDto;
@@ -115,7 +116,8 @@ public class CommentController {
                     )
             }
     )
-    @DeleteMapping(value = "/{adId}/comments/{commentId}")//
+    @DeleteMapping(value = "/{adId}/comments/{commentId}")
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
     public void deleteComment(@PathVariable(required = false) Integer adId,
                               @PathVariable(required = true) Integer commentId) {
         logger.info("Запущен метод CommentController deleteComment: Удаление комментария");
@@ -152,8 +154,9 @@ public class CommentController {
             }
     )
     @PatchMapping(value = "/{adId}/comments/{commentId}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<CommentDto> patchComment(@PathVariable(required = true) Integer adId,
-                                                   @PathVariable(required = true) Integer commentId,
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
+    public ResponseEntity<CommentDto> patchComment(@PathVariable Integer adId,
+                                                   @PathVariable Integer commentId,
                                                    @RequestBody(required = false) CreateOrUpdateCommentDto createOrUpdateCommentDto) {
         logger.info("Запущен метод CommentController patchComment: Обновление комментария");
         return ResponseEntity.ok(commentService.patchCommentAtAd(adId, commentId, createOrUpdateCommentDto));

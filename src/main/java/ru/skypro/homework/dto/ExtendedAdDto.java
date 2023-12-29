@@ -1,7 +1,9 @@
 package ru.skypro.homework.dto;
 
 import lombok.*;
-
+/**
+ * Класс, описывающий Data Transfer Object для передачи расширенного блока информации об объекте Ad
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

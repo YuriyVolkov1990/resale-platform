@@ -136,7 +136,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/image/{id}")
-    public byte[] getImage(@PathVariable(required = true) Integer id) {
+    public byte[] getImage(@PathVariable Integer id) {
         return imageService.getImage(id);
     }
 }

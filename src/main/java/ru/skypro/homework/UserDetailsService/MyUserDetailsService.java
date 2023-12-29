@@ -1,4 +1,4 @@
-package ru.skypro.homework.manager;
+package ru.skypro.homework.UserDetailsService;
 
 
 import lombok.Data;
@@ -12,6 +12,9 @@ import ru.skypro.homework.entity.User;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
 
+/**
+ * Класс, имплементирующий UserDetailsManager
+ */
 @Component
 @Data
 @RequiredArgsConstructor
@@ -35,12 +38,9 @@ public class MyUserDetailsService implements UserDetailsManager {
     }
 
     public void updateUser(UserDetails user) {
-
-        //найти пользователья и обновить
     }
 
     public void deleteUser(String username) {
-        // сделать запрос в репозиторий ти удалить
     }
 
     public void changePassword(String oldPassword, String newPassword) {
@@ -59,9 +59,4 @@ public class MyUserDetailsService implements UserDetailsManager {
         }
         return user;
     }
-//org.springframework.security.core.userdetails.User.builder()
-//        .username(user.getEmail())
-//            .password(user.getPassword())
-//            .roles(user.getRole().name())
-//            .build();
 }

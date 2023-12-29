@@ -3,7 +3,9 @@ package ru.skypro.homework.dto;
 import lombok.*;
 
 import javax.validation.constraints.Size;
-
+/**
+ * Класс, описывающий Data Transfer Object для передачи информации об username и password
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

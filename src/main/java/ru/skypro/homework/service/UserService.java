@@ -41,13 +41,10 @@ public interface UserService {
      */
     UserDto findById(Integer userId);
 
+    /**
+     * Метод обновляет аватар пользователя
+     * @param multipartFile - файл новой картинки
+     * @param authentication - параметр, позволяющий работать с данными авторизованного пользователя
+     */
     void patchImage(MultipartFile multipartFile, Authentication authentication) throws IOException;
-
-
-//    /**
-//     * Метод обновляет аватар пользователя
-//     * @param image - MultipartFile файл, содержащий изображение
-//     * @param authentication - объект класса Authentication, содержащий данные о текущей сессии
-//     */
-//    void updateUserImage(MultipartFile image, Authentication authentication) throws IOException;
 }

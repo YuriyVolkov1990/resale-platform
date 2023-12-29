@@ -15,12 +15,16 @@ import ru.skypro.homework.repository.UserRepository;
 
 import java.io.IOException;
 
+/**
+ * Класс-маппер, сопоставляющий поля класса User с полями DTO классов
+ */
 @Component
 @Data
 @RequiredArgsConstructor
 public class UserMapper {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
+
     public UserDto mapToUserDto(User user) {
         UserDto dto = new UserDto();
         dto.setPk(user.getPk());
@@ -29,8 +33,10 @@ public class UserMapper {
         dto.setLastName(user.getLastName());
         dto.setPhone(user.getPhone());
         dto.setRole(user.getRole());
+        dto.setImage(user.getImage());
         return dto;
     }
+
     public User mapToUser(UserDto dto) {
         User user = new User();
         user.setPk(dto.getPk());
@@ -41,15 +47,7 @@ public class UserMapper {
         user.setRole(dto.getRole());
         return user;
     }
-//    public NewPasswordDto mapToNewPasswordDto(User user) {
-//        NewPasswordDto dto = new NewPasswordDto();
-//        dto.setNewPassword(user.getPassword());
-//        return dto;
-//    }
-//    public User mapFromNewPasswordToUser(NewPasswordDto newPasswordDto) {
-//       user.setPassword(newPasswordDto.getNewPassword());
-//       return user;
-//    }
+
     public Image mapMultipartFileToImage(MultipartFile imageMulti) {
         Image image = new Image();
         try {

@@ -10,6 +10,10 @@ import ru.skypro.homework.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Класс-маппер, сопоставляющий поля класса Ad с полями DTO классов
+ */
 @Component
 @Data
 @AllArgsConstructor
@@ -50,18 +54,6 @@ public class AdMapper {
         return dto;
     }
 
-//    public Ad mapToAd(ExtendedAdDto dto) {
-//        Ad ad = new Ad();
-//        ad.setPk(dto.getPk());
-//        ad.setImage(dto.getImage());
-//        ad.setPrice(dto.getPrice());
-//        ad.setTitle(dto.getTitle());
-//        ad.setDescription(dto.getDescription());
-//        User user = new User(dto.getPk(), dto.getEmail(), dto.getAuthorFirstName(), dto.getAuthorLastName(), dto.getPhone(), null, null, null);
-//        userMapper.mapToUserDto(user);
-//        ad.setUser(user);
-//        return ad;
-//    }
     public AdsDto mapToAdsDto(List<AdDto> ads) {
         AdsDto adsDto = new AdsDto();
         adsDto.setResults(ads);
@@ -69,6 +61,7 @@ public class AdMapper {
         adsDto.setCount(count);
         return adsDto;
     }
+
     public List<AdDto> mapToAds(AdsDto adsDto) {
         List<AdDto> ads = new ArrayList<>();
         for (int i = 0; i <= adsDto.getCount(); i++) {

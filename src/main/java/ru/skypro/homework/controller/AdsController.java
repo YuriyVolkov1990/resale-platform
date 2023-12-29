@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,11 +55,6 @@ public class AdsController {
         logger.info("Запущен метод AdsController getAllAds: Получение всех объявлений");
         return ResponseEntity.ok(adsService.getAllAds());
     }
-
-//    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<AdDto> addAd(@RequestPart CreateOrUpdateAdDto properties, @RequestPart MultipartFile image) {
-//            return new ResponseEntity<AdDto>(adsService.addAd(properties, image),HttpStatus.CREATED);
-//    }
 
     @Operation(
             tags = "Объявления",
@@ -143,7 +139,8 @@ public class AdsController {
     )
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteAd(@PathVariable(required = true) Integer id) {
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
+    public void deleteAd(@PathVariable Integer id) {
         logger.info("Запущен метод AdsController deleteAd: Удаление объявления");
         if (adsService.findById(id).isPresent()) {
             adsService.deleteAd(id);
@@ -180,7 +177,8 @@ public class AdsController {
             }
     )
     @PatchMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<AdDto> patchAd(@PathVariable(required = true) Integer id,
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
+    public ResponseEntity<AdDto> patchAd(@PathVariable Integer id,
                                          @RequestBody(required = false) CreateOrUpdateAdDto dto) {
         logger.info("Запущен метод AdsController patchAd: Обновление информации об объявлении");
         return ResponseEntity.ok(adsService.patchAd(id, dto));
@@ -241,12 +239,14 @@ public class AdsController {
             }
     )
     @PatchMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<String> patchImage(@PathVariable(required = true) Integer id,
+    @PreAuthorize(value = "hasRole('ADMIN') or @adsServiceImpl.isUserAd(authentication.getName(), #id)")
+    public ResponseEntity<String> patchImage(@PathVariable Integer id,
                                              @RequestPart MultipartFile image,
                                              Authentication authentication) throws IOException {
         logger.info("Запущен метод AdsController patchImage: Обновление картинки объявления");
         return ResponseEntity.ok(adsService.patchImage(id, image));
     }
+
     @GetMapping(value = "/image/{id}")
     public byte[] getImage(@PathVariable(required = true) Integer id) {
         return imageService.getImage(id);
